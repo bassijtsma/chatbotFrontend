@@ -1,28 +1,25 @@
 {
   "name": "chatbotfrontend",
   "version": "1.0.0",
-  "description": "project to enter chatrules for chatbot",
+  "description": "Frontend to chatbot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "production": "webpack -p",
+    "start": "webpack-dev-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bassijtsma/chatbotFrontend.git"
-  },
-  "author": "bas sijtsma",
+  "author": "bas",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bassijtsma/chatbotFrontend/issues"
-  },
-  "homepage": "https://github.com/bassijtsma/chatbotFrontend#readme",
   "dependencies": {
-    "babel-preset-react": "^6.5.0",
-    "babelify": "^7.2.0",
-    "gulp": "^3.9.1",
-    "gulp-connect": "^2.3.1",
-    "gulp-open": "^1.0.0",
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-router": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.7.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "html-webpack-plugin": "^2.10.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   }
 }

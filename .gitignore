@@ -52,8 +52,6 @@ Temporary Items
 .idea
 .idea\*
 
-npm-debug.log
-
 ###yowsup
 *.pyc
 *.class
@@ -65,9 +63,8 @@ dist
 build
 .idea
 
-
-chatbotconfig.txt
-credentials.py
-crds.txt
+credentials.txt
 
 deployment-config.json
+
+node_modules/*
