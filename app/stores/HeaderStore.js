@@ -1,7 +1,7 @@
 /**
  * Overengineered, testing flux pattern.
  * Store and respective action deals with hiding/showing info
- * and  tutorial div. 
+ * and  tutorial div.
  */
 var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../constants/Constants');
@@ -33,8 +33,9 @@ var HeaderStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(action){
   switch(action.actionType) {
+
     case Constants.TOGGLEHEADER:
-      headerVisibility = true;
+      headerVisibility = !headerVisibility;
       HeaderStore.emitChange();
       break
     default:
@@ -42,4 +43,4 @@ Dispatcher.register(function(action){
   }
 })
 
-module..exports = HeaderStore;
+module.exports = HeaderStore;
