@@ -3,13 +3,11 @@ var PropTypes = React.PropTypes;
 var HeaderActions = require('../actions/HeaderActions');
 var HeaderStore = require('../stores/HeaderStore');
 
-
 function getHeaderState() {
   return ({
     headerVisibility: HeaderStore.getHeaderVisibility()
   })
 }
-
 
 var Header = React.createClass({
 
@@ -20,7 +18,6 @@ var Header = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('component Did mount');
     HeaderStore.addChangeListener(this._onChange);
   },
 
@@ -41,7 +38,6 @@ var Header = React.createClass({
   _onChange: function() {
     this.setState(getHeaderState());
   }
-
 })
 
 module.exports = Header;

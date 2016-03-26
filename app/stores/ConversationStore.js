@@ -1,19 +1,15 @@
-/**
- * Overengineered, testing flux pattern.
- * Store and respective action deals with hiding/showing information div.
- */
 var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../constants/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
-var headerVisibility = false;
+var conversations = {};
 
-var HeaderStore = assign({}, EventEmitter.prototype, {
+var ConversationStore = assign({}, EventEmitter.prototype, {
 
-  getHeaderVisibility: function() {
-    return headerVisibility;
+  getAllConversations: function() {
+    // async getting convs, is this the right place?
   },
 
   emitChange: function() {
@@ -29,17 +25,15 @@ var HeaderStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-Dispatcher.register(function(action){
+Dispatcher.register(function(action) {
   switch(action.actionType) {
 
-    case Constants.TOGGLEHEADER:
-      headerVisibility = !headerVisibility;
-      HeaderStore.emitChange();
-      break
-      
+    case Constants.CONV_CREATE:
+      // do create
+      ConversationStore.emitChange();
+      break;
+
     default:
-     // no op
+      // none
   }
 })
-
-module.exports = HeaderStore;
