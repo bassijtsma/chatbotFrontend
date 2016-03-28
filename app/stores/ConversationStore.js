@@ -8,10 +8,6 @@ var conversations = {};
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
-  getAllConversations: function() {
-    // async getting convs, is this the right place?
-  },
-
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -22,6 +18,25 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getAllConversations: function() {
+    console.log('get all convs')
+    // async getting convs, is this the right place?
+  },
+
+  createConversation: function() {
+
+  },
+
+  updateConversation: function() {
+
+  },
+
+  deleteConversation: function() {
+    // in backend handle also removing the qs and responses
+    // in frontend emit to dispatcher, make q and r stores that listen to c has
+    // been deleted
   }
 })
 
@@ -33,7 +48,19 @@ Dispatcher.register(function(action) {
       ConversationStore.emitChange();
       break;
 
+    case Constants.CONV_DELETE:
+      // do delete
+      ConversationStore.emitChange();
+      break,
+
+    case Constants.CONV_UPDATE:
+      // do update
+      ConversationStore.emitChange();
+      break
+
     default:
       // none
   }
 })
+
+module.export = ConversationStore;

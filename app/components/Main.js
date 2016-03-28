@@ -1,7 +1,7 @@
 var React = require('react');
 var Header = require('./Header');
-var ConversationSection = require('./ConversationSection');
-var ConversationStore = require('./ConversationStore');
+var ConversationSection = require('./ConversationItem');
+var ConversationStore = require('../stores/ConversationStore');
 
 var Main = React.createClass({
 
