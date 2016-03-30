@@ -38,7 +38,7 @@ Dispatcher.register(function(action){
     case Constants.TOGGLEHEADER:
       headerVisibility = !headerVisibility;
       HeaderStore.emitChange();
-      break
+      break;
 
     default:
      // no op

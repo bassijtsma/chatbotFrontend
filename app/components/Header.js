@@ -21,6 +21,10 @@ var Header = React.createClass({
     HeaderStore.addChangeListener(this._onChange);
   },
 
+  componentWillUnmount: function() {
+    HeaderStore.removeChangeListener(this._onChange);
+  }
+
   render : function() {
     return (
       <div>

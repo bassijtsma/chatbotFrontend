@@ -2,6 +2,7 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../constants/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var axios = require('axios');
 
 var CHANGE_EVENT = 'change';
 var conversations = {};
@@ -21,7 +22,7 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllConversations: function() {
-    console.log('get all convs')
+    console.log('get all convs');
     // async getting convs, is this the right place?
   },
 
@@ -51,16 +52,16 @@ Dispatcher.register(function(action) {
     case Constants.CONV_DELETE:
       // do delete
       ConversationStore.emitChange();
-      break,
+      break;
 
     case Constants.CONV_UPDATE:
       // do update
       ConversationStore.emitChange();
-      break
+      break;
 
     default:
       // none
   }
-})
+});
 
 module.export = ConversationStore;
