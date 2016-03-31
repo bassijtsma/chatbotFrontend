@@ -64,4 +64,5 @@ Dispatcher.register(function(action) {
   }
 });
 
+console.log(ConversationStore);
 module.export = ConversationStore;

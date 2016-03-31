@@ -4,30 +4,35 @@ var PropTypes = React.PropTypes;
 var ConversationItem = React.createClass({
 
   getInitialState: function() {
+    return {
     isSelected: false,
-    conversationName: '',
-    conversationId: null,
+    conversationName: null,
+    conversationId: null
+    }
   },
 
   componentDidMount: function() {
     this.setState({
       conversationName: this.props.conversationName,
       conversationId: this.props.conversationId
-    }).bind(this)
+    })
   },
   componentWillUnmount: function() {
-
+    console.log('willUnmount');
   },
+
   render: function() {
+    return(
     <div>
       <h2>{this.state.conversationName}</h2>
       <p>id: {this.state.conversationId}</p>
       <p>edit | delete</p>
     </div>
-  }
+    )
+  },
 
   _onChange: function() {
-
+    console.log('onChange')
   }
 })
 

@@ -3,6 +3,10 @@ var Header = require('./Header');
 var ConversationItem = require('./ConversationItem');
 var ConversationStore = require('../stores/ConversationStore');
 
+window.ConversationStore = ConversationStore;
+
+convs = [{'name' : 'conv 1', 'id' : '1'}, {'name' : 'conver 2', 'id' : '2'}];
+
 var Main = React.createClass({
 
   getInitialState: function() {
@@ -13,21 +17,22 @@ var Main = React.createClass({
 
   componentDidMount: function() {
     this.setState({
-      conversationstwo: ConversationStore.getAllConversations(),
-      conversations: [{}, {}] })
+      conversations: convs
+    })
   },
 
   render: function() {
+    console.log(this.state.conversations);
+
+    var convies = this.state.conversations.map(function(conversation) {
+        return <ConversationItem conversationName={conversation.name} conversationId={conversation.id} key={conversation.id} />
+    })
+
     return (
       <div>
         <Header />
-
-        <div className='main-container'>
-          {this.state.conversations.map(function(conversation) {
-              return <ConversationItem conversationName={conversation.name} conversationId={conversation.id} />
-          })}
-
-        </div>
+          <p>hi</p>
+          {convies}
       </div>
     )
   }
