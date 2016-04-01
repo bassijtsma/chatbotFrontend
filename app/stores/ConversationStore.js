@@ -7,6 +7,8 @@ var axios = require('axios');
 var CHANGE_EVENT = 'change';
 var conversations = {};
 
+
+
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
@@ -55,7 +57,8 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_UPDATE:
-      // do update
+      ConversationStore.updateConversation;
+      console.log('updated convsation')
       ConversationStore.emitChange();
       break;
 

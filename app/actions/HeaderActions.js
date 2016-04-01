@@ -5,9 +5,9 @@ var HeaderActions = {
   toggleInformation: function() {
     Dispatcher.dispatch({
       actionType: Constants.TOGGLEHEADER
-    })
+    });
   }
-}
+};
 
 
 module.exports = HeaderActions;

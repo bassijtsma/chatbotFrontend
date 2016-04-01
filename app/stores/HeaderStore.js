@@ -10,9 +10,6 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var headerVisibility = false;
 
-window.assign = assign;
-window.EventEmitter = EventEmitter;
-
 var HeaderStore = assign({}, EventEmitter.prototype, {
 
   getHeaderVisibility: function() {
