@@ -3,7 +3,7 @@
  * Store and respective action deals with hiding/showing information div.
  */
 var Dispatcher = require('../dispatcher/Dispatcher');
-var Constants = require('../constants/Constants');
+var Constants = require('../utils/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 

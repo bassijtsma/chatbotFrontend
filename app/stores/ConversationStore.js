@@ -1,8 +1,8 @@
 var Dispatcher = require('../dispatcher/Dispatcher');
-var Constants = require('../constants/Constants');
+var Constants = require('../utils/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-var axios = require('axios');
+
 
 var CHANGE_EVENT = 'change';
 var conversations = {};

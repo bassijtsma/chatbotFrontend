@@ -39,6 +39,10 @@ var ConversationItem = React.createClass({
   },
 
   _editConversation: function() {
+    ConversationItemActions.editConversation();
+  },
+
+  _updateConversation: function() {
     ConversationItemActions.updateConversation();
   },
 
