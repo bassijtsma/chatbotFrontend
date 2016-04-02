@@ -20,11 +20,11 @@ var ConversationItemActions = {
   },
   getConversations: function() {
     Api
-    .get('/conversations')
+    .get('/conversations/')
     .then(function(conversations){
       Dispatcher.dispatch({
-        actionType: Constants.RECEIVED_CONVERSATIONS,
-        conversations: conversations
+        actionType: Constants.CONV_RECEIVED,
+        conversations: conversations.results
       });
     });
   }

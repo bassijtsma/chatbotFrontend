@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var ConversationItemActions = require('../actions/ConversationItemActions');
-
+var ConversationStore = require('../stores/ConversationStore');
 
 var ConversationItem = React.createClass({
 
@@ -15,10 +15,15 @@ var ConversationItem = React.createClass({
   },
 
   componentDidMount: function() {
-    ConversationItemActions.getConversations();
+    ConversationStore.addChangeListener(this._onChange);
+    this.setState({
+      conversationName: this.props.conversationName,
+      conversationId: this.props.conversationId,
+    })
   },
+
   componentWillUnmount: function() {
-    console.log('willUnmount');
+    ConversationStore.removeChangeListener(this._onChange);
   },
 
   render: function() {

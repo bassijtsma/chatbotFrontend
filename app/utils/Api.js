@@ -1,6 +1,7 @@
 var axios = require('axios');
 
-var url = '';
+// var url = 'http://www.bastronaut.com:3000';
+var url =  'http://198.211.120.226:3000';
 
 var Api = {
   get: function(GETEndPoint) {
@@ -8,7 +9,7 @@ var Api = {
       axios.get(url+GETEndPoint)
         .then(function(response) {
           console.log(response);
-          resolve(response);
+          resolve(response.data);
         })
         .catch(function(error) {
           console.log(error);
@@ -21,8 +22,8 @@ var Api = {
     return new Promise(function (resolve, reject) {
       axios.post(url+POSTEndPoint, payload)
         .then(function (response) {
-          console.log(response);
-          resolve(response);
+          // console.log(response);
+          resolve(response.data);
         })
         .catch(function (response) {
           console.log(response);
@@ -36,7 +37,7 @@ var Api = {
       axios.put(url+PUTEndPoint, payload)
         .then(function (response) {
           console.log(response);
-          resolve(response);
+          resolve(response.data);
         })
         .catch(function (response) {
           console.log(response);

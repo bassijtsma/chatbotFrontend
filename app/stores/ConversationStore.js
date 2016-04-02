@@ -65,7 +65,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_RECEIVED:
-      ConversationStore.setConversations(action.conversations);
+      setConversations(action.conversations);
       ConversationStore.emitChange();
       console.log('convs received, convs updated, change emitted');
       break;
@@ -75,5 +75,6 @@ Dispatcher.register(function(action) {
   }
 });
 
-
-module.export = ConversationStore;
+window.convy = ConversationStore;
+console.log('in convstore:', ConversationStore);
+module.exports = ConversationStore;
