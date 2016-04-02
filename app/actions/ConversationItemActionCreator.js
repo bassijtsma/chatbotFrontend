@@ -2,10 +2,11 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
-var ActionCreator = {
+
+var ConversationItemActionCreator = {
   getConversations: function() {
     Api
-    .get('url')
+    .get('/conversations')
     .then(function(conversations){
       Dispatcher.dispatch({
         actionType: Constants.RECEIVED_CONVERSATIONS,
@@ -14,3 +15,5 @@ var ActionCreator = {
     });
   }
 };
+
+module.exports = ConversationItemActionCreator;
