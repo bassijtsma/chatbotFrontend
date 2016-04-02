@@ -5,9 +5,11 @@ var assign = require('object-assign');
 
 
 var CHANGE_EVENT = 'change';
-var conversations = {};
+var _conversations = {};
 
-
+function setConversations(conversations) {
+  _conversations = conversations;
+}
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
@@ -25,7 +27,7 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
 
   getAllConversations: function() {
     console.log('get all convs');
-    // async getting convs, is this the right place?
+    return _conversations;
   },
 
   createConversation: function() {
@@ -58,8 +60,14 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_UPDATE:
       ConversationStore.updateConversation;
-      console.log('updated convsation')
+      console.log('updated convsation');
       ConversationStore.emitChange();
+      break;
+
+    case Constants.CONV_RECEIVED:
+      ConversationStore.setConversations(action.conversations);
+      ConversationStore.emitChange();
+      console.log('convs received, convs updated, change emitted');
       break;
 
     default:
@@ -67,5 +75,5 @@ Dispatcher.register(function(action) {
   }
 });
 
-console.log(ConversationStore);
+
 module.export = ConversationStore;

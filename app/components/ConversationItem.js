@@ -15,10 +15,7 @@ var ConversationItem = React.createClass({
   },
 
   componentDidMount: function() {
-    this.setState({
-      conversationName: this.props.conversationName,
-      conversationId: this.props.conversationId,
-    })
+    ConversationItemActions.getConversations();
   },
   componentWillUnmount: function() {
     console.log('willUnmount');
@@ -36,6 +33,10 @@ var ConversationItem = React.createClass({
 
   _onChange: function() {
     console.log('onChange')
+    this.setState({
+      conversationName: this.props.conversationName,
+      conversationId: this.props.conversationId,
+    })
   },
 
   _editConversation: function() {
