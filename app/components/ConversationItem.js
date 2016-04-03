@@ -9,7 +9,6 @@ var ConversationItem = React.createClass({
     return {
     conversationName: null,
     conversationId: null,
-    isSelected: false,
     isEditState: false
     }
   },
@@ -27,7 +26,7 @@ var ConversationItem = React.createClass({
   },
 
   render: function() {
-    return(
+    return (
     <div>
       {!this.state.isEditState ? <h2>{this.state.conversationName}</h2> : <h2>edit the conv state</h2>}
       <p>id: {this.state.conversationId}</p>

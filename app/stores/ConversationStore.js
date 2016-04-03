@@ -6,6 +6,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var _conversations = {};
+var _activeConversation = null;
 
 function setConversations(conversations) {
   _conversations = conversations;
@@ -28,6 +29,11 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
   getAllConversations: function() {
     console.log('get all convs');
     return _conversations;
+  },
+
+  getActiveConversation: function() {
+    console.log('get the active conversation');
+    return _activeConversation;
   },
 
   createConversation: function() {
