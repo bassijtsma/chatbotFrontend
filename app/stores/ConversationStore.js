@@ -7,9 +7,24 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 var _conversations = {};
 var _activeConversation = 1;
+var _conversationsEditState = {};
 
 function setConversations(conversations) {
   _conversations = conversations;
+}
+
+function setInitialConversationsEditState(conversations) {
+  conversations.map(function (conv) {
+    _conversationsEditState[conv.conv_id] = false;
+  });
+}
+
+function toggleConversationsEditState(conv_id) {
+  _conversationsEditState[conv_id] = !_conversationsEditState[conv_id];
+}
+
+function setActiveConversation(conv_id) {
+  _activeConversation = conv_id;
 }
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
@@ -27,17 +42,19 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllConversations: function() {
-    console.log('get all convs');
     return _conversations;
-  },
-
-  setActiveConversation: function(conv_id) {
-    console.log('setting active conv');
-    _activeConversation = conv_id;
   },
 
   getActiveConversation: function() {
     return _activeConversation;
+  },
+
+  getConversationEditState: function(conv_id) {
+    return _conversationsEditState[conv_id];
+  },
+
+  isActiveConversation: function(conv_id) {
+    return conv_id === _activeConversation;
   },
 
   createConversation: function() {
@@ -63,6 +80,11 @@ Dispatcher.register(function(action) {
       ConversationStore.emitChange();
       break;
 
+    case Constants.CONV_EDIT:
+      toggleConversationsEditState(action.conv_id);
+      ConversationStore.emitChange();
+      break;
+
     case Constants.CONV_DELETE:
       // do delete
       ConversationStore.emitChange();
@@ -76,11 +98,12 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_RECEIVED:
       setConversations(action.conversations);
+      setInitialConversationsEditState(action.conversations);
       ConversationStore.emitChange();
       break;
 
     case Constants.CONV_CLICKED:
-      ConversationStore.setActiveConversation(action.conv_id);
+      setActiveConversation(action.conv_id);
       ConversationStore.emitChange();
       break;
 
@@ -89,6 +112,4 @@ Dispatcher.register(function(action) {
   }
 });
 
-window.convy = ConversationStore;
-console.log('in convstore:', ConversationStore);
 module.exports = ConversationStore;

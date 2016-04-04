@@ -13,7 +13,9 @@ var Chat = React.createClass({
   },
   render : function() {
     return (
-      <p>Chat</p>
+      <div className="col-xs-8">
+        <p>Chat is here!</p>
+      </div>
     )
   },
   _onChange: function() {

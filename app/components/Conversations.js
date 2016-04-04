@@ -7,14 +7,11 @@ var HeaderStore = require('../stores/HeaderStore');
 
 var Conversations = React.createClass({
   getInitialState: function() {
-    return {
-      conversations : []
-    }
+    return null;
   },
 
   componentDidMount: function() {
     ConversationStore.addChangeListener(this._onChange);
-    ConversationItemActions.getConversations();
   },
 
   componentWillUnmount: function() {
@@ -22,25 +19,25 @@ var Conversations = React.createClass({
   },
 
   render: function() {
-    console.log('is it this?', this.state.conversations);
-
     var ConversationItems;
 
-    if (this.state.conversations.length > 0) {
-      console.log('it is this.',  this.state.conversations)
-      ConversationItems = this.state.conversations.map(function(conversation) {
+    if (this.props.conversations.length > 0) {
+      console.log('Multiple convs, render ConversationItems',
+                  this.props.conversations)
+      ConversationItems = this.props.conversations.map(function(conversation) {
         return (
           <ConversationItem
             conversationName={conversation.conv_name}
             conversationId={conversation.conv_id}
-            key={conversation._id} />
+            key={conversation._id}
+            isActiveConversation={ConversationStore.isActiveConversation(conversation.conv_id)}
+            isEditState={ConversationStore.getConversationEditState(conversation.conv_id)}/>
         )
       })
     };
 
     return(
-      <div className="main-container">
-        in conversationscomponent
+      <div className="col-xs-4">
         {ConversationItems}
       </div>
     )
@@ -48,9 +45,7 @@ var Conversations = React.createClass({
   },
 
   _onChange: function() {
-    this.setState({
-      conversations: ConversationStore.getAllConversations()
-    })
+    console.log('change logged in Conversations component!')
   }
 
 })

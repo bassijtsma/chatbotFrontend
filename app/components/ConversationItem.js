@@ -3,23 +3,19 @@ var PropTypes = React.PropTypes;
 var ConversationItemActions = require('../actions/ConversationItemActions');
 var ConversationStore = require('../stores/ConversationStore');
 
+
 var ConversationItem = React.createClass({
 
   getInitialState: function() {
     return {
-    conversationName: null,
-    conversationId: null,
-    isEditState: false,
-    isActiveConversation: false,
+    conversationName: null
     }
   },
 
   componentDidMount: function() {
     ConversationStore.addChangeListener(this._onChange);
     this.setState({
-      conversationName: this.props.conversationName,
-      conversationId: this.props.conversationId,
-      isActiveConversation: this._isActiveConversation()
+      conversationName: this.props.conversationName
     })
   },
 
@@ -29,10 +25,18 @@ var ConversationItem = React.createClass({
 
   render: function() {
     return (
-    <div onClick={this._setActiveConversation} className={this.state.isActiveConversation ? 'activeConv' : 'inactiveConv'}>
-      {!this.state.isEditState ? <h2>{this.state.conversationName}</h2> : <h2>edit the conv state</h2>}
-      <p>id: {this.state.conversationId}</p>
-      <p> <span onClick={this._editConversation}>Edit</span> | <span onClick={this._deleteConversation}>Delete</span></p>
+    <div onClick={this._setActiveConversation}
+      className={this.props.isActiveConversation ? 'activeConv' : 'inactiveConv'}
+      style={this.props.isActiveConversation ? {color: 'red'} : null }>
+      {!this.props.isEditState
+        ? <h2 onClick={this._editConversation.bind(this, this.props.conversationId)}>{this.state.conversationName}</h2>
+        : <h2 onClick={this._editConversation.bind(this, this.props.conversationId)}>edit the conv state</h2>
+      }
+      <p>id: {this.props.conversationId}</p>
+      <p>
+        <span onClick={this._editConversation.bind(this, this.props.conversationId)}>Edit</span> |
+        <span onClick={this._deleteConversation}>Delete</span>
+      </p>
     </div>
     )
   },
@@ -40,12 +44,13 @@ var ConversationItem = React.createClass({
   _onChange: function() {
     this.setState({
       conversationName: this.props.conversationName,
-      isActiveConversation: this._isActiveConversation()
     })
   },
 
-  _editConversation: function() {
-    ConversationItemActions.editConversation();
+  _editConversation: function(conv_id) {
+    {/*magic in edit onClick: a function reference should be passed, otherwise
+      it will call it directly. ref passed with .bind*/}
+    ConversationItemActions.editConversation(conv_id);
   },
 
   _updateConversation: function() {
@@ -57,20 +62,17 @@ var ConversationItem = React.createClass({
   },
 
   _setActiveConversation: function() {
-    if (!this._isActiveConversation()) {
+    if (!this.props.isActiveConversation) {
       ConversationItemActions._setActiveConversation(this.props.conversationId)
     }
   },
-
-  _isActiveConversation: function() {
-    return this.props.conversationId === ConversationStore.getActiveConversation();
-  }
 
 })
 
 ConversationItem.PropTypes = {
   conversationName: PropTypes.string,
-  conversationId: PropTypes.string
+  conversationId: PropTypes.string,
+  isEditState: PropTypes.bool
 }
 
 module.exports = ConversationItem;
