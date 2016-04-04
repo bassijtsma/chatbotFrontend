@@ -6,7 +6,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var _conversations = {};
-var _activeConversation = null;
+var _activeConversation = 1;
 
 function setConversations(conversations) {
   _conversations = conversations;
@@ -31,8 +31,12 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
     return _conversations;
   },
 
+  setActiveConversation: function(conv_id) {
+    console.log('setting active conv');
+    _activeConversation = conv_id;
+  },
+
   getActiveConversation: function() {
-    console.log('get the active conversation');
     return _activeConversation;
   },
 
@@ -49,7 +53,7 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
     // in frontend emit to dispatcher, make q and r stores that listen to c has
     // been deleted
   }
-})
+});
 
 Dispatcher.register(function(action) {
   switch(action.actionType) {
@@ -65,7 +69,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_UPDATE:
-      ConversationStore.updateConversation;
+      ConversationStore.updateConversation();
       console.log('updated convsation');
       ConversationStore.emitChange();
       break;
@@ -73,7 +77,11 @@ Dispatcher.register(function(action) {
     case Constants.CONV_RECEIVED:
       setConversations(action.conversations);
       ConversationStore.emitChange();
-      console.log('convs received, convs updated, change emitted');
+      break;
+
+    case Constants.CONV_CLICKED:
+      ConversationStore.setActiveConversation(action.conv_id);
+      ConversationStore.emitChange();
       break;
 
     default:

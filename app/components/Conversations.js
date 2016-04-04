@@ -32,7 +32,7 @@ var Conversations = React.createClass({
         return (
           <ConversationItem
             conversationName={conversation.conv_name}
-            conversationId={conversation._id}
+            conversationId={conversation.conv_id}
             key={conversation._id} />
         )
       })

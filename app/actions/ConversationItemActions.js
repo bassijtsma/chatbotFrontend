@@ -27,6 +27,12 @@ var ConversationItemActions = {
         conversations: conversations.results
       });
     });
+  },
+  _setActiveConversation: function(conv_id) {
+    Dispatcher.dispatch({
+      actionType: Constants.CONV_CLICKED,
+      conv_id: conv_id
+    });
   }
 };
 

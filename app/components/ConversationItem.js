@@ -9,7 +9,8 @@ var ConversationItem = React.createClass({
     return {
     conversationName: null,
     conversationId: null,
-    isEditState: false
+    isEditState: false,
+    isActiveConversation: false,
     }
   },
 
@@ -18,6 +19,7 @@ var ConversationItem = React.createClass({
     this.setState({
       conversationName: this.props.conversationName,
       conversationId: this.props.conversationId,
+      isActiveConversation: this._isActiveConversation()
     })
   },
 
@@ -27,7 +29,7 @@ var ConversationItem = React.createClass({
 
   render: function() {
     return (
-    <div>
+    <div onClick={this._setActiveConversation} className={this.state.isActiveConversation ? 'activeConv' : 'inactiveConv'}>
       {!this.state.isEditState ? <h2>{this.state.conversationName}</h2> : <h2>edit the conv state</h2>}
       <p>id: {this.state.conversationId}</p>
       <p> <span onClick={this._editConversation}>Edit</span> | <span onClick={this._deleteConversation}>Delete</span></p>
@@ -36,10 +38,9 @@ var ConversationItem = React.createClass({
   },
 
   _onChange: function() {
-    console.log('onChange')
     this.setState({
       conversationName: this.props.conversationName,
-      conversationId: this.props.conversationId,
+      isActiveConversation: this._isActiveConversation()
     })
   },
 
@@ -53,7 +54,18 @@ var ConversationItem = React.createClass({
 
   _deleteConversation: function() {
     ConversationItemActions.deleteConversation();
+  },
+
+  _setActiveConversation: function() {
+    if (!this._isActiveConversation()) {
+      ConversationItemActions._setActiveConversation(this.props.conversationId)
+    }
+  },
+
+  _isActiveConversation: function() {
+    return this.props.conversationId === ConversationStore.getActiveConversation();
   }
+
 })
 
 ConversationItem.PropTypes = {
