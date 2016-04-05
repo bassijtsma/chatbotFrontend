@@ -18,7 +18,8 @@ var Main = React.createClass({
     return {
       activeConvId: 1,
       conversations: [],
-      messages: []
+      messages: [],
+      messagesEditState: {}
     }
   },
 
@@ -40,8 +41,8 @@ var Main = React.createClass({
             <Messages
               activeConversation={this.state.activeConvId}
               messages={this.state.messages}
+              messagesEditState={this.state.messagesEditState}
               />
-            <p>hi</p>
           </div>
         </div>
       </div>
@@ -52,7 +53,8 @@ var Main = React.createClass({
     this.setState({
       activeConvId : ConversationStore.getActiveConversation(),
       conversations: ConversationStore.getAllConversations(),
-      messages: MessageStore.getAllMessages()
+      messages: MessageStore.getAllMessages(),
+      messagesEditState: MessageStore.getMessagesEditState()
     })
   }
 

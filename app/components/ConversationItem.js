@@ -30,11 +30,13 @@ var ConversationItem = React.createClass({
       style={this.props.isActiveConversation ? {color: 'red'} : null }>
       {!this.props.isEditState
         ? <h2 onClick={this._editConversation.bind(this, this.props.conversationId)}>{this.state.conversationName}</h2>
-        : <h2 onClick={this._editConversation.bind(this, this.props.conversationId)}>edit the conv state</h2>
+        : <h2>edit the conv state</h2>
       }
       <p>id: {this.props.conversationId}</p>
       <p>
-        <span onClick={this._editConversation.bind(this, this.props.conversationId)}>Edit</span> |
+        <span onClick={this._editConversation.bind(this, this.props.conversationId)}>
+        {this.props.isEditState ? 'Save' : 'Edit'}
+        </span> |
         <span onClick={this._deleteConversation}>Delete</span>
       </p>
     </div>

@@ -5,10 +5,6 @@ var MessageItem = require('../components/MessageItem');
 
 var Messages = React.createClass({
 
-  getInitialState: function() {
-    return null;
-  },
-
   componentDidMount: function() {
     MessageStore.addChangeListener(this._onChange);
   },
@@ -23,21 +19,32 @@ var Messages = React.createClass({
     var messageItems = this.props.messages.map(function (message) {
       if (message.conv_id === activeConversation) {
         return (
-          <MessageItem
-            key={message._id}
-            messagenr={message._nr}
-            responseText={message.rtext}
-            questionText={message.qtext}
-            isAlternative={message.is_alternative}
-            conversationId={message.conv_id}
-             />
-         )}
-    });
+          <div className='row' key={message._id}>
+            <div className='col-xs-6'>
+              <MessageItem
+                objectId={message._id}
+                messagenr={message.m_nr}
+                text={message.qtext}
+                isAlternative={message.is_alternative}
+                messageType='question'
+                editState={this.props.messagesEditState[message._id]} />
+            </div>
 
-    console.log('calling render')
+            <div className='col-xs-6'>
+              <MessageItem
+                objectId={message._id}
+                messagenr={message.m_nr}
+                text={message.rtext}
+                isAlternative={message.is_alternative}
+                messageType='response'
+                editState={this.props.messagesEditState[message._id]} />
+            </div>
+          </div>
+         )}
+    }.bind(this));
+
     return (
       <div className="col-xs-8">
-        <p>Messages is here!</p>
         {messageItems}
       </div>
     )

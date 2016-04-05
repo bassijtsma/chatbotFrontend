@@ -17,7 +17,14 @@ var MessageActions = {
         console.log('error fetching messages, todo: build dispatching error actiontype');
         console.log(error);
       });
+  },
+  editMessage: function(objectId) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_EDIT,
+      objectId: objectId
+    });
   }
+
 };
 
 module.exports = MessageActions;
