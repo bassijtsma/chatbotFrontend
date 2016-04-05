@@ -73,7 +73,7 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
 });
 
 Dispatcher.register(function(action) {
-  switch(action.actionType) {
+  switch (action.actionType) {
 
     case Constants.CONV_CREATE:
       // do create

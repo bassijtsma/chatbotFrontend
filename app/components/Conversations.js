@@ -1,4 +1,5 @@
 var React = require('react');
+var PropTypes = React.PropTypes;
 var ConversationStore = require('../stores/ConversationStore');
 var ConversationItem = require('./ConversationItem');
 var ConversationItemActions = require('../actions/ConversationItemActions');
@@ -6,6 +7,7 @@ var HeaderStore = require('../stores/HeaderStore');
 
 
 var Conversations = React.createClass({
+
   getInitialState: function() {
     return null;
   },
@@ -45,9 +47,13 @@ var Conversations = React.createClass({
   },
 
   _onChange: function() {
-    console.log('change logged in Conversations component!')
+    
   }
 
 })
+
+Conversations.PropTypes = {
+  conversations: PropTypes.array.isRequired
+}
 
 module.exports = Conversations;

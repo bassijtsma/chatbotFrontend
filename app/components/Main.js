@@ -1,10 +1,15 @@
 var React = require('react');
 var Header = require('./Header');
+
 var ConversationStore = require('../stores/ConversationStore');
 var Conversations = require('./Conversations');
 var ConversationItemActions = require('../actions/ConversationItemActions');
+
+var MessageStore = require('../stores/MessageStore');
+var MessageActions = require('../actions/MessageActions');
+
 var ChatHeader = require('./ChatHeader');
-var Chat = require('./Chat');
+var Messages = require('./Messages');
 
 
 var Main = React.createClass({
@@ -12,13 +17,16 @@ var Main = React.createClass({
   getInitialState: function() {
     return {
       activeConvId: 1,
-      conversations: []
+      conversations: [],
+      messages: []
     }
   },
 
   componentDidMount: function() {
     ConversationStore.addChangeListener(this._onChange);
+    MessageStore.addChangeListener(this._onChange);
     ConversationItemActions.getConversations();
+    MessageActions.getMessages();
   },
 
   render: function() {
@@ -29,7 +37,10 @@ var Main = React.createClass({
           <div className="row">
             <Conversations conversations={this.state.conversations}/>
             <ChatHeader />
-            <Chat activeConversation={this.state.activeConvId}/>
+            <Messages
+              activeConversation={this.state.activeConvId}
+              messages={this.state.messages}
+              />
             <p>hi</p>
           </div>
         </div>
@@ -39,8 +50,9 @@ var Main = React.createClass({
 
   _onChange: function() {
     this.setState({
-      activeConvId : ConversationStore.getActiveConversation,
-      conversations: ConversationStore.getAllConversations()
+      activeConvId : ConversationStore.getActiveConversation(),
+      conversations: ConversationStore.getAllConversations(),
+      messages: MessageStore.getAllMessages()
     })
   }
 

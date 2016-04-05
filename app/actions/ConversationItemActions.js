@@ -27,11 +27,15 @@ var ConversationItemActions = {
   getConversations: function() {
     Api
     .get('/conversations/')
-    .then(function(conversations){
+    .then(function(conversations) {
       Dispatcher.dispatch({
         actionType: Constants.CONV_RECEIVED,
         conversations: conversations.results
       });
+    })
+    .catch(function(error) {
+      console.log('error fetching conversations. todo: build dispatch error actiontype');
+      console.log(error);
     });
   },
   _setActiveConversation: function(conv_id) {
