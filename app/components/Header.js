@@ -3,26 +3,11 @@ var PropTypes = React.PropTypes;
 var HeaderActions = require('../actions/HeaderActions');
 var HeaderStore = require('../stores/HeaderStore');
 
-function getHeaderState() {
-  return ({
-    headerVisibility: HeaderStore.getHeaderVisibility()
-  })
-}
 
 var Header = React.createClass({
 
-  getInitialState: function() {
-    return {
-      headerVisibility: false
-    };
-  },
-
-  componentDidMount: function() {
-    HeaderStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    HeaderStore.removeChangeListener(this._onChange);
+  shouldComponentUpdate: function() {
+    return true;
   },
 
   render : function() {
@@ -30,18 +15,15 @@ var Header = React.createClass({
       <div>
         <h1>Chatbot Manager</h1>
         <p onClick={this._onHeaderToggle}>help</p>
-        {this.state.headerVisibility ? <p>help text?</p> : null}
+        {this.props.headerVisibility ? <p>help text?</p> : null}
       </div>
     )
   },
 
   _onHeaderToggle: function() {
     HeaderActions.toggleInformation();
-  },
-
-  _onChange: function() {
-    this.setState(getHeaderState());
   }
+
 })
 
 module.exports = Header;

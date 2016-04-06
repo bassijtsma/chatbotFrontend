@@ -1,5 +1,7 @@
 var React = require('react');
+
 var Header = require('./Header');
+var HeaderStore = require('../stores/HeaderStore');
 
 var ConversationStore = require('../stores/ConversationStore');
 var Conversations = require('./Conversations');
@@ -19,11 +21,13 @@ var Main = React.createClass({
       activeConvId: 1,
       conversations: [],
       messages: [],
-      messagesEditState: {}
+      messagesEditState: {},
+      headerVisibility: false,
     }
   },
 
   componentDidMount: function() {
+    HeaderStore.addChangeListener(this._onChange);
     ConversationStore.addChangeListener(this._onChange);
     MessageStore.addChangeListener(this._onChange);
     ConversationItemActions.getConversations();
@@ -33,7 +37,7 @@ var Main = React.createClass({
   render: function() {
     return (
       <div>
-        <Header />
+        <Header headerVisibility={this.state.headerVisibility} />
         <div className="main-container">
           <div className="row">
             <Conversations conversations={this.state.conversations}/>
@@ -54,7 +58,8 @@ var Main = React.createClass({
       activeConvId : ConversationStore.getActiveConversation(),
       conversations: ConversationStore.getAllConversations(),
       messages: MessageStore.getAllMessages(),
-      messagesEditState: MessageStore.getMessagesEditState()
+      messagesEditState: MessageStore.getMessagesEditState(),
+      headerVisibility: HeaderStore.getHeaderVisibility()
     })
   }
 
