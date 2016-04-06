@@ -1,8 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var MessageStore = require('../stores/MessageStore');
-var MessageItem = require('../components/MessageItem');
-
+var MessageItem = require('./MessageItem');
+var MessageOptions = require('./MessageOptions');
 var Messages = React.createClass({
 
   componentDidMount: function() {
@@ -27,7 +27,12 @@ var Messages = React.createClass({
                 text={message.qtext}
                 isAlternative={message.is_alternative}
                 messageType='question'
-                editState={this.props.messagesEditState[message._id]} />
+                editState={this.props.questionsEditState[message._id]} />
+
+            <MessageOptions
+                objectId={message._id}
+                messageType='question'
+                editState={this.props.questionsEditState[message._id]} />
             </div>
 
             <div className='col-xs-6'>
@@ -37,8 +42,14 @@ var Messages = React.createClass({
                 text={message.rtext}
                 isAlternative={message.is_alternative}
                 messageType='response'
-                editState={this.props.messagesEditState[message._id]} />
+                editState={this.props.responsesEditState[message._id]} />
+
+              <MessageOptions
+                objectId={message._id}
+                messageType='response'
+                editState={this.props.responsesEditState[message._id]} />
             </div>
+
           </div>
          )}
     }.bind(this));

@@ -18,10 +18,11 @@ var MessageActions = {
         console.log(error);
       });
   },
-  editMessage: function(objectId) {
+  editMessage: function(objectId, messageType) {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_EDIT,
-      objectId: objectId
+      objectId: objectId,
+      messageType: messageType
     });
   }
 

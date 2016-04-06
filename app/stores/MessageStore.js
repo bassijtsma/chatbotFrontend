@@ -6,7 +6,8 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 var _messages = [];
-var _messagesEditState = {};
+var _questionsEditState = {};
+var _responsesEditState = {};
 
 function setMessages(messages) {
   _messages = messages;
@@ -14,7 +15,8 @@ function setMessages(messages) {
 
 function setInitialMessageEditState(messages) {
   messages.map(function (message) {
-    _messagesEditState[message._id] = false;
+    _questionsEditState[message._id] = false;
+    _responsesEditState[message._id] = false;
   });
 }
 
@@ -34,12 +36,14 @@ function deleteMessage(message) {
 
 }
 
-function toggleMessageEditState(objectId) {
+function toggleMessageEditState(objectId, messageType) {
   _messages.every(function(msg) {
-    console.log(msg, objectId)
     if (msg._id === objectId) {
-      console.log('changing the msg state!')
-      _messagesEditState[msg._id] = !_messagesEditState[msg._id];
+      if (messageType === 'question') {
+          _questionsEditState[msg._id] = !_questionsEditState[msg._id];
+      } else if (messageType === 'response') {
+        _responsesEditState[msg._id] = !_responsesEditState[msg._id];
+      }
       return false;
     } else {
       return true;
@@ -65,9 +69,12 @@ var MessageStore = assign({}, EventEmitter.prototype, {
     return _messages;
   },
 
-  getMessagesEditState: function() {
-    console.log('\n returning msg edit state\n')
-    return _messagesEditState;
+  getQuestionsEditState: function() {
+    return _questionsEditState;
+  },
+
+  getResponsesEditState: function() {
+    return _responsesEditState;
   }
 
 });
@@ -97,7 +104,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_EDIT:
-      toggleMessageEditState(action.objectId);
+      toggleMessageEditState(action.objectId, action.messageType);
       MessageStore.emitChange();
       break;
 

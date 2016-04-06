@@ -21,7 +21,8 @@ var Main = React.createClass({
       activeConvId: 1,
       conversations: [],
       messages: [],
-      messagesEditState: {},
+      questionsEditState: {},
+      responsesEditState: {},
       headerVisibility: false,
     }
   },
@@ -45,7 +46,8 @@ var Main = React.createClass({
             <Messages
               activeConversation={this.state.activeConvId}
               messages={this.state.messages}
-              messagesEditState={this.state.messagesEditState}
+              questionsEditState={this.state.questionsEditState}
+              responsesEditState={this.state.responsesEditState}
               />
           </div>
         </div>
@@ -58,7 +60,8 @@ var Main = React.createClass({
       activeConvId : ConversationStore.getActiveConversation(),
       conversations: ConversationStore.getAllConversations(),
       messages: MessageStore.getAllMessages(),
-      messagesEditState: MessageStore.getMessagesEditState(),
+      questionsEditState: MessageStore.getQuestionsEditState(),
+      responsesEditState: MessageStore.getResponsesEditState(),
       headerVisibility: HeaderStore.getHeaderVisibility()
     })
   }

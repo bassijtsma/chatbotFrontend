@@ -5,30 +5,13 @@ var MessageActions = require('../actions/MessageActions');
 
 var MessageItem = React.createClass({
 
-  getInitialState: function() {
-    return null;
-  },
 
   render: function() {
-
     return (
-      <div className='col-xs-6'>
-
+      <div>
         <p>{this.props.text}</p>
-        <p>{this.props.isAlternative}</p>
-        <p onClick={this._editMessage.bind(this, this.props.objectId)}>
-          {this.props.editState ? 'Save' : 'Edit'}
-        </p>
       </div>
     )
-  },
-
-  _onChange: function() {
-
-  },
-
-  _editMessage: function(objectId) {
-    MessageActions.editMessage(objectId)
   }
 })
 
