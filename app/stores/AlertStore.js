@@ -34,16 +34,21 @@ Dispatcher.register(function(action) {
   switch (action.actionType) {
 
     case Constants.ALERT_MSGDELETE:
-      setDeleteMessageAlertVisibility();
+      setDeleteMessageAlertVisibility(true);
       setDeleteMessageId(action.objectId);
       AlertStore.emitChange();
       break;
+
+    case Constants.ALERT_CONFIRMMSGDELETE:
+      setDeleteMessageAlertVisibility(false);
+      setDeleteMessageId(null);
+      AlertStore.emitChange();
     }
 });
 
 
-function setDeleteMessageAlertVisibility(){
-  _deleteMessageAlertVisibility = true;
+function setDeleteMessageAlertVisibility(flag){
+  _deleteMessageAlertVisibility = flag;
 }
 
 function setDeleteMessageId(objectId) {

@@ -8,6 +8,11 @@ var AlertActions = {
       actionType: Constants.ALERT_MSGDELETE,
       objectId: objectId
     });
+  },
+  confirmDeleteMessageAlert: function() {
+    Dispatcher.dispatch({
+      actionType: Constants.ALERT_CONFIRMMSGDELETE
+    })
   }
 };
 
