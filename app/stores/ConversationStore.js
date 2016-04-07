@@ -9,24 +9,6 @@ var _conversations = {};
 var _activeConversation = 1;
 var _conversationsEditState = {};
 
-function setConversations(conversations) {
-  _conversations = conversations;
-}
-
-function setInitialConversationsEditState(conversations) {
-  conversations.map(function (conv) {
-    _conversationsEditState[conv.conv_id] = false;
-  });
-}
-
-function toggleConversationsEditState(conv_id) {
-  _conversationsEditState[conv_id] = !_conversationsEditState[conv_id];
-}
-
-function setActiveConversation(conv_id) {
-  _activeConversation = conv_id;
-}
-
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
@@ -57,20 +39,9 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
     return conv_id === _activeConversation;
   },
 
-  createConversation: function() {
 
-  },
-
-  updateConversation: function() {
-
-  },
-
-  deleteConversation: function() {
-    // in backend handle also removing the qs and responses
-    // in frontend emit to dispatcher, make q and r stores that listen to c has
-    // been deleted
-  }
 });
+
 
 Dispatcher.register(function(action) {
   switch (action.actionType) {
@@ -111,5 +82,40 @@ Dispatcher.register(function(action) {
       // none
   }
 });
+
+
+function setConversations(conversations) {
+  _conversations = conversations;
+}
+
+function setInitialConversationsEditState(conversations) {
+  conversations.map(function (conv) {
+    _conversationsEditState[conv.conv_id] = false;
+  });
+}
+
+function toggleConversationsEditState(conv_id) {
+  _conversationsEditState[conv_id] = !_conversationsEditState[conv_id];
+}
+
+function setActiveConversation(conv_id) {
+  _activeConversation = conv_id;
+}
+
+
+function createConversation() {
+
+}
+
+function updateConversation() {
+
+}
+
+function deleteConversation() {
+  // in backend handle also removing the qs and responses
+  // in frontend emit to dispatcher, make q and r stores that listen to c has
+  // been deleted
+}
+
 
 module.exports = ConversationStore;

@@ -9,48 +9,6 @@ var _messages = [];
 var _questionsEditState = {};
 var _responsesEditState = {};
 
-function setMessages(messages) {
-  _messages = messages;
-}
-
-function setInitialMessageEditState(messages) {
-  messages.map(function (message) {
-    _questionsEditState[message._id] = false;
-    _responsesEditState[message._id] = false;
-  });
-}
-
-function setMessageText(message) {
-
-}
-
-function createMessage(conv_id) {
-
-}
-
-function toggleMessageIsAlternative(message) {
-
-}
-
-function deleteMessage(message) {
-
-}
-
-function toggleMessageEditState(objectId, messageType) {
-  _messages.every(function(msg) {
-    if (msg._id === objectId) {
-      if (messageType === 'question') {
-          _questionsEditState[msg._id] = !_questionsEditState[msg._id];
-      } else if (messageType === 'response') {
-        _responsesEditState[msg._id] = !_responsesEditState[msg._id];
-      }
-      return false;
-    } else {
-      return true;
-    }
-  });
-}
-
 var MessageStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
@@ -99,7 +57,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_DELETE:
-      deleteMessage(action.message);
+      deleteMessage(action.objectId);
       MessageStore.emitChange();
       break;
 
@@ -117,5 +75,58 @@ Dispatcher.register(function(action) {
 
   }
 })
+
+
+function setMessages(messages) {
+  _messages = messages;
+}
+
+function setInitialMessageEditState(messages) {
+  messages.map(function (message) {
+    _questionsEditState[message._id] = false;
+    _responsesEditState[message._id] = false;
+  });
+}
+
+function setMessageText(message) {
+
+}
+
+function createMessage(conv_id) {
+
+}
+
+function toggleMessageIsAlternative(message) {
+
+}
+
+function deleteMessage(objectId) {
+  _messages.every(function(msg, index) {
+    if (msg._id === objectId) {
+      _messages.splice(index, 1)
+      delete _questionsEditState[msg._id];
+      delete _responsesEditState[msg._id];
+      console.log('msg deleted');
+      return false;
+    } else {
+      return true;
+    }
+  })
+}
+
+function toggleMessageEditState(objectId, messageType) {
+  _messages.every(function(msg) {
+    if (msg._id === objectId) {
+      if (messageType === 'question') {
+          _questionsEditState[msg._id] = !_questionsEditState[msg._id];
+      } else if (messageType === 'response') {
+        _responsesEditState[msg._id] = !_responsesEditState[msg._id];
+      }
+      return false;
+    } else {
+      return true;
+    }
+  });
+}
 
 module.exports = MessageStore;

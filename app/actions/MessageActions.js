@@ -24,6 +24,12 @@ var MessageActions = {
       objectId: objectId,
       messageType: messageType
     });
+  },
+  deleteMessage: function(objectId) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_DELETE,
+      objectId: objectId
+    })
   }
 
 };

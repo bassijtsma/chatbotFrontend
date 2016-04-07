@@ -1,17 +1,18 @@
-var React = require('react');
+require("../styles/bootstrap.min.css");
+require("../styles/bootstrap-theme.css");
+require("../styles/style.css");
 
+var React = require('react');
 var Header = require('./Header');
 var HeaderStore = require('../stores/HeaderStore');
-
 var ConversationStore = require('../stores/ConversationStore');
 var Conversations = require('./Conversations');
 var ConversationItemActions = require('../actions/ConversationItemActions');
-
+var Messages = require('./Messages');
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
-
 var ChatHeader = require('./ChatHeader');
-var Messages = require('./Messages');
+var Alerts = require('./Alerts');
 
 
 var Main = React.createClass({
@@ -24,6 +25,7 @@ var Main = React.createClass({
       questionsEditState: {},
       responsesEditState: {},
       headerVisibility: false,
+      alertsVisibilities: {},
     }
   },
 
@@ -38,6 +40,7 @@ var Main = React.createClass({
   render: function() {
     return (
       <div>
+        <Alerts />
         <Header headerVisibility={this.state.headerVisibility} />
         <div className="main-container">
           <div className="row">
@@ -64,7 +67,7 @@ var Main = React.createClass({
       responsesEditState: MessageStore.getResponsesEditState(),
       headerVisibility: HeaderStore.getHeaderVisibility()
     })
-  }
+  },
 
 });
 
