@@ -26,13 +26,11 @@ var ConversationItem = React.createClass({
   render: function() {
     return (
     <div onClick={this._setActiveConversation}
-      className={this.props.isActiveConversation ? 'activeConv' : 'inactiveConv'}
-      style={this.props.isActiveConversation ? {color: 'red'} : null }>
+      className={this.props.isActiveConversation ? 'activeConv conversation-item' : 'inactiveConv conversation-item'} >
       {!this.props.isEditState
-        ? <h2 onClick={this._editConversation.bind(this, this.props.conversationId)}>{this.state.conversationName}</h2>
-        : <h2>edit the conv state</h2>
+        ? <h4 onClick={this._editConversation.bind(this, this.props.conversationId)}>{this.state.conversationName}</h4>
+        : <h4>edit the conv state</h4>
       }
-      <p>id: {this.props.conversationId}</p>
       <p>
         <span onClick={this._editConversation.bind(this, this.props.conversationId)}>
         {this.props.isEditState ? 'Save' : 'Edit'}

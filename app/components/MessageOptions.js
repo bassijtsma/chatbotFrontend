@@ -7,14 +7,15 @@ var MessageOptions = React.createClass({
 	render: function() {
 		return (
       <div>
-        <p onClick={this._editMessage.bind(this,
-                    this.props.objectId, this.props.messageType)}>
-          {this.props.editState ? 'Save' : 'Edit'}
-        </p>
+        <p>
+					<span onClick={this._editMessage.bind(this,
+	          this.props.objectId, this.props.messageType)}>
+	          {this.props.editState ? 'Save' : 'Edit'}
+	        </span>
 
-        <p onClick={this._deleteMessage.bind(this,
-                    this.props.objectId)}>
-          Delete
+	        <span onClick={this._deleteMessage.bind(this,
+	          this.props.objectId)}> Delete
+					</span>
         </p>
       </div>
     );

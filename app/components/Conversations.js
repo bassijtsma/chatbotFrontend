@@ -12,11 +12,9 @@ var Conversations = React.createClass({
     var ConversationItems;
 
     if (this.props.conversations.length > 0) {
-      console.log('Multiple convs, render ConversationItems',
-                  this.props.conversations)
       ConversationItems = this.props.conversations.map(function(conversation) {
         return (
-          <ConversationItem
+          <ConversationItem 
             conversationName={conversation.conv_name}
             conversationId={conversation.conv_id}
             key={conversation._id}
