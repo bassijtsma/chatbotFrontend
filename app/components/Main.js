@@ -11,7 +11,7 @@ var ConversationsHeader = require('./ConversationsHeader')
 var Messages = require('./Messages');
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
-var ChatHeader = require('./ChatHeader');
+var MessagesHeader = require('./MessagesHeader');
 
 
 
@@ -42,12 +42,12 @@ var Main = React.createClass({
       <div className='app-wrapper container'>
         <Header headerVisibility={this.state.headerVisibility} />
         <div className="row">
-          <div className="col-xs-12 col-md-4">
+          <div className="col-xs-12 col-md-3 conversations">
             <ConversationsHeader />
             <Conversations conversations={this.state.conversations} />
           </div>
-          <div className="col-xs-12 col-md-8 messages-container">
-            <ChatHeader />
+          <div className="col-xs-12 col-md-9 messages-container">
+            <MessagesHeader />
 
             <Messages
               activeConversation={this.state.activeConvId}

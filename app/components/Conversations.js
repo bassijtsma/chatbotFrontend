@@ -14,7 +14,7 @@ var Conversations = React.createClass({
     if (this.props.conversations.length > 0) {
       ConversationItems = this.props.conversations.map(function(conversation) {
         return (
-          <ConversationItem 
+          <ConversationItem
             conversationName={conversation.conv_name}
             conversationId={conversation.conv_id}
             key={conversation._id}
@@ -25,9 +25,9 @@ var Conversations = React.createClass({
     };
 
     return(
-      <div>
+      <ul className='conversations'>
         {ConversationItems}
-      </div>
+      </ul>
     )
   }
 })

@@ -12,27 +12,50 @@ body {
 }
 
 .app-wrapper::after {
-    position: fixed;
-    z-index: -1;
-    background-color: #009688;
-    width: 100%;
-    height: 127px;
-    content: '';
-    top: 0;
-    left: 0;
+  position: fixed;
+  z-index: -1;
+  background-color: #009688;
+  width: 100%;
+  height: 127px;
+  content: '';
+  top: 0;
+  left: 0;
+}
+
+.conversations {
+  padding: 0px;
 }
 
 .conversation-item {
   cursor: pointer;
 }
 
+.conversation-item h4 {
+  margin: 0px;
+}
+
+.conversations-header {
+  height: 50px;
+  background-color: #eee;
+  border-bottom: 1px solid #dedede;
+}
+
+.conversation-item {
+  border-bottom: 1px solid #f2f2f2;;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  list-style: none;
+}
+.conversation-item:hover {
+  background-color: #f4f5f5;
+}
 
 .activeConv {
-  color: red;
+  background-color: #e9ebeb;
 }
 
 .inactiveConv {
-  color: black;
+
 }
 
 .message {
@@ -44,4 +67,11 @@ body {
 
 .messages-container {
   background-color: #eee;
+  border-left: 1px solid #dedede;
+}
+
+.messages-header {
+  height: 50px;
+  background-color: #eee;
+  border-bottom: 1px solid #dedede;
 }

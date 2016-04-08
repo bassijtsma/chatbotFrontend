@@ -25,7 +25,7 @@ var ConversationItem = React.createClass({
 
   render: function() {
     return (
-    <div onClick={this._setActiveConversation}
+    <li onClick={this._setActiveConversation}
       className={this.props.isActiveConversation ? 'activeConv conversation-item' : 'inactiveConv conversation-item'} >
       {!this.props.isEditState
         ? <h4 onClick={this._editConversation.bind(this, this.props.conversationId)}>{this.state.conversationName}</h4>
@@ -37,7 +37,7 @@ var ConversationItem = React.createClass({
         </span> |
         <span onClick={this._deleteConversation}>Delete</span>
       </p>
-    </div>
+    </li>
     )
   },
 

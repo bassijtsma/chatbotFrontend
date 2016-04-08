@@ -21,33 +21,37 @@ var Messages = React.createClass({
         return (
           <div className='row' key={message._id}>
             <div className='col-xs-6'>
-              <MessageItem
-                objectId={message._id}
-                messagenr={message.m_nr}
-                text={message.qtext}
-                isAlternative={message.is_alternative}
-                messageType='question'
-                editState={this.props.questionsEditState[message._id]} />
+              <div className='message'>
+                <MessageItem
+                  objectId={message._id}
+                  messagenr={message.m_nr}
+                  text={message.qtext}
+                  isAlternative={message.is_alternative}
+                  messageType='question'
+                  editState={this.props.questionsEditState[message._id]} />
 
-            <MessageOptions
-                objectId={message._id}
-                messageType='question'
-                editState={this.props.questionsEditState[message._id]} />
+              <MessageOptions
+                  objectId={message._id}
+                  messageType='question'
+                  editState={this.props.questionsEditState[message._id]} />
+              </div>
             </div>
 
             <div className='col-xs-6'>
-              <MessageItem
-                objectId={message._id}
-                messagenr={message.m_nr}
-                text={message.rtext}
-                isAlternative={message.is_alternative}
-                messageType='response'
-                editState={this.props.responsesEditState[message._id]} />
+              <div className='message'>
+                <MessageItem
+                  objectId={message._id}
+                  messagenr={message.m_nr}
+                  text={message.rtext}
+                  isAlternative={message.is_alternative}
+                  messageType='response'
+                  editState={this.props.responsesEditState[message._id]} />
 
-              <MessageOptions
-                objectId={message._id}
-                messageType='response'
-                editState={this.props.responsesEditState[message._id]} />
+                <MessageOptions
+                  objectId={message._id}
+                  messageType='response'
+                  editState={this.props.responsesEditState[message._id]} />
+                </div>
             </div>
 
           </div>
