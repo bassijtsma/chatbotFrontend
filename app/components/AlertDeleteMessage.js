@@ -8,10 +8,25 @@ var AlertDeleteMessage = React.createClass({
     return (
 
       this.props.visibility
-        ?  <div>
-            <p>This will delete both the question and response. Are you sure?</p>
-            <p><span onClick={this._confirmDeleteMessage}>Yes</span> |
-              <span onClick={this._cancelDeleteMessage}>No</span> | </p>
+        ?  <div className='alertModalContainer'>
+            <div className='alertModal'>
+
+              <div className='alertModalHeader'>
+                <p>Delete message</p>
+              </div>
+
+              <div className='alertModalBody'>
+                <p>This will delete both the question and response. Are you sure?</p>
+              </div>
+
+              <div className='alertModalFooter'>
+                <p>
+                  <span onClick={this._confirmDeleteMessage}>Yes</span> |
+                  <span onClick={this._cancelDeleteMessage}> No</span>
+                </p>
+              </div>
+
+            </div>
           </div>
         : null
     );

@@ -61,6 +61,16 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
+    case Constants.MESSAGE_DELETE_SUCCESS:
+      deleteMessage(action.objectId);
+      MessageStore.emitChange();
+      break;
+
+    case Constants.MESSAGE_DELETE_FAIL:
+      deleteMessage(action.objectId);
+      MessageStore.emitChange();
+      break;
+
     case Constants.MESSAGE_EDIT:
       toggleMessageEditState(action.objectId, action.messageType);
       MessageStore.emitChange();
@@ -74,7 +84,7 @@ Dispatcher.register(function(action) {
     default:
 
   }
-})
+});
 
 
 function setMessages(messages) {
@@ -103,7 +113,7 @@ function toggleMessageIsAlternative(message) {
 function deleteMessage(objectId) {
   _messages.every(function(msg, index) {
     if (msg._id === objectId) {
-      _messages.splice(index, 1)
+      _messages.splice(index, 1);
       delete _questionsEditState[msg._id];
       delete _responsesEditState[msg._id];
       console.log('msg deleted');
@@ -111,7 +121,15 @@ function deleteMessage(objectId) {
     } else {
       return true;
     }
-  })
+  });
+}
+
+function deleteMessageSuccess(result) {
+  console.log('dlt msg success, result', result);
+}
+
+function deleteMessageFail(result) {
+  console.log('dlt msg fail, result', result);
 }
 
 function toggleMessageEditState(objectId, messageType) {

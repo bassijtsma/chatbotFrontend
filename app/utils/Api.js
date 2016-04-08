@@ -46,6 +46,19 @@ var Api = {
     });
 
   },
+  delete: function(DELETEEndPoint, payload) {
+    return new Promise(function (resolve, reject) {
+      axios.delete(url+DELETEEndPoint, payload)
+        .then(function (response) {
+          console.log(response);
+          resolve(response.data);
+        })
+        .catch(function (response) {
+          console.log(response);
+          reject(response);
+        });
+    });
+  }
 };
 
 
