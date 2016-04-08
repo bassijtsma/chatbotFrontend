@@ -55,7 +55,7 @@ var Messages = React.createClass({
     }.bind(this));
 
     return (
-      <div className="col-xs-8">
+      <div className="row">
         {messageItems}
       </div>
     )

@@ -1,5 +1,4 @@
 require("../styles/bootstrap.min.css");
-require("../styles/bootstrap-theme.css");
 require("../styles/style.css");
 
 var React = require('react');
@@ -39,21 +38,25 @@ var Main = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <Alerts />
+      <div className='app-wrapper container'>
         <Header headerVisibility={this.state.headerVisibility} />
-        <div className="main-container">
-          <div className="row">
-            <Conversations conversations={this.state.conversations}/>
+        <div className="row">
+          <div className="col-xs-12 col-md-4">
+            <Conversations conversations={this.state.conversations} />
+          </div>
+          <div className="col-xs-12 col-md-8">
             <ChatHeader />
+          
             <Messages
               activeConversation={this.state.activeConvId}
               messages={this.state.messages}
               questionsEditState={this.state.questionsEditState}
               responsesEditState={this.state.responsesEditState}
               />
+
           </div>
         </div>
+
       </div>
     )
   },

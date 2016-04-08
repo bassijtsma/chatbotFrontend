@@ -8,18 +8,6 @@ var HeaderStore = require('../stores/HeaderStore');
 
 var Conversations = React.createClass({
 
-  getInitialState: function() {
-    return null;
-  },
-
-  componentDidMount: function() {
-    ConversationStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    ConversationStore.removeChangeListener(this._onChange);
-  },
-
   render: function() {
     var ConversationItems;
 
@@ -39,17 +27,11 @@ var Conversations = React.createClass({
     };
 
     return(
-      <div className="col-xs-4">
+      <div>
         {ConversationItems}
       </div>
     )
-
-  },
-
-  _onChange: function() {
-    
   }
-
 })
 
 Conversations.PropTypes = {

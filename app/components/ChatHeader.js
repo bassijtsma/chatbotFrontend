@@ -4,7 +4,11 @@ var PropTypes = React.PropTypes;
 var ChatHeader = React.createClass({
   render : function() {
     return (
-      <p>ChatHeader</p>
+      <div className="row">
+
+          <p>ChatHeader</p>
+        
+      </div>
     )
   }
 })

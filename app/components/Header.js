@@ -12,7 +12,7 @@ var Header = React.createClass({
 
   render : function() {
     return (
-      <div>
+      <div className="row">
         <h1>Chatbot Manager</h1>
         <p onClick={this._onHeaderToggle}>help</p>
         {this.props.headerVisibility ? <p>help text?</p> : null}
