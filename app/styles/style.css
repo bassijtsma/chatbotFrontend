@@ -1,6 +1,16 @@
 body {
   background-color: #dfdfdf;
   margin: 19px;
+  font-family: 'Roboto', sans-serif;
+}
+
+html, body{
+  height:100%;
+}
+
+
+p {
+  font-family: 'Roboto', sans-serif;
 }
 
 .app-wrapper {
@@ -24,33 +34,57 @@ body {
 
 .conversations {
   padding: 0px;
+  margin-bottom: 0px;
 }
 
 .conversation-item {
   cursor: pointer;
 }
 
-.conversation-item h4 {
+.conversation-item h2 {
   margin: 0px;
 }
 
 .conversations-header {
-  height: 50px;
+  height: 59px;
   background-color: #eee;
-  border-bottom: 1px solid #dedede;
+  border: 1px 0 1px 0 solid #dedede;
 }
 
 .conversation-item {
   border-bottom: 1px solid #f2f2f2;;
   margin-bottom: 0px;
   margin-top: 0px;
+  padding: 15px;
+  height: 72px;
   list-style: none;
 }
 .conversation-item:hover {
   background-color: #f4f5f5;
 }
 
+.conversation-item-header {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.conversation-options {
+  text-align: right;
+  margin-bottom: 0px;
+}
+
+.conversations-header-options {
+  padding: 15px;
+  text-align: right
+}
+
 .activeConv {
+  background-color: #e9ebeb;
+}
+
+.activeConv:hover {
   background-color: #e9ebeb;
 }
 
@@ -59,36 +93,62 @@ body {
 }
 
 .message {
-  padding: 5px;
-  margin: 5px;
+  padding: 9px;
   background-color: #fff;
+  margin-bottom: 15px;
+  box-shadow: 0px 0px 5px #888888;
+  height: 100%;
+}
+
+.question {
+  border-left: 4px solid #009688;
+  margin-left: 15px;
+}
+
+.response {
+  border-right: 4px solid #009688;
+  margin-right: 15px;
 }
 
 .messages-container {
-  background-color: #eee;
+  background-color: #eae4de;
   border-left: 1px solid #dedede;
+  height: 100%;
+}
+
+.new-message {
+  margin-top: 60px;
 }
 
 .messages-header {
-  height: 50px;
+  height: 59px;
   background-color: #eee;
-  border-bottom: 1px solid #dedede;
+  border: 1px 0 1px 0 solid #dedede;
+  margin-bottom: 15px;
 }
 
-.example-enter {
+.footertest {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.newConvHover-enter {
   opacity: 0.01;
 }
 
-.example-enter.example-enter-active {
+.newConvHover-enter.newConvHover-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 300ms ease-in;
 }
 
-.example-leave {
+.newConvHover-leave {
   opacity: 1;
 }
 
-.example-leave.example-leave-active {
+.newConvHover-leave.newConvHover-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }

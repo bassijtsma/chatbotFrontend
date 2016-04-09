@@ -38,7 +38,7 @@ var ConversationItemActions = {
       console.log(error);
     });
   },
-  _setActiveConversation: function(conv_id) {
+  setActiveConversation: function(conv_id) {
     Dispatcher.dispatch({
       actionType: Constants.CONV_CLICKED,
       conv_id: conv_id

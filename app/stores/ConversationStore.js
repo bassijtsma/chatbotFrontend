@@ -78,6 +78,7 @@ Dispatcher.register(function(action) {
       ConversationStore.emitChange();
       break;
 
+
     default:
       // none
   }

@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 var MessageStore = require('../stores/MessageStore');
 var MessageItem = require('./MessageItem');
 var MessageOptions = require('./MessageOptions');
-
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var Messages = React.createClass({
 
@@ -23,7 +23,7 @@ var Messages = React.createClass({
         return (
             <div className='row' key={message._id}>
               <div className='col-xs-6'>
-                <div className='message'>
+                <div className='message question'>
                   <MessageItem
                     objectId={message._id}
                     messagenr={message.m_nr}
@@ -40,7 +40,7 @@ var Messages = React.createClass({
               </div>
 
               <div className='col-xs-6'>
-                <div className='message'>
+                <div className='message response'>
                   <MessageItem
                     objectId={message._id}
                     messagenr={message.m_nr}
@@ -61,11 +61,9 @@ var Messages = React.createClass({
     }.bind(this));
 
     return (
-      <div className="row">
-
-        {messageItems}
-
-      </div>
+        <div className="row">
+            {messageItems}
+        </div>
     )
   },
 

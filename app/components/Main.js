@@ -12,8 +12,7 @@ var Messages = require('./Messages');
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
 var MessagesHeader = require('./MessagesHeader');
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-
+var NewMessage = require('./NewMessage');
 
 var Main = React.createClass({
 
@@ -48,15 +47,13 @@ var Main = React.createClass({
           </div>
           <div className="col-xs-12 col-md-9 messages-container">
             <MessagesHeader />
-
-          <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
             <Messages
               activeConversation={this.state.activeConvId}
               messages={this.state.messages}
               questionsEditState={this.state.questionsEditState}
               responsesEditState={this.state.responsesEditState}
               />
-          </ReactCSSTransitionGroup>
+            <NewMessage />
           </div>
         </div>
 
