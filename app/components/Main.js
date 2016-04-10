@@ -41,11 +41,11 @@ var Main = React.createClass({
       <div className='app-wrapper container'>
         <Header headerVisibility={this.state.headerVisibility} />
         <div className="row">
-          <div className="col-xs-12 col-md-3 conversations">
+          <div className="col-xs-12 col-md-3 conversations boxshadow">
             <ConversationsHeader />
             <Conversations conversations={this.state.conversations} />
           </div>
-          <div className="col-xs-12 col-md-9 messages-container">
+          <div className="col-xs-12 col-md-9 messages-container boxshadow">
             <MessagesHeader />
             <Messages
               activeConversation={this.state.activeConvId}

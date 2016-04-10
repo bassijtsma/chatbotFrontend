@@ -14,12 +14,12 @@ var ConversationsHeader = React.createClass({
   render: function() {
     return (
       <div className='conversations-header'>
-        <div className='conversations-header-options'>
+
 
           <ReactCSSTransitionGroup transitionName="newConvHover"
           transitionEnterTimeout={300} transitionLeaveTimeout={300}>
             {this.state.newConvHover
-              ? <span key='1'>New conversation </span>
+              ? <span key='1' className='newconvhover'>New conversation </span>
               : null
             }
           </ReactCSSTransitionGroup>
@@ -27,7 +27,7 @@ var ConversationsHeader = React.createClass({
           onMouseOver={this.onNewConversationHover}
           onMouseOut={this.offNewConversationHover}
           aria-hidden="true"></span>
-        </div>
+
       </div>
     )
   },
