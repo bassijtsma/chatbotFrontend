@@ -30,12 +30,14 @@ var Messages = React.createClass({
                     text={message.qtext}
                     isAlternative={message.is_alternative}
                     messageType='question'
-                    editState={this.props.questionsEditState[message._id]} />
+                    editState={this.props.questionsEditState[message._id]}
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
 
                 <MessageOptions
                     objectId={message._id}
                     messageType='question'
-                    editState={this.props.questionsEditState[message._id]} />
+                    editState={this.props.questionsEditState[message._id]}
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
                 </div>
               </div>
 
@@ -47,12 +49,14 @@ var Messages = React.createClass({
                     text={message.rtext}
                     isAlternative={message.is_alternative}
                     messageType='response'
-                    editState={this.props.responsesEditState[message._id]} />
+                    editState={this.props.responsesEditState[message._id]}
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
 
                   <MessageOptions
                     objectId={message._id}
                     messageType='response'
-                    editState={this.props.responsesEditState[message._id]} />
+                    editState={this.props.responsesEditState[message._id]}
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
                   </div>
               </div>
             </div>

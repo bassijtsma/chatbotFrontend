@@ -8,6 +8,7 @@ var CHANGE_EVENT = 'change';
 var _messages = [];
 var _questionsEditState = {};
 var _responsesEditState = {};
+var _messagesDeleteState = {};
 
 var MessageStore = assign({}, EventEmitter.prototype, {
 
@@ -33,6 +34,10 @@ var MessageStore = assign({}, EventEmitter.prototype, {
 
   getResponsesEditState: function() {
     return _responsesEditState;
+  },
+
+  getMessagesDeleteState: function() {
+    return _responsesEditState;
   }
 
 });
@@ -42,7 +47,7 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGES_RECEIVED:
       setMessages(action.messages);
-      setInitialMessageEditState(action.messages);
+      setInitialMessagesState(action.messages);
       MessageStore.emitChange();
       break;
 
@@ -81,6 +86,11 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
+    case Constants.MESSAGE_ALERTDELETE:
+      toggleMessageDeleteState(action.objectId);
+      MessageStore.emitChange();
+      break;
+
     default:
 
   }
@@ -91,10 +101,11 @@ function setMessages(messages) {
   _messages = messages;
 }
 
-function setInitialMessageEditState(messages) {
+function setInitialMessagesState(messages) {
   messages.map(function (message) {
     _questionsEditState[message._id] = false;
     _responsesEditState[message._id] = false;
+    _deleteMessageState[message._id] = false;
   });
 }
 
@@ -140,6 +151,17 @@ function toggleMessageEditState(objectId, messageType) {
       } else if (messageType === 'response') {
         _responsesEditState[msg._id] = !_responsesEditState[msg._id];
       }
+      return false;
+    } else {
+      return true;
+    }
+  });
+}
+
+function toggleMessageDeleteState(objectId) {
+  _messages.every(function(msg) {
+    if (msg._id === objectId) {
+      _messagesDeleteState[msg._id] = !_messagesDeleteState[msg._id];
       return false;
     } else {
       return true;

@@ -30,7 +30,13 @@ var MessageActions = {
       actionType: Constants.MESSAGE_DELETE,
       objectId: objectId
     })
-  }
+  },
+  showDeleteMessageAlert: function(objectId) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_ALERTDELETE,
+      objectId: objectId
+    });
+  },
 
 };
 

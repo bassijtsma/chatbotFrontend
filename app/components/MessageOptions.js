@@ -26,7 +26,7 @@ var MessageOptions = React.createClass({
   },
 
   _deleteMessage: function(objectId, messageType) {
-    AlertActions.showDeleteMessageAlert(objectId);
+    MessageActions.showDeleteMessageAlert(objectId);
   }
 
 })

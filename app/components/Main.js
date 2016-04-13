@@ -52,6 +52,7 @@ var Main = React.createClass({
               messages={this.state.messages}
               questionsEditState={this.state.questionsEditState}
               responsesEditState={this.state.responsesEditState}
+              messagesDeleteState={this.state.messagesDeleteState}
               />
             <NewMessage />
           </div>
@@ -68,7 +69,8 @@ var Main = React.createClass({
       messages: MessageStore.getAllMessages(),
       questionsEditState: MessageStore.getQuestionsEditState(),
       responsesEditState: MessageStore.getResponsesEditState(),
-      headerVisibility: HeaderStore.getHeaderVisibility()
+      messagesDeleteState: MessageStore.getMessagesDeleteState();
+      headerVisibility: HeaderStore.getHeaderVisibility(),
     })
   },
 
