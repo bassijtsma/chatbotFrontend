@@ -25,6 +25,7 @@ var MessageStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllMessages: function() {
+    console.log('returning msgs:', _messages);
     return _messages;
   },
 
@@ -37,7 +38,7 @@ var MessageStore = assign({}, EventEmitter.prototype, {
   },
 
   getMessagesDeleteState: function() {
-    return _responsesEditState;
+    return _messagesDeleteState;
   }
 
 });
@@ -86,7 +87,7 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
-    case Constants.MESSAGE_ALERTDELETE:
+    case Constants.MESSAGE_ALERTDELETETOGGLE:
       toggleMessageDeleteState(action.objectId);
       MessageStore.emitChange();
       break;
@@ -105,7 +106,7 @@ function setInitialMessagesState(messages) {
   messages.map(function (message) {
     _questionsEditState[message._id] = false;
     _responsesEditState[message._id] = false;
-    _deleteMessageState[message._id] = false;
+    _messagesDeleteState[message._id] = false;
   });
 }
 
@@ -127,6 +128,7 @@ function deleteMessage(objectId) {
       _messages.splice(index, 1);
       delete _questionsEditState[msg._id];
       delete _responsesEditState[msg._id];
+      delete _messagesDeleteState[msg._id];
       console.log('msg deleted');
       return false;
     } else {

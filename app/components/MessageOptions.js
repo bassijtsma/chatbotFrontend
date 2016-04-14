@@ -1,21 +1,36 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var MessageActions = require('../actions/MessageActions');
-var AlertActions = require('../actions/AlertActions');
+
 
 var MessageOptions = React.createClass({
 	render: function() {
 		return (
       <div>
         <p>
-					<span onClick={this._editMessage.bind(this,
-	          this.props.objectId, this.props.messageType)}>
-	          {this.props.editState ? 'Save' : 'Edit'}
-	        </span>
 
-	        <span onClick={this._deleteMessage.bind(this,
-	          this.props.objectId)}> Delete
-					</span>
+					{!this.props.messagesDeleteState
+						? <span onClick={this._editMessage.bind(this,
+		          this.props.objectId, this.props.messageType)}>
+		          {this.props.editState ? 'Save ' : 'Edit '}
+		        </span>
+						: null
+					}
+
+
+					{this.props.messagesDeleteState
+						? <span>
+								Delete message?
+								<span onClick={this._confirmDeleteMessage.bind(this,
+									this.props.objectId)}> Confirm</span>
+								<span> | </span>
+								<span onClick={this._toggleDeleteMessage.bind(this,
+										this.props.objectId)}>Cancel</span>
+							</span>
+
+						: <span onClick={this._toggleDeleteMessage.bind(this,
+		          this.props.objectId)}> Delete </span>
+					}
         </p>
       </div>
     );
@@ -25,9 +40,17 @@ var MessageOptions = React.createClass({
     MessageActions.editMessage(objectId, messageType);
   },
 
-  _deleteMessage: function(objectId, messageType) {
-    MessageActions.showDeleteMessageAlert(objectId);
-  }
+  _toggleDeleteMessage: function(objectId) {
+    MessageActions.toggleDeleteMessageAlert(objectId);
+  },
+
+	_confirmDeleteMessage: function(objectId) {
+		var requestBody = {
+			'conv_id' : this.props.activeConversation,
+			'm_id' : this.props.messagenr
+		}
+		MessageActions.deleteMessage(objectId, requestBody);
+	}
 
 })
 

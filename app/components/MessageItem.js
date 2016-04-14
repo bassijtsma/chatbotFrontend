@@ -10,7 +10,7 @@ var MessageItem = React.createClass({
     return (
       <div>
         {this.props.editState
-        ? <p>Edit the message text {this.props.messagesDeleteState}</p>
+        ? <p>Edit the message text </p>
         : <p>{this.props.text}</p> }
 
       </div>

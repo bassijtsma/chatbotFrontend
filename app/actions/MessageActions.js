@@ -25,18 +25,25 @@ var MessageActions = {
       messageType: messageType
     });
   },
-  deleteMessage: function(objectId) {
+  deleteMessage: function(objectId, requestBody) {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
       objectId: objectId
     })
+    Api
+    .delete('/messages/', requestBody)
+    .then()
+    .catch();
   },
-  showDeleteMessageAlert: function(objectId) {
+  toggleDeleteMessageAlert: function(objectId) {
     Dispatcher.dispatch({
-      actionType: Constants.MESSAGE_ALERTDELETE,
+      actionType: Constants.MESSAGE_ALERTDELETETOGGLE,
       objectId: objectId
     });
   },
+
+
+
 
 };
 

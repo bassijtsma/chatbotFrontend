@@ -31,13 +31,14 @@ var Messages = React.createClass({
                     isAlternative={message.is_alternative}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
+                     />
 
                 <MessageOptions
                     objectId={message._id}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]}
+                    convId={this.props.activeConversation} />
                 </div>
               </div>
 
@@ -50,13 +51,15 @@ var Messages = React.createClass({
                     isAlternative={message.is_alternative}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
+                     />
 
                   <MessageOptions
                     objectId={message._id}
+                    messagenr={message.m_nr}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]} />
+                    messagesDeleteState={this.props.messagesDeleteState[message._id]}
+                    convId={this.props.activeConversation} />
                   </div>
               </div>
             </div>

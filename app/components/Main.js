@@ -69,7 +69,7 @@ var Main = React.createClass({
       messages: MessageStore.getAllMessages(),
       questionsEditState: MessageStore.getQuestionsEditState(),
       responsesEditState: MessageStore.getResponsesEditState(),
-      messagesDeleteState: MessageStore.getMessagesDeleteState();
+      messagesDeleteState: MessageStore.getMessagesDeleteState(),
       headerVisibility: HeaderStore.getHeaderVisibility(),
     })
   },
