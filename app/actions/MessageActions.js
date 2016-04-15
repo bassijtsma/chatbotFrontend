@@ -26,14 +26,22 @@ var MessageActions = {
     });
   },
   deleteMessage: function(objectId, requestBody) {
+    console.log(requestBody)
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
       objectId: objectId
     })
     Api
     .delete('/messages/', requestBody)
-    .then()
-    .catch();
+    .then(function(result) {
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_DELETERESULTRECEIVED,
+        requestResult: result
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   },
   toggleDeleteMessageAlert: function(objectId) {
     Dispatcher.dispatch({
