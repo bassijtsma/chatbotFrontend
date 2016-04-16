@@ -47,7 +47,7 @@ var MessageOptions = React.createClass({
 	_confirmDeleteMessage: function(objectId) {
 		var requestBody = {
 			'conv_id' : this.props.convId,
-			'm_id' : this.props.messagenr
+			'm_nr' : this.props.messagenr
 		}
 		MessageActions.deleteMessage(objectId, requestBody);
 	}

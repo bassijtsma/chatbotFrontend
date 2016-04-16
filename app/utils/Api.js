@@ -3,7 +3,7 @@ var axios = require('axios');
 // var url =  'http://198.211.120.226:3000';
 var url =  'http://localhost:3000';
 var querystring = require('querystring');
-var headers = { 'headers' : {"Content-Type": "application/x-www-form-urlencoded"}};
+var header = { headers : {"Content-Type": "application/x-www-form-urlencoded"}};
 //
 // var axios = axiosr.create({
 //   baseURL: 'https://api.example.com',
@@ -29,6 +29,7 @@ var Api = {
     });
 
   },
+
   post: function(POSTEndPoint, payload) {
     console.log(payload);
     return new Promise(function (resolve, reject) {
@@ -58,9 +59,27 @@ var Api = {
 
   },
   delete: function(DELETEEndPoint, payload) {
-    console.log(payload)
+    console.log(querystring.stringify(payload));
     return new Promise(function (resolve, reject) {
-      axios.delete(url+DELETEEndPoint, payload, querystring.stringify(payload), headers)
+    //   axios.post(url+DELETEEndPoint,
+    //     querystring.stringify({
+    //         username: 'abcd', //gave the values directly for testing
+    //         password: '1235!',
+    //         client_id: 'user-client'
+    //       }), {
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded"
+    //   }
+    // }).then(function(response) {
+    //       console.log(response.data);
+    //       resolve(response.data);
+    //     console.log(response);
+    // });
+      axios.delete(url+DELETEEndPoint, payload, querystring.stringify(payload), {
+          headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
         .then(function (response) {
           console.log(response.data);
           resolve(response.data);
