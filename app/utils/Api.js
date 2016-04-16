@@ -2,7 +2,17 @@ var axios = require('axios');
 // var url = 'http://www.bastronaut.com:3000';
 // var url =  'http://198.211.120.226:3000';
 var url =  'http://localhost:3000';
-var headers = {"Content-Type": "application/x-www-form-urlencoded"};
+var querystring = require('querystring');
+var headers = { 'headers' : {"Content-Type": "application/x-www-form-urlencoded"}};
+//
+// var axios = axiosr.create({
+//   baseURL: 'https://api.example.com',
+//   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+// });
+
+// Alter defaults after instance has been created
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+console.log(axios);
 
 var Api = {
   get: function(GETEndPoint) {
@@ -22,7 +32,7 @@ var Api = {
   post: function(POSTEndPoint, payload) {
     console.log(payload);
     return new Promise(function (resolve, reject) {
-      axios.post(url+POSTEndPoint, payload, headers)
+      axios.post(url+POSTEndPoint, querystring.stringify(payload), headers)
         .then(function (response) {
           resolve(response.data);
         })
@@ -35,7 +45,7 @@ var Api = {
   },
   put: function(PUTEndPoint, payoad) {
     return new Promise(function (resolve, reject) {
-      axios.put(url+PUTEndPoint, payload, headers)
+      axios.put(url+PUTEndPoint, payload)
         .then(function (response) {
           console.log(response);
           resolve(response.data);
@@ -50,9 +60,9 @@ var Api = {
   delete: function(DELETEEndPoint, payload) {
     console.log(payload)
     return new Promise(function (resolve, reject) {
-      axios.delete(url+DELETEEndPoint, payload, headers)
+      axios.delete(url+DELETEEndPoint, payload, querystring.stringify(payload), headers)
         .then(function (response) {
-          console.log(response);
+          console.log(response.data);
           resolve(response.data);
         })
         .catch(function (response) {
