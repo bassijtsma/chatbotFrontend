@@ -32,7 +32,7 @@ var MessageActions = {
       objectId: objectId
     })
     Api
-    .delete('/messages/', requestBody)
+    .delete('/messages/'+requestBody.conv_id+'/'+requestBody.m_nr)
     .then(function(result) {
       Dispatcher.dispatch({
         actionType: Constants.MESSAGE_DELETERESULTRECEIVED,
