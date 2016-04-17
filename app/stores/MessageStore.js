@@ -9,6 +9,7 @@ var _messages = [];
 var _questionsEditState = {};
 var _responsesEditState = {};
 var _messagesDeleteState = {};
+var _highestM_NrForActiveConv = 0;
 
 var MessageStore = assign({}, EventEmitter.prototype, {
 
@@ -39,6 +40,9 @@ var MessageStore = assign({}, EventEmitter.prototype, {
 
   getMessagesDeleteState: function() {
     return _messagesDeleteState;
+  },
+  getHighestM_NrForActiveConv: function() {
+    return _highestM_NrForActiveConv;
   }
 
 });
@@ -49,11 +53,12 @@ Dispatcher.register(function(action) {
     case Constants.MESSAGES_RECEIVED:
       setMessages(action.messages);
       setInitialMessagesState(action.messages);
+      setHighestM_NrForActiveConv(1); // default on first load
       MessageStore.emitChange();
       break;
 
     case Constants.MESSAGE_CREATE:
-
+      createNewMessage(action.message);
       MessageStore.emitChange();
       break;
 
@@ -171,5 +176,33 @@ function toggleMessageDeleteState(objectId) {
     }
   });
 }
+
+function setHighestM_NrForActiveConv(activeConvId) {
+  highestM_NrForActiveConv = 0;
+  _messages.forEach(function (message) {
+    if (message.conv_id === activeConvId) {
+      if (message.m_nr > highestM_NrForActiveConv) {
+        _highestM_NrForActiveConv = message.m_nr;
+      }
+    }
+  })
+  _highestM_NrForActiveConv = highestM_NrForActiveConv;
+}
+
+// When a user creates a new message, it is added 'temporarily' so that the
+// action appears instant. In the background, the new msg is is added to the db.
+// When successfull, we fetch the newly created message's objectId, and update
+// it in all necessary places. Feels dangerous but makes it look instanteneous
+function createNewMessage(message) {
+  _messages.push(message);
+  _highestM_NrForActiveConv = message.m_nr;
+}
+
+
+function finalizeNewMessage(message) {
+  // update the object id
+  // add the messages' editstate
+}
+
 
 module.exports = MessageStore;

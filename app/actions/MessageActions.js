@@ -49,10 +49,20 @@ var MessageActions = {
       objectId: objectId
     });
   },
-
-
-
-
+  createNewMessage: function(message) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_CREATE,
+      message: message
+    });
+    Api
+      .post('/messages/', message)
+      .then(function(result) {
+        console.log(result);
+      })
+      .catch(function(err) {
+        console.log(err)
+      })
+  }
 };
 
 module.exports = MessageActions;

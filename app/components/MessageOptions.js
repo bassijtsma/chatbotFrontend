@@ -4,6 +4,10 @@ var MessageActions = require('../actions/MessageActions');
 
 
 var MessageOptions = React.createClass({
+	propTypes: {
+		m_nr: React.PropTypes.number.isRequired,
+		objectId: React.PropTypes.string.isRequired
+	},
 	render: function() {
 		return (
       <div>
@@ -47,11 +51,11 @@ var MessageOptions = React.createClass({
 	_confirmDeleteMessage: function(objectId) {
 		var requestBody = {
 			'conv_id' : this.props.convId,
-			'm_nr' : this.props.messagenr
+			'm_nr' : this.props.m_nr
 		}
 		MessageActions.deleteMessage(objectId, requestBody);
 	}
-
 })
+
 
 module.exports = MessageOptions;

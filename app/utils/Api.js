@@ -17,13 +17,11 @@ var Api = {
           reject(error);
         });
     });
-
   },
-
   post: function(POSTEndPoint, payload) {
     console.log(payload);
     return new Promise(function (resolve, reject) {
-      axios.post(url+POSTEndPoint, querystring.stringify(payload), headers)
+      axios.post(url+POSTEndPoint, payload)
         .then(function (response) {
           resolve(response.data);
         })
@@ -45,7 +43,6 @@ var Api = {
           reject(response);
         });
     });
-
   },
   delete: function(DELETEEndPoint) {
     return new Promise(function (resolve, reject) {

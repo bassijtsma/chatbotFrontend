@@ -7,6 +7,11 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 var Messages = React.createClass({
 
+  propTypes: {
+    activeConversation: PropTypes.number.isRequired,
+    messages: PropTypes.array.isRequired
+  },
+
   componentDidMount: function() {
     MessageStore.addChangeListener(this._onChange);
   },
@@ -26,9 +31,9 @@ var Messages = React.createClass({
                 <div className='message question'>
                   <MessageItem
                     objectId={message._id}
-                    messagenr={message.m_nr}
+                    m_nr={message.m_nr}
                     text={message.qtext}
-                    isAlternative={message.is_alternative}
+                    is_alternative={message.is_alternative}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
                      />
@@ -38,7 +43,7 @@ var Messages = React.createClass({
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
                     messagesDeleteState={this.props.messagesDeleteState[message._id]}
-                    messagenr={message.m_nr}
+                    m_nr={message.m_nr}
                     convId={activeConversation} />
                 </div>
               </div>
@@ -47,16 +52,16 @@ var Messages = React.createClass({
                 <div className='message response'>
                   <MessageItem
                     objectId={message._id}
-                    messagenr={message.m_nr}
+                    m_nr={message.m_nr}
                     text={message.rtext}
-                    isAlternative={message.is_alternative}
+                    is_alternative={message.is_alternative}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
                      />
 
                   <MessageOptions
                     objectId={message._id}
-                    messagenr={message.m_nr}
+                    m_nr={message.m_nr}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
                     messagesDeleteState={this.props.messagesDeleteState[message._id]}
@@ -83,9 +88,5 @@ var Messages = React.createClass({
 })
 
 
-Messages.PropTypes = {
-  activeConversation: PropTypes.string.isRequired,
-  messages: PropTypes.array.isRequired
-}
 
 module.exports = Messages;

@@ -19,6 +19,7 @@ var Main = React.createClass({
   getInitialState: function() {
     return {
       activeConvId: 1,
+      highestM_NrForActiveConv: 0,
       conversations: [],
       messages: [],
       questionsEditState: {},
@@ -54,7 +55,10 @@ var Main = React.createClass({
               responsesEditState={this.state.responsesEditState}
               messagesDeleteState={this.state.messagesDeleteState}
               />
-            <NewMessage />
+            <NewMessage
+              activeConversation={this.state.activeConvId}
+              highestm_nr={this.state.highestM_NrForActiveConv}
+              />
           </div>
         </div>
 
@@ -71,6 +75,7 @@ var Main = React.createClass({
       responsesEditState: MessageStore.getResponsesEditState(),
       messagesDeleteState: MessageStore.getMessagesDeleteState(),
       headerVisibility: HeaderStore.getHeaderVisibility(),
+      highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv()
     })
   },
 
