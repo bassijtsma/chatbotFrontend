@@ -39,6 +39,7 @@ var NewMessage = React.createClass({
   },
 
   saveInput: function() {
+    console.log('the highestm_nr is now:', this.props.highestm_nr)
     var newMessage = {};
     newMessage.rtext = this.state.questionInputField;
     newMessage.qtext = this.state.responseInputField;
@@ -46,7 +47,7 @@ var NewMessage = React.createClass({
     newMessage.m_nr = this.props.highestm_nr + 1;
     newMessage.is_alternative = false;
     var temporaryObjectId = (String(Math.floor(Date.now() / 1000)) + this.props.highestm_nr);
-    newMessage.objectId = temporaryObjectId;
+    newMessage._id = temporaryObjectId;
     console.log('new msg:', newMessage);
     MessageActions.createNewMessage(newMessage);
   }

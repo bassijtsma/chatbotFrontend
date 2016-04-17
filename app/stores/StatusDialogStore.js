@@ -25,8 +25,8 @@ var StatusDialogStore = assign({}, EventEmitter.prototype, {
 Dispatcher.register(function(action) {
   switch (action.actionType) {
 
-    case Constants.MESSAGE_DELETERESULTRECEIVED:
-      processDeleteMessageReceived(action.requestBody);
+    case Constants.MESSAGE_DELETE_SUCCESS:
+      processDeleteMessageSuccess(action.requestBody);
       StatusDialogStore.emitChange();
       break;
 
@@ -36,7 +36,7 @@ Dispatcher.register(function(action) {
 });
 
 
-function processDeleteMessageReceived(requestResult) {
+function processDeleteMessageSuccess(requestResult) {
 
 }
 

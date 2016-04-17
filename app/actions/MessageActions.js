@@ -34,13 +34,28 @@ var MessageActions = {
     Api
     .delete('/messages/'+requestBody.conv_id+'/'+requestBody.m_nr)
     .then(function(result) {
-      Dispatcher.dispatch({
-        actionType: Constants.MESSAGE_DELETERESULTRECEIVED,
-        requestResult: result
-      });
+      if (result.results === 'Message deleted successfully') {
+        Dispatcher.dispatch({
+          actionType: Constants.MESSAGE_DELETE_SUCCESS,
+          requestResult: result,
+          conv_id: requestBody.conv_id
+        });
+      } else {
+        Dispatcher.dispatch({
+          actionType: Constants.MESSAGE_DELETE_FAIL,
+          requestResult: result,
+          conv_id: requestBody.conv_id,
+          objectId: objectId
+        });
+      }
     })
     .catch(function (error) {
       console.log(error);
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_DELETE_FAIL,
+        requestResult: result,
+        conv_id: requestBody.conv_id
+      });
     });
   },
   toggleDeleteMessageAlert: function(objectId) {
@@ -57,7 +72,20 @@ var MessageActions = {
     Api
       .post('/messages/', message)
       .then(function(result) {
-        console.log(result);
+
+        if (result.results === 'Message inserted successfully') {
+          Dispatcher.dispatch({
+            actionType: Constants.MESSAGE_CREATE_SUCCESS,
+            requestResult: result,
+            conv_id: message.conv_id
+          });
+        } else {
+          Dispatcher.dispatch({
+            actionType: Constants.MESSAGE_CREATE_FAIL,
+            requestResult: result,
+            conv_id: message.conv_id
+          });
+        }
       })
       .catch(function(err) {
         console.log(err)

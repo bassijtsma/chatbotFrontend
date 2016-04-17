@@ -26,7 +26,6 @@ var MessageStore = assign({}, EventEmitter.prototype, {
   },
 
   getAllMessages: function() {
-    console.log('returning msgs:', _messages);
     return _messages;
   },
 
@@ -62,6 +61,16 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
+    case Constants.MESSAGE_CREATE_SUCCESS:
+      // verify processing already done
+      console.log('msg create success. not doing anything yet TODO')
+      break;
+
+    case Constants.MESSAGE_CREATE_FAIL:
+      // fail
+      console.log('msg create fail. not doing anything yet TODO')
+      break;
+
     case Constants.MESSAGE_TOGGLEALTERNATIVE:
       toggleMessageIsAlternative(action.message);
       MessageStore.emitChange();
@@ -73,8 +82,8 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_DELETE_SUCCESS:
-      deleteMessage(action.objectId);
-      MessageStore.emitChange();
+      // verify processing already done
+      console.log('msg delete success. not doing anything yet prolly no TODO')
       break;
 
     case Constants.MESSAGE_DELETE_FAIL:
@@ -94,6 +103,11 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGE_ALERTDELETETOGGLE:
       toggleMessageDeleteState(action.objectId);
+      MessageStore.emitChange();
+      break;
+
+    case Constants.CONV_CLICKED:
+      setHighestM_NrForActiveConv(action.conv_id);
       MessageStore.emitChange();
       break;
 
@@ -182,7 +196,7 @@ function setHighestM_NrForActiveConv(activeConvId) {
   _messages.forEach(function (message) {
     if (message.conv_id === activeConvId) {
       if (message.m_nr > highestM_NrForActiveConv) {
-        _highestM_NrForActiveConv = message.m_nr;
+        highestM_NrForActiveConv = message.m_nr;
       }
     }
   })
@@ -194,6 +208,7 @@ function setHighestM_NrForActiveConv(activeConvId) {
 // When successfull, we fetch the newly created message's objectId, and update
 // it in all necessary places. Feels dangerous but makes it look instanteneous
 function createNewMessage(message) {
+  console.log('the m_nr is now:', message.m_nr)
   _messages.push(message);
   _highestM_NrForActiveConv = message.m_nr;
 }
@@ -203,6 +218,5 @@ function finalizeNewMessage(message) {
   // update the object id
   // add the messages' editstate
 }
-
 
 module.exports = MessageStore;
