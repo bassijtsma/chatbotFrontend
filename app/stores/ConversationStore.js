@@ -55,7 +55,7 @@ Dispatcher.register(function(action) {
       ConversationStore.emitChange();
       break;
 
-    case Constants.CONV_EDIT:
+    case Constants.CONV_TOGGLEEDIT:
       toggleConversationsEditState(action.conv_id);
       ConversationStore.emitChange();
       break;
@@ -72,8 +72,7 @@ Dispatcher.register(function(action) {
 
 
     case Constants.CONV_UPDATE:
-      ConversationStore.updateConversation();
-      console.log('updated convsation');
+      updateConversation(action.conv_id, action.newConvName);
       ConversationStore.emitChange();
       break;
 
@@ -130,8 +129,15 @@ function toggleConversationDeleteState(conv_id) {
 }
 
 
-function updateConversation() {
-
+function updateConversation(conv_id, newConvName) {
+  _conversations.every(function(conv) {
+    if (conv.conv_id === conv_id) {
+      conv.conv_name = newConvName;
+      return false;
+    } else {
+      return true;
+    }
+  });
 }
 
 function deleteConversation() {

@@ -21,7 +21,6 @@ var MessageOptions = React.createClass({
 						: null
 					}
 
-
 					{this.props.deleteState
 						? <span>
 								Delete message?

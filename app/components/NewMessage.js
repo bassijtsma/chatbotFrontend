@@ -6,8 +6,8 @@ var MessageActions = require('../actions/MessageActions');
 var NewMessage = React.createClass({
   getInitialState: function(){
     return {
-      questionInputField: "",
-      responseInputField: "",
+      questionInputField: '',
+      responseInputField: '',
     }
   },
   render: function() {

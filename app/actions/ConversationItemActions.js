@@ -8,14 +8,16 @@ var ConversationItemActions = {
       actionType: Constants.CONV_CREATE
     });
   },
-  updateConversation: function() {
+  updateConversation: function(conv_id, newConvName) {
     Dispatcher.dispatch({
-      actionType: Constants.CONV_UPDATE
+      actionType: Constants.CONV_UPDATE,
+      conv_id: conv_id,
+      newConvName: newConvName
     });
   },
-  editConversation: function(conv_id) {
+  toggleEditConversation: function(conv_id) {
     Dispatcher.dispatch({
-      actionType: Constants.CONV_EDIT,
+      actionType: Constants.CONV_TOGGLEEDIT,
       conv_id: conv_id
     });
   },

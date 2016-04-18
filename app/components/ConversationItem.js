@@ -13,50 +13,41 @@ var ConversationItem = React.createClass({
 
   getInitialState: function() {
     return {
-      conversationName: null
+      tempConversationName: ''
     }
-  },
-
-  componentDidMount: function() {
-    ConversationStore.addChangeListener(this._onChange);
-    this.setState({
-      conversationName: this.props.conversationName
-    })
-  },
-
-  componentWillUnmount: function() {
-    ConversationStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     return (
       <div>
-      <li onClick = {this._setActiveConversation}
-        className = {this.props.isActiveConversation
+      <li onClick= {this._setActiveConversation}
+        className= {this.props.isActiveConversation
           ? 'activeConv conversation-item'
           : 'inactiveConv conversation-item'
         } >
 
         {!this.props.isEditState
-          ? <h2 className = 'conversation-item-header'>
-            {this.state.conversationName}
+          ? <h2 className='conversation-item-header'>
+            {this.props.conversationName}
           </h2>
-          : <input type="text" className = "conversationname-form"
-          placeholder = {this.state.conversationName}/>}
+          : <input type='text' className='conversationname-form'
+          placeholder= {this.props.conversationName}
+          value={this.state.tempConversationName}
+          onChange={this._updateTempConversationName}
+          />}
 
           <ConversationItemOptions
             conversationId={this.props.conversationId}
             isEditState={this.props.isEditState}
             isDeleteState={this.props.isDeleteState}
+            updateConversation={this._updateConversationName}
             />
         </li>
       </div>)
       },
 
       _onChange: function() {
-        this.setState({
-          conversationName: this.props.conversationName,
-        })
+
       },
 
       _setActiveConversation: function() {
@@ -64,6 +55,17 @@ var ConversationItem = React.createClass({
           ConversationItemActions.setActiveConversation(this.props.conversationId)
         }
       },
+
+      _updateTempConversationName: function(event) {
+        this.setState({
+          tempConversationName: event.target.value
+        })
+      },
+
+      _updateConversationName: function() {
+        ConversationItemActions.updateConversation(this.props.conversationId,
+          this.state.tempConversationName);
+      }
 
   })
 

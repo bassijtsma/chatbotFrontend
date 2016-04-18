@@ -14,7 +14,6 @@ var MessageItem = React.createClass({
         ? <p>Edit the message text </p>
         : <p>{this.props.text}</p> }
 
-
         <MessageOptions
             objectId={this.props.objectId}
             messageType={this.props.messageType}

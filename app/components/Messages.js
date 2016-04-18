@@ -12,14 +12,6 @@ var Messages = React.createClass({
     messages: PropTypes.array.isRequired
   },
 
-  componentDidMount: function() {
-    MessageStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    MessageStore.removeChangeListener(this._onChange);
-  },
-
   render: function() {
 
     var messageItems = this.props.messages.map(function (message) {
@@ -56,9 +48,7 @@ var Messages = React.createClass({
                      />
                   </div>
               </div>
-
             </div>
-
          )}
     }.bind(this));
 
@@ -67,14 +57,7 @@ var Messages = React.createClass({
             {messageItems}
         </div>
     )
-  },
-
-  _onChange(){
-    return;
   }
-
 })
-
-
 
 module.exports = Messages;

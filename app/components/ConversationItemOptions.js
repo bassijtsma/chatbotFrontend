@@ -8,31 +8,32 @@ var ConversationItemOptions = React.createClass({
   render: function() {
     return (
       <div>
-      <p className = 'conversation-options' >
-        <span onClick = {
-        this._editConversation.bind(this, this.props.conversationId)
-        } > {this.props.isEditState ? 'Save' : 'Edit'} </span> |
-        <span onClick = {
-          this._toggleDeleteConversationAlert.bind(this, this.props.conversationId)}>
-          {this.props.isDeleteState ? 'Cancel' : 'Delete'}</span>
-          </p>
-          </div>
+        <p className = 'conversation-options' >
+          <span onClick = {this._editConversation} >
+          {this.props.isEditState
+            ? <span onClick = {this.props.updateConversation}>Save </span>
+            : 'Edit conversation name'}
+          </span> |
+          <span onClick = {
+            this._toggleDeleteConversationAlert}>
+            {this.props.isDeleteState ? 'Cancel' : 'Delete'}
+          </span>
+        </p>
+      </div>
     )
   },
 
-  _editConversation: function(conv_id) {
-    ConversationItemActions.editConversation(conv_id);
+  _editConversation: function() {
+    console.log(' edit conv state', this.props.conversationId)
+    ConversationItemActions.toggleEditConversation(this.props.conversationId);
   },
 
-  _updateConversation: function() {
-    ConversationItemActions.updateConversation();
-  },
 
   _deleteConversation: function() {
     ConversationItemActions.deleteConversation();
   },
-  _toggleDeleteConversationAlert: function(conv_id) {
-    ConversationItemActions.toggleDeleteConversationAlert(conv_id)
+  _toggleDeleteConversationAlert: function() {
+    ConversationItemActions.toggleDeleteConversationAlert(this.props.conversationId);
   }
 })
 
