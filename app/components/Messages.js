@@ -21,14 +21,14 @@ var Messages = React.createClass({
   },
 
   render: function() {
-    var activeConversation = this.props.activeConversation;
 
     var messageItems = this.props.messages.map(function (message) {
-      if (message.conv_id === activeConversation) {
+      if (message.conv_id === this.props.activeConversation) {
         return (
             <div className='row' key={message._id}>
               <div className='col-xs-6'>
                 <div className='message question'>
+
                   <MessageItem
                     objectId={message._id}
                     m_nr={message.m_nr}
@@ -36,16 +36,10 @@ var Messages = React.createClass({
                     is_alternative={message.is_alternative}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
+                    deleteState={this.props.messagesDeleteState[message._id]}
+                    activeConversation={this.props.activeConversation}
                      />
-
-                <MessageOptions
-                    objectId={message._id}
-                    messageType='question'
-                    editState={this.props.questionsEditState[message._id]}
-                    messageDeleteState={this.props.messagesDeleteState[message._id]}
-                    m_nr={message.m_nr}
-                    convId={activeConversation} />
-                </div>
+               </div>
               </div>
 
               <div className='col-xs-6'>
@@ -57,18 +51,12 @@ var Messages = React.createClass({
                     is_alternative={message.is_alternative}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
+                    deleteState={this.props.messagesDeleteState[message._id]}
+                    activeConversation={this.props.activeConversation}
                      />
-
-                  <MessageOptions
-                    objectId={message._id}
-                    m_nr={message.m_nr}
-                    messageType='response'
-                    editState={this.props.responsesEditState[message._id]}
-                    messageDeleteState={this.props.messagesDeleteState[message._id]}
-                    messagenr={message.m_nr}
-                    convId={activeConversation} />
                   </div>
               </div>
+
             </div>
 
          )}
