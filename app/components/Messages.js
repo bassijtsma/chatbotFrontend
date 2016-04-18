@@ -42,7 +42,7 @@ var Messages = React.createClass({
                     objectId={message._id}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]}
+                    messageDeleteState={this.props.messagesDeleteState[message._id]}
                     m_nr={message.m_nr}
                     convId={activeConversation} />
                 </div>
@@ -64,7 +64,7 @@ var Messages = React.createClass({
                     m_nr={message.m_nr}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}
-                    messagesDeleteState={this.props.messagesDeleteState[message._id]}
+                    messageDeleteState={this.props.messagesDeleteState[message._id]}
                     messagenr={message.m_nr}
                     convId={activeConversation} />
                   </div>

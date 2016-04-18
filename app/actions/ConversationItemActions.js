@@ -19,6 +19,12 @@ var ConversationItemActions = {
       conv_id: conv_id
     });
   },
+  toggleDeleteConversationAlert: function(conv_id) {
+    Dispatcher.dispatch({
+      actionType: Constants.CONV_ALERTDELETETOGGLE,
+      conv_id: conv_id
+    });
+  },
   deleteConversation: function() {
     Dispatcher.dispatch({
       actionType: Constants.CONV_DELETE

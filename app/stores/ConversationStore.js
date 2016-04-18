@@ -8,6 +8,7 @@ var CHANGE_EVENT = 'change';
 var _conversations = {};
 var _activeConversation = 1;
 var _conversationsEditState = {};
+var _conversationsDeleteState = {};
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
@@ -31,14 +32,17 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
     return _activeConversation;
   },
 
-  getConversationEditState: function(conv_id) {
-    return _conversationsEditState[conv_id];
+  getConversationEditState: function() {
+    return _conversationsEditState;
   },
 
   isActiveConversation: function(conv_id) {
     return conv_id === _activeConversation;
   },
 
+  getConversationsDeleteState: function() {
+    return _conversationsDeleteState;
+  }
 
 });
 
@@ -61,6 +65,12 @@ Dispatcher.register(function(action) {
       ConversationStore.emitChange();
       break;
 
+    case Constants.CONV_ALERTDELETETOGGLE:
+      toggleConversationDeleteState(action.conv_id);
+      ConversationStore.emitChange();
+      break;
+
+
     case Constants.CONV_UPDATE:
       ConversationStore.updateConversation();
       console.log('updated convsation');
@@ -69,7 +79,7 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_RECEIVED:
       setConversations(action.conversations);
-      setInitialConversationsEditState(action.conversations);
+      setInitialConversationsState(action.conversations);
       ConversationStore.emitChange();
       break;
 
@@ -89,24 +99,36 @@ function setConversations(conversations) {
   _conversations = conversations;
 }
 
-function setInitialConversationsEditState(conversations) {
+
+function setInitialConversationsState(conversations) {
   conversations.map(function (conv) {
     _conversationsEditState[conv.conv_id] = false;
+    _conversationsDeleteState[conv.conv_id] = false;
   });
 }
+
 
 function toggleConversationsEditState(conv_id) {
   _conversationsEditState[conv_id] = !_conversationsEditState[conv_id];
 }
+
 
 function setActiveConversation(conv_id) {
   _activeConversation = conv_id;
 }
 
 
-function createConversation() {
-
+// TODO
+function createConversation(conv_id) {
+  _conversationsEditState[conv_id] = false;
+  _conversationsDeleteState[conv_id] = false;
 }
+
+
+function toggleConversationDeleteState(conv_id) {
+  _conversationsDeleteState[conv_id] = !_conversationsDeleteState[conv_id];
+}
+
 
 function updateConversation() {
 

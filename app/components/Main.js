@@ -26,6 +26,8 @@ var Main = React.createClass({
       responsesEditState: {},
       headerVisibility: false,
       alertsVisibilities: {},
+      conversationsEditState: {},
+      conversationsDeleteState: {}
     }
   },
 
@@ -42,11 +44,15 @@ var Main = React.createClass({
       <div className='app-wrapper container'>
         <Header headerVisibility={this.state.headerVisibility} />
         <div className="row">
-          <div className="col-xs-12 col-md-3 conversations boxshadow">
+          <div className="col-xs-12 col-md-3 conversations">
             <ConversationsHeader />
-            <Conversations conversations={this.state.conversations} />
+            <Conversations
+              conversations={this.state.conversations}
+              conversationsEditState={this.state.conversationsEditState}
+              conversationsDeleteState={this.state.conversationsDeleteState}
+              />
           </div>
-          <div className="col-xs-12 col-md-9 messages-container boxshadow">
+          <div className="col-xs-12 col-md-9 messages-container">
             <MessagesHeader />
             <Messages
               activeConversation={this.state.activeConvId}
@@ -70,6 +76,8 @@ var Main = React.createClass({
     this.setState({
       activeConvId : ConversationStore.getActiveConversation(),
       conversations: ConversationStore.getAllConversations(),
+      conversationsEditState: ConversationStore.getConversationEditState(),
+      conversationsDeleteState: ConversationStore.getConversationsDeleteState(),
       messages: MessageStore.getAllMessages(),
       questionsEditState: MessageStore.getQuestionsEditState(),
       responsesEditState: MessageStore.getResponsesEditState(),

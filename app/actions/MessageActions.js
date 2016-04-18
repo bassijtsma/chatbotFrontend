@@ -7,7 +7,7 @@ var MessageActions = {
     Api
       .get('/messages/')
       .then(function (messages) {
-        console.log('getting messages complete!')
+        console.log('getting messages complete!');
         Dispatcher.dispatch({
           actionType: Constants.MESSAGES_RECEIVED,
           messages: messages.results
@@ -26,11 +26,11 @@ var MessageActions = {
     });
   },
   deleteMessage: function(objectId, requestBody) {
-    console.log(requestBody)
+    console.log(requestBody);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
       objectId: objectId
-    })
+    });
     Api
     .delete('/messages/'+requestBody.conv_id+'/'+requestBody.m_nr)
     .then(function(result) {
@@ -88,8 +88,8 @@ var MessageActions = {
         }
       })
       .catch(function(err) {
-        console.log(err)
-      })
+        console.log(err);
+      });
   }
 };
 

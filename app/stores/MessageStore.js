@@ -63,12 +63,12 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGE_CREATE_SUCCESS:
       // verify processing already done
-      console.log('msg create success. not doing anything yet TODO')
+      console.log('msg create success. not doing anything yet TODO');
       break;
 
     case Constants.MESSAGE_CREATE_FAIL:
       // fail
-      console.log('msg create fail. not doing anything yet TODO')
+      console.log('msg create fail. not doing anything yet TODO');
       break;
 
     case Constants.MESSAGE_TOGGLEALTERNATIVE:
@@ -83,7 +83,7 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGE_DELETE_SUCCESS:
       // verify processing already done
-      console.log('msg delete success. not doing anything yet prolly no TODO')
+      console.log('msg delete success. not doing anything yet prolly no TODO');
       break;
 
     case Constants.MESSAGE_DELETE_FAIL:
@@ -166,29 +166,15 @@ function deleteMessageFail(result) {
 }
 
 function toggleMessageEditState(objectId, messageType) {
-  _messages.every(function(msg) {
-    if (msg._id === objectId) {
-      if (messageType === 'question') {
-          _questionsEditState[msg._id] = !_questionsEditState[msg._id];
-      } else if (messageType === 'response') {
-        _responsesEditState[msg._id] = !_responsesEditState[msg._id];
-      }
-      return false;
-    } else {
-      return true;
-    }
-  });
+  if (messageType === 'question') {
+    _questionsEditState[objectId] = !_questionsEditState[objectId];
+  } else if (messageType === 'response') {
+    _responsesEditState[objectId] = !_responsesEditState[objectId];
+  }
 }
 
 function toggleMessageDeleteState(objectId) {
-  _messages.every(function(msg) {
-    if (msg._id === objectId) {
-      _messagesDeleteState[msg._id] = !_messagesDeleteState[msg._id];
-      return false;
-    } else {
-      return true;
-    }
-  });
+  _messagesDeleteState[objectId] = !_messagesDeleteState[objectId];
 }
 
 function setHighestM_NrForActiveConv(activeConvId) {
@@ -199,7 +185,7 @@ function setHighestM_NrForActiveConv(activeConvId) {
         highestM_NrForActiveConv = message.m_nr;
       }
     }
-  })
+  });
   _highestM_NrForActiveConv = highestM_NrForActiveConv;
 }
 
@@ -208,7 +194,7 @@ function setHighestM_NrForActiveConv(activeConvId) {
 // When successfull, we fetch the newly created message's objectId, and update
 // it in all necessary places. Feels dangerous but makes it look instanteneous
 function createNewMessage(message) {
-  console.log('the m_nr is now:', message.m_nr)
+  console.log('the m_nr is now:', message.m_nr);
   _messages.push(message);
   _highestM_NrForActiveConv = message.m_nr;
 }
