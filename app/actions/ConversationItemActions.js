@@ -27,10 +27,38 @@ var ConversationItemActions = {
       conv_id: conv_id
     });
   },
-  deleteConversation: function() {
+  deleteConversation: function(conv_id) {
     Dispatcher.dispatch({
-      actionType: Constants.CONV_DELETE
+      actionType: Constants.CONV_DELETE,
+      conv_id: conv_id
     });
+    Api
+      .delete('/conversations/'+conv_id)
+      .then(function(result) {
+        console.log('success:', result);
+        if(result.results === 'Conversation deleted successfully') {
+          Dispatcher.dispatch({
+            actionType: Constants.CONV_DELETE_SUCCESS,
+            requestResult: result,
+            conv_id: conv_id
+          });
+        } else {
+          console.log('result is not success:', result.results)
+          Dispatcher.dispatch({
+            actionType: Constants.CONV_DELETE_FAIL,
+            requestResult: result,
+            conv_id: conv_id
+          });
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_DELETE_FAIL,
+          requestResult: result,
+          conv_id: conv_id
+        });
+      });
   },
   getConversations: function() {
     Api

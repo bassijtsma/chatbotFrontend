@@ -13,11 +13,15 @@ var ConversationItemOptions = React.createClass({
           {this.props.isEditState
             ? <span onClick = {this.props.updateConversation}>Save </span>
             : 'Edit conversation name'}
-          </span> |
-          <span onClick = {
-            this._toggleDeleteConversationAlert}>
-            {this.props.isDeleteState ? 'Cancel' : 'Delete'}
           </span>
+          <div>
+            {this.props.isDeleteState
+            ? <div>
+            <span onClick={this._deleteConversation}>Confirm delete</span>
+             <span onClick={this._toggleDeleteConversationAlert}>Cancel</span>
+            </div>
+              : <span onClick={this._toggleDeleteConversationAlert}>Delete</span>}
+          </div>
         </p>
       </div>
     )
@@ -28,10 +32,10 @@ var ConversationItemOptions = React.createClass({
     ConversationItemActions.toggleEditConversation(this.props.conversationId);
   },
 
-
   _deleteConversation: function() {
-    ConversationItemActions.deleteConversation();
+    ConversationItemActions.deleteConversation(this.props.conversationId);
   },
+
   _toggleDeleteConversationAlert: function() {
     ConversationItemActions.toggleDeleteConversationAlert(this.props.conversationId);
   }
