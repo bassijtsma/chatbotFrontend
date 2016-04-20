@@ -16,11 +16,11 @@ var ConversationItemOptions = React.createClass({
           </span>
           <div>
             {this.props.isDeleteState
-            ? <div>
-            <span onClick={this._deleteConversation}>Confirm delete</span>
-             <span onClick={this._toggleDeleteConversationAlert}>Cancel</span>
-            </div>
-              : <span onClick={this._toggleDeleteConversationAlert}>Delete</span>}
+            ? <span>
+                <span onClick={this._deleteConversation}>Confirm delete</span>
+                 <span onClick={this._toggleDeleteConversationAlert}>Cancel</span>
+               </span>
+            : <span onClick={this._toggleDeleteConversationAlert}>Delete</span>}
           </div>
         </p>
       </div>

@@ -13,6 +13,8 @@ var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
 var MessagesHeader = require('./MessagesHeader');
 var NewMessage = require('./NewMessage');
+var StatusDialog = require('./StatusDialog');
+var StatusDialogStore = require('../stores/StatusDialogStore');
 
 var Main = React.createClass({
 
@@ -27,16 +29,21 @@ var Main = React.createClass({
       headerVisibility: false,
       alertsVisibilities: {},
       conversationsEditState: {},
-      conversationsDeleteState: {}
+      conversationsDeleteState: {},
+      statusDialogVisibility: false,
+      statusDialogMessage: ''
     }
   },
 
   componentDidMount: function() {
     HeaderStore.addChangeListener(this._onChange);
     ConversationStore.addChangeListener(this._onChange);
-    MessageStore.addChangeListener(this._onChange);
     ConversationItemActions.getConversations();
+
+    MessageStore.addChangeListener(this._onChange);
     MessageActions.getMessages();
+
+    StatusDialogStore.addChangeListener(this._onChange);
   },
 
   render: function() {
@@ -44,6 +51,12 @@ var Main = React.createClass({
       <div className='app-wrapper container'>
         <Header headerVisibility={this.state.headerVisibility} />
         <div className="row">
+          <StatusDialog
+          isVisible={this.state.statusDialogVisibility}
+          statusDialogMessage='test' />
+        </div>
+        <div className="row">
+
           <div className="col-xs-12 col-md-3 conversations">
             <ConversationsHeader />
             <Conversations
@@ -83,7 +96,9 @@ var Main = React.createClass({
       responsesEditState: MessageStore.getResponsesEditState(),
       messagesDeleteState: MessageStore.getMessagesDeleteState(),
       headerVisibility: HeaderStore.getHeaderVisibility(),
-      highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv()
+      highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv(),
+      statusDialogVisibility: StatusDialogStore.getStatusDialogVisibility(),
+      statusDialogMessage: StatusDialogStore.getStatusDialogMessage()
     })
   },
 

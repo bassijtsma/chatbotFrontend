@@ -18,6 +18,14 @@ var StatusDialogStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getStatusDialogVisibility: function() {
+    return _statusDialogVisibility;
+  },
+
+  getStatusDialogMessage: function() {
+    return _statusDialogMessage;
   }
 
 });
@@ -26,6 +34,7 @@ Dispatcher.register(function(action) {
   switch (action.actionType) {
 
     case Constants.MESSAGE_DELETE_SUCCESS:
+       // TODO: built timer to show/hide and dispatch show/hide?
       processDeleteMessageSuccess(action.requestBody);
       StatusDialogStore.emitChange();
       break;
@@ -33,11 +42,16 @@ Dispatcher.register(function(action) {
     default:
       // none
   }
+
+  //TODO: maybe after switch statement, add the timer and set it to false?
+  
 });
 
 
 function processDeleteMessageSuccess(requestResult) {
-
+  // TODO: display requestResult body probbably
+  _statusDialogMessage = 'Message deleted successfully';
+  _statusDialogVisibility = true;
 }
 
 module.exports = StatusDialogStore;
