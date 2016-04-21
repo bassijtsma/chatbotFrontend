@@ -3,7 +3,7 @@ var Constants = require('../utils/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-
+var CHANGE_EVENT = 'change';
 var _statusDialogVisibility = false;
 var _statusDialogMessage = '';
 
@@ -44,7 +44,7 @@ Dispatcher.register(function(action) {
   }
 
   //TODO: maybe after switch statement, add the timer and set it to false?
-  
+
 });
 
 

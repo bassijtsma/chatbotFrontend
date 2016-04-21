@@ -14,14 +14,14 @@ var ConversationItemOptions = React.createClass({
             ? <span onClick = {this.props.updateConversation}>Save </span>
             : 'Edit conversation name'}
           </span>
-          <div>
+          <span>
             {this.props.isDeleteState
             ? <span>
                 <span onClick={this._deleteConversation}>Confirm delete</span>
                  <span onClick={this._toggleDeleteConversationAlert}>Cancel</span>
                </span>
             : <span onClick={this._toggleDeleteConversationAlert}>Delete</span>}
-          </div>
+          </span>
         </p>
       </div>
     )

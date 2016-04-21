@@ -14,6 +14,32 @@ var ConversationItemActions = {
       conv_id: conv_id,
       newConvName: newConvName
     });
+    Api
+    .put('/conversations/' + conv_id)
+    .then(function(result) {
+      if (result.results === 'TODO') {
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_UPDATE_SUCCESS,
+          conv_id: conv_id,
+          newConvName: newConvName
+        });
+      } else {
+        console.log("TODO CON ITEM ACTIONS CONV UPDTATE")
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_UPDATE_FAIL,
+          conv_id: conv_id,
+          newConvName: newConvName
+        });
+        }
+      })
+      .catch(function(error){
+        console.log(error);
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_UPDATE_FAIL,
+          conv_id: conv_id,
+          newConvName: newConvName
+        });
+      });
   },
   toggleEditConversation: function(conv_id) {
     Dispatcher.dispatch({
@@ -36,7 +62,7 @@ var ConversationItemActions = {
       .delete('/conversations/'+conv_id)
       .then(function(result) {
         console.log('success:', result);
-        if(result.results === 'Conversation deleted successfully') {
+        if(result.results === 'Conversation de  leted successfully') {
           Dispatcher.dispatch({
             actionType: Constants.CONV_DELETE_SUCCESS,
             requestResult: result,
