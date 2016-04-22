@@ -74,6 +74,7 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_DELETE_FAIL:
       restoreConversationsBackup(action.recoverykey);
+      deleteConversationsBackup(action.recoverykey);
       ConversationStore.emitChange();
       break;
 
@@ -166,16 +167,19 @@ function updateConversation(conv_id, newConvName) {
 
 
 function setConversationsBackup(recoverykey) {
+  console.log('setting conv backup')
   _conversationsBackup.recoverykey = _conversations;
 }
 
 
 function deleteConversationsBackup(recoverykey) {
+  console.log('deletin conv backup no longer needed')
   delete _conversationsBackup.recoverykey;
 }
 
 
 function restoreConversationsBackup(recoverykey) {
+  console.log('restoring backup convs')
   _conversations = _conversationsBackup.recoverykey;
 }
 

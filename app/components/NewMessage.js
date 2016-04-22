@@ -13,15 +13,21 @@ var NewMessage = React.createClass({
   render: function() {
     return (
       <div className='row new-message'>
-        <div className='col-xs-5'>
-          <input type="text" value={this.state.questionInputField} placeholder='yo' onChange={this.updateQuestionInputField}/>
-        </div>
+        <form className="saveForm" onSubmit={this.onSaveForm}>
+          <div className='col-xs-5'>
+            <input type="text" value={this.state.questionInputField} placeholder='yo' onChange={this.updateQuestionInputField}/>
+          </div>
 
-        <div className='col-xs-5'>
-        <input type="text" value={this.state.responseInputField} onChange={this.updateResponseInputField} />
-        </div>
+          <div className='col-xs-5'>
+          <input type="text" value={this.state.responseInputField} onChange={this.updateResponseInputField} />
+          </div>
 
-        <div className='col-xs-2'><button onClick={this.saveInput}>Save</button></div>
+          <div className='col-xs-2'>
+
+            <button type="submit">Save</button>
+
+          </div>
+        </form>
       </div>
     )
   },
@@ -38,8 +44,13 @@ var NewMessage = React.createClass({
     })
   },
 
-  saveInput: function() {
-    console.log('the highestm_nr is now:', this.props.highestm_nr)
+  onSaveForm: function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.createNewMessage();
+  },
+
+  createNewMessage: function() {
     var newMessage = {};
     newMessage.qtext = this.state.questionInputField;
     newMessage.rtext = this.state.responseInputField;

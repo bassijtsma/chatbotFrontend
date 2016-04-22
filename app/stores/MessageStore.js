@@ -70,6 +70,7 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGE_CREATE_FAIL:
       restoreMessagesBackup(action.recoverykey);
+      deleteMessagesBackup(action.recoverykey);
       break;
 
     case Constants.MESSAGE_TOGGLEALTERNATIVE:
