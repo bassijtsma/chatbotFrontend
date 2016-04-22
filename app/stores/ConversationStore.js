@@ -9,6 +9,8 @@ var _conversations = {};
 var _activeConversation = 1;
 var _conversationsEditState = {};
 var _conversationsDeleteState = {};
+// object to store backup of conversations for rollbacks in case of API failure
+var _conversationsbackup = {};
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
@@ -61,7 +63,18 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_DELETE:
-      // do delete
+      setConversationsBackup(action.recoverykey);
+      //TODO: delete conversation
+      ConversationStore.emitChange();
+      break;
+
+    case Constants.CONV_DELETE_SUCCESS:
+      removeConversationsBackup(action.recoverykey);
+      ConversationStore.emitChange();
+      break;
+
+    case Constants.CONV_DELETE_FAIL:
+      restoreConversationsBackup(action.recoverykey);
       ConversationStore.emitChange();
       break;
 
@@ -72,7 +85,19 @@ Dispatcher.register(function(action) {
 
 
     case Constants.CONV_UPDATE:
+      setConversationsBackup(action.recoverykey);
       updateConversation(action.conv_id, action.newConvName);
+      ConversationStore.emitChange();
+      break;
+
+    case Constants.CONV_UPDATE_SUCCESS:
+      removeConversationsBackup(action.recoverykey);
+      ConversationStore.emitChange();
+      break;
+
+    case Constants.CONV_UPDATE_FAIL:
+      restoreConversationsBackup(action.recoverykey);
+      removeConversationsBackup(action.recoverykey);
       ConversationStore.emitChange();
       break;
 
@@ -138,6 +163,19 @@ function updateConversation(conv_id, newConvName) {
       return true;
     }
   });
+}
+
+function setConversationsBackup(recoverykey) {
+  _conversationsbackup.recoverykey = _conversations;
+}
+
+
+function removeConversationsBackup(recoverykey) {
+  delete _conversationsbackup.recoverykey;
+}
+
+function restoreConversationsBackup(recoverykey) {
+  _conversations = _conversationsbackup.recoverykey;
 }
 
 function deleteConversation() {

@@ -130,18 +130,6 @@ function setInitialMessagesState(messages) {
   });
 }
 
-function setMessageText(message) {
-
-}
-
-function createMessage(conv_id) {
-
-}
-
-function toggleMessageIsAlternative(message) {
-
-}
-
 function deleteMessage(objectId) {
   _messages.every(function(msg, index) {
     if (msg._id === objectId) {
@@ -157,13 +145,6 @@ function deleteMessage(objectId) {
   });
 }
 
-function deleteMessageSuccess(result) {
-  console.log('dlt msg success, result', result);
-}
-
-function deleteMessageFail(result) {
-  console.log('dlt msg fail, result', result);
-}
 
 function toggleMessageEditState(objectId, messageType) {
   if (messageType === 'question') {

@@ -63,8 +63,11 @@ var ConversationItem = React.createClass({
       },
 
       _updateConversationName: function() {
-        ConversationItemActions.updateConversation(this.props.conversationId,
-          this.state.tempConversationName);
+        requestBody = {
+          conv_name: this.state.tempConversationName,
+          conv_id: this.props.conversationId
+        };
+        ConversationItemActions.updateConversation(requestBody);
       }
 
   })

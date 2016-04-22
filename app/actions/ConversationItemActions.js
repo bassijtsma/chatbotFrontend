@@ -8,27 +8,27 @@ var ConversationItemActions = {
       actionType: Constants.CONV_CREATE
     });
   },
-  updateConversation: function(conv_id, newConvName) {
+  updateConversation: function(requestBody) {
+    var timestamp = Math.now();
     Dispatcher.dispatch({
       actionType: Constants.CONV_UPDATE,
-      conv_id: conv_id,
-      newConvName: newConvName
+      conv_id: requestBody.conv_id,
+      newConvName: requestBody.conv_name,
+      recoverykey: timestamp
     });
     Api
-    .put('/conversations/' + conv_id)
+    .put('/conversations/' + requestBody.conv_id)
     .then(function(result) {
       if (result.results === 'TODO') {
         Dispatcher.dispatch({
           actionType: Constants.CONV_UPDATE_SUCCESS,
-          conv_id: conv_id,
-          newConvName: newConvName
+          recoverykey: timestmap
         });
       } else {
-        console.log("TODO CON ITEM ACTIONS CONV UPDTATE")
+        console.log("TODO CON ITEM ACTIONS CONV UPDTATE");
         Dispatcher.dispatch({
           actionType: Constants.CONV_UPDATE_FAIL,
-          conv_id: conv_id,
-          newConvName: newConvName
+          recoverykey: timestamp
         });
         }
       })
@@ -36,8 +36,7 @@ var ConversationItemActions = {
         console.log(error);
         Dispatcher.dispatch({
           actionType: Constants.CONV_UPDATE_FAIL,
-          conv_id: conv_id,
-          newConvName: newConvName
+          recoverykey: timestamp
         });
       });
   },
@@ -54,9 +53,11 @@ var ConversationItemActions = {
     });
   },
   deleteConversation: function(conv_id) {
+    var timestamp = Math.now();
     Dispatcher.dispatch({
       actionType: Constants.CONV_DELETE,
-      conv_id: conv_id
+      conv_id: conv_id,
+      recoverykey: timestamp
     });
     Api
       .delete('/conversations/'+conv_id)
@@ -66,14 +67,16 @@ var ConversationItemActions = {
           Dispatcher.dispatch({
             actionType: Constants.CONV_DELETE_SUCCESS,
             requestResult: result,
-            conv_id: conv_id
+            conv_id: conv_id,
+            recoverykey: timestamp
           });
         } else {
-          console.log('result is not success:', result.results)
+          console.log('result is not success:', result.results);
           Dispatcher.dispatch({
             actionType: Constants.CONV_DELETE_FAIL,
             requestResult: result,
-            conv_id: conv_id
+            conv_id: conv_id,
+            recoverykey: timestamp
           });
         }
       })
@@ -82,7 +85,8 @@ var ConversationItemActions = {
         Dispatcher.dispatch({
           actionType: Constants.CONV_DELETE_FAIL,
           requestResult: result,
-          conv_id: conv_id
+          conv_id: conv_id,
+          recoverykey: timestamp
         });
       });
   },

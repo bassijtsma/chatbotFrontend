@@ -41,8 +41,8 @@ var NewMessage = React.createClass({
   saveInput: function() {
     console.log('the highestm_nr is now:', this.props.highestm_nr)
     var newMessage = {};
-    newMessage.rtext = this.state.questionInputField;
-    newMessage.qtext = this.state.responseInputField;
+    newMessage.qtext = this.state.questionInputField;
+    newMessage.rtext = this.state.responseInputField;
     newMessage.conv_id = this.props.activeConversation;
     newMessage.m_nr = this.props.highestm_nr + 1;
     newMessage.is_alternative = false;
