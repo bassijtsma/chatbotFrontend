@@ -27,9 +27,11 @@ var MessageActions = {
   },
   deleteMessage: function(objectId, requestBody) {
     console.log(requestBody);
+    var timestamp = Date.now();
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
-      objectId: objectId
+      objectId: objectId,
+      recoverykey: timestamp
     });
     Api
     .delete('/messages/'+requestBody.conv_id+'/'+requestBody.m_nr)
@@ -38,14 +40,14 @@ var MessageActions = {
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_DELETE_SUCCESS,
           requestResult: result,
-          conv_id: requestBody.conv_id
+          conv_id: requestBody.conv_id,
+          recoverykey: timestamp
         });
       } else {
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_DELETE_FAIL,
           requestResult: result,
-          conv_id: requestBody.conv_id,
-          objectId: objectId
+          recoverykey: timestamp
         });
       }
     })
@@ -53,8 +55,7 @@ var MessageActions = {
       console.log(error);
       Dispatcher.dispatch({
         actionType: Constants.MESSAGE_DELETE_FAIL,
-        requestResult: result,
-        conv_id: requestBody.conv_id
+        recoverykey: timestamp
       });
     });
   },

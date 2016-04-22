@@ -5,12 +5,12 @@ var assign = require('object-assign');
 
 
 var CHANGE_EVENT = 'change';
-var _conversations = {};
+var _conversations = [];
 var _activeConversation = 1;
 var _conversationsEditState = {};
 var _conversationsDeleteState = {};
 // object to store backup of conversations for rollbacks in case of API failure
-var _conversationsbackup = {};
+var _conversationsBackup = {};
 
 var ConversationStore = assign({}, EventEmitter.prototype, {
 
@@ -64,13 +64,12 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_DELETE:
       setConversationsBackup(action.recoverykey);
-      //TODO: delete conversation
+      deleteConversation(action.conv_id);
       ConversationStore.emitChange();
       break;
 
     case Constants.CONV_DELETE_SUCCESS:
-      removeConversationsBackup(action.recoverykey);
-      ConversationStore.emitChange();
+      deleteConversationsBackup(action.recoverykey);
       break;
 
     case Constants.CONV_DELETE_FAIL:
@@ -91,13 +90,13 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_UPDATE_SUCCESS:
-      removeConversationsBackup(action.recoverykey);
+      deleteConversationsBackup(action.recoverykey);
       ConversationStore.emitChange();
       break;
 
     case Constants.CONV_UPDATE_FAIL:
       restoreConversationsBackup(action.recoverykey);
-      removeConversationsBackup(action.recoverykey);
+      deleteConversationsBackup(action.recoverykey);
       ConversationStore.emitChange();
       break;
 
@@ -165,23 +164,30 @@ function updateConversation(conv_id, newConvName) {
   });
 }
 
+
 function setConversationsBackup(recoverykey) {
-  _conversationsbackup.recoverykey = _conversations;
+  _conversationsBackup.recoverykey = _conversations;
 }
 
 
-function removeConversationsBackup(recoverykey) {
-  delete _conversationsbackup.recoverykey;
+function deleteConversationsBackup(recoverykey) {
+  delete _conversationsBackup.recoverykey;
 }
+
 
 function restoreConversationsBackup(recoverykey) {
-  _conversations = _conversationsbackup.recoverykey;
+  _conversations = _conversationsBackup.recoverykey;
 }
 
-function deleteConversation() {
-  // in backend handle also removing the qs and responses
-  // in frontend emit to dispatcher, make q and r stores that listen to c has
-  // been deleted
+
+function deleteConversation(conv_id) {
+  _conversations.every(function (conv, index){
+    if (conv.conv_id === conv_id) {
+      _conversations.splice(index, 1);
+      delete _conversationsEditState.conv_id;
+      delete _conversationsDeleteState.conv_id;
+    }
+  });
 }
 
 

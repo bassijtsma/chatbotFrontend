@@ -15,7 +15,7 @@ var ConversationsHeader = React.createClass({
     return (
       <div className='conversations-header'>
 
-
+        <div>
           <ReactCSSTransitionGroup transitionName="newConvHover"
           transitionEnterTimeout={300} transitionLeaveTimeout={300}>
             {this.state.newConvHover
@@ -26,8 +26,8 @@ var ConversationsHeader = React.createClass({
           <span className="glyphicon glyphicon-plus"
           onMouseOver={this.onNewConversationHover}
           onMouseOut={this.offNewConversationHover}
-          aria-hidden="true"></span>
-
+          aria-hidden="true" />
+        </div>
       </div>
     )
   },

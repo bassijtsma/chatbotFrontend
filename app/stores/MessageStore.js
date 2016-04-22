@@ -10,6 +10,8 @@ var _questionsEditState = {};
 var _responsesEditState = {};
 var _messagesDeleteState = {};
 var _highestM_NrForActiveConv = 0;
+// object to store backup of msgs for rollbacks in case of API failure
+var _messagesBackup = {};
 
 var MessageStore = assign({}, EventEmitter.prototype, {
 
@@ -57,18 +59,17 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_CREATE:
+      setMessagesBackup(action.recoverykey);
       createNewMessage(action.message);
       MessageStore.emitChange();
       break;
 
     case Constants.MESSAGE_CREATE_SUCCESS:
-      // verify processing already done
-      console.log('msg create success. not doing anything yet TODO');
+      deleteMessagesBackup(action.recoverykey);
       break;
 
     case Constants.MESSAGE_CREATE_FAIL:
-      // fail
-      console.log('msg create fail. not doing anything yet TODO');
+      restoreMessagesBackup(action.recoverykey);
       break;
 
     case Constants.MESSAGE_TOGGLEALTERNATIVE:
@@ -77,17 +78,17 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_DELETE:
+      setMessagesBackup(action.recoverykey);
       deleteMessage(action.objectId);
       MessageStore.emitChange();
       break;
 
     case Constants.MESSAGE_DELETE_SUCCESS:
-      // verify processing already done
-      console.log('msg delete success. not doing anything yet prolly no TODO');
+      deleteMessagesBackup(action.recoverykey);
       break;
 
     case Constants.MESSAGE_DELETE_FAIL:
-      deleteMessage(action.objectId);
+      restoreMessagesBackup(action.recoverykey);
       MessageStore.emitChange();
       break;
 
@@ -134,9 +135,9 @@ function deleteMessage(objectId) {
   _messages.every(function(msg, index) {
     if (msg._id === objectId) {
       _messages.splice(index, 1);
-      delete _questionsEditState[msg._id];
-      delete _responsesEditState[msg._id];
-      delete _messagesDeleteState[msg._id];
+      delete _questionsEditState.objectId;
+      delete _responsesEditState.objectId;
+      delete _messagesDeleteState.objectId;
       console.log('msg deleted');
       return false;
     } else {
@@ -181,9 +182,20 @@ function createNewMessage(message) {
 }
 
 
-function finalizeNewMessage(message) {
-  // update the object id
-  // add the messages' editstate
+
+function setMessagesBackup(recoverykey) {
+  _messagesBackup.recoverykey = _messages;
 }
+
+
+function deleteMessagesBackup(recoverykey) {
+  delete _messagesBackup.recoverykey;
+}
+
+
+function restoreMessagesBackup(recoverykey) {
+  _messages = _messagesBackup.recoverykey;
+}
+
 
 module.exports = MessageStore;

@@ -9,7 +9,7 @@ var ConversationItemActions = {
     });
   },
   updateConversation: function(requestBody) {
-    var timestamp = Math.now();
+    var timestamp = Date.now();
     Dispatcher.dispatch({
       actionType: Constants.CONV_UPDATE,
       conv_id: requestBody.conv_id,
@@ -53,7 +53,7 @@ var ConversationItemActions = {
     });
   },
   deleteConversation: function(conv_id) {
-    var timestamp = Math.now();
+    var timestamp = Date.now();
     Dispatcher.dispatch({
       actionType: Constants.CONV_DELETE,
       conv_id: conv_id,
