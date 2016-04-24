@@ -1,186 +1,90 @@
-html, body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
+/* Built on top of getbootstrap.com dashboard example */
 
 body {
-  background-color: #dfdfdf;
-  margin: 19px;
-  font-family: 'Roboto', sans-serif;
+  padding-top: 0px;
 }
 
-
-p {
-  font-family: 'Roboto', sans-serif;
-}
-
-.app-wrapper {
-  margin-top: 19px;
-}
-
-.app-wrapper::after {
-  position: fixed;
-  z-index: -2;
-  background-color: #009688;
-  width: 100%;
-  height: 127px;
-  content: '';
-  top: 0;
-  left: 0;
-}
-
-.boxshadow {
-  box-shadow: 0px 0px 9px #888888;
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
 }
 
 /*
-######################
-##ConversationsHeader
-*/
+ * Sidebar
+ */
 
-.conversations-header {
-  height: 59px;
-  background-color: #eee;
-  border: 1px 0 1px 0 solid #dedede;
-  text-align: right;
-  padding: 22px 22px 0px 0px;
+
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #1f2d3e;
+    border-right: 1px solid #eee;
+  }
 }
 
-.newconvhover {
-  position: relative;
-  right: 5px;
-  top: -1px;
+.sidebartop {
+  background-color: #1f2d3e;
 }
-
-/*
-######################
-##Conversations
-*/
-
-.conversations {
-  padding: 0px;
-  margin-bottom: 0px;
-  border-radius: 3px;
-  z-index: 3;
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
 }
-
-.conversation-item {
-  cursor: pointer;
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
 }
-
-.conversation-item h2 {
-  margin: 0px;
-}
-
-.conversation-item {
-  background-color: #FFF;
-  border-bottom: 1px solid #f2f2f2;;
-  margin-bottom: 0px;
-  margin-top: 0px;
-  padding: 15px;
-  height: 72px;
-  list-style: none;
-}
-.conversation-item:hover {
-  background-color: #f4f5f5;
-}
-
-.conversation-item-header {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 21px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.conversation-options {
-  text-align: right;
-  margin-bottom: 0px;
-}
-
-.conversations-header-options {
-  padding: 15px;
-  text-align: right;
-}
-
-.activeConv {
-  background-color: #e9ebeb;
-}
-
-.activeConv:hover {
-  background-color: #e9ebeb;
-}
-
-.inactiveConv {
-}
-
-/*
-#################
-##NewConv Animation
-*/
-
-.newConvHover-enter {
-  opacity: 0.01;
-}
-
-.newConvHover-enter.newConvHover-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in;
-}
-
-.newConvHover-leave {
-  opacity: 1;
-}
-
-.newConvHover-leave.newConvHover-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
 }
 
 
 /*
-#################
-##MessagesHeader
-*/
+ * Main content
+ */
 
-.messages-header {
-  height: 59px;
-  background-color: #eee;
-  border: 1px 0 1px 0 solid #dedede;
-  margin-bottom: 15px;
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
 }
 
 
 /*
-#################
-##Messages
-*/
+ * Placeholder dashboard ideas
+ */
 
-.message {
-  padding: 9px;
-  background-color: #fff;
-  margin-bottom: 15px;
-
-  height: 100%;
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
 }
-
-.question {
-  border-left: 4px solid #009688;
-  margin-left: 15px;
+.placeholders h4 {
+  margin-bottom: 0;
 }
-
-.response {
-  border-right: 4px solid #009688;
-  margin-right: 15px;
+.placeholder {
+  margin-bottom: 20px;
 }
-
-.messages-container {
-  background-color: #eae4de;
-  border-left: 1px solid #dedede;
-  height: 100%;
-  border-radius: 3px;
-}
-
-.new-message {
-  width: 100%;
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
 }

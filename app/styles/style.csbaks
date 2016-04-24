@@ -1,0 +1,186 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+  background-color: #dfdfdf;
+  margin: 19px;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
+.app-wrapper {
+  margin-top: 19px;
+}
+
+.app-wrapper::after {
+  position: fixed;
+  z-index: -2;
+  background-color: #009688;
+  width: 100%;
+  height: 127px;
+  content: '';
+  top: 0;
+  left: 0;
+}
+
+.boxshadow {
+  box-shadow: 0px 0px 9px #888888;
+}
+
+/*
+######################
+##ConversationsHeader
+*/
+
+.conversations-header {
+  height: 59px;
+  background-color: #eee;
+  border: 1px 0 1px 0 solid #dedede;
+  text-align: right;
+  padding: 22px 22px 0px 0px;
+}
+
+.newconvhover {
+  position: relative;
+  right: 5px;
+  top: -1px;
+}
+
+/*
+######################
+##Conversations
+*/
+
+.conversations {
+  padding: 0px;
+  margin-bottom: 0px;
+  border-radius: 3px;
+  z-index: 3;
+}
+
+.conversation-item {
+  cursor: pointer;
+}
+
+.conversation-item h2 {
+  margin: 0px;
+}
+
+.conversation-item {
+  background-color: #FFF;
+  border-bottom: 1px solid #f2f2f2;;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 15px;
+  height: 72px;
+  list-style: none;
+}
+.conversation-item:hover {
+  background-color: #f4f5f5;
+}
+
+.conversation-item-header {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.conversation-options {
+  text-align: right;
+  margin-bottom: 0px;
+}
+
+.conversations-header-options {
+  padding: 15px;
+  text-align: right;
+}
+
+.activeConv {
+  background-color: #e9ebeb;
+}
+
+.activeConv:hover {
+  background-color: #e9ebeb;
+}
+
+.inactiveConv {
+}
+
+/*
+#################
+##NewConv Animation
+*/
+
+.newConvHover-enter {
+  opacity: 0.01;
+}
+
+.newConvHover-enter.newConvHover-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.newConvHover-leave {
+  opacity: 1;
+}
+
+.newConvHover-leave.newConvHover-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+
+/*
+#################
+##MessagesHeader
+*/
+
+.messages-header {
+  height: 59px;
+  background-color: #eee;
+  border: 1px 0 1px 0 solid #dedede;
+  margin-bottom: 15px;
+}
+
+
+/*
+#################
+##Messages
+*/
+
+.message {
+  padding: 9px;
+  background-color: #fff;
+  margin-bottom: 15px;
+
+  height: 100%;
+}
+
+.question {
+  border-left: 4px solid #009688;
+  margin-left: 15px;
+}
+
+.response {
+  border-right: 4px solid #009688;
+  margin-right: 15px;
+}
+
+.messages-container {
+  background-color: #eae4de;
+  border-left: 1px solid #dedede;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.new-message {
+  width: 100%;
+}

@@ -49,13 +49,15 @@ var Main = React.createClass({
   render: function() {
     return (
       <div className='container-fluid'>
+        <Header headerVisibility={this.state.headerVisibility} />
         <div className="row">
-          <div className="col-sm-3 col-md-2 sidebar sidebartop">
-            <Header headerVisibility={this.state.headerVisibility} />
-            <StatusDialog
-            isVisible={this.state.statusDialogVisibility}
-            statusDialogMessage='test' />
+          <StatusDialog
+          isVisible={this.state.statusDialogVisibility}
+          statusDialogMessage='test' />
+        </div>
+        <div className="row">
 
+          <div className="col-xs-12 col-md-3 conversations">
             <ConversationsHeader />
             <Conversations
               conversations={this.state.conversations}
@@ -63,8 +65,7 @@ var Main = React.createClass({
               conversationsDeleteState={this.state.conversationsDeleteState}
               />
           </div>
-
-          <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div className="col-xs-12 col-md-9 messages-container">
             <MessagesHeader />
             <Messages
               activeConversation={this.state.activeConvId}
@@ -79,6 +80,7 @@ var Main = React.createClass({
               />
           </div>
         </div>
+
       </div>
     )
   },
