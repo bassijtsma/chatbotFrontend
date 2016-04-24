@@ -76,6 +76,7 @@ Dispatcher.register(function(action) {
     case Constants.CONV_DELETE:
       setConversationsBackup(action.recoverykey);
       deleteConversation(action.conv_id);
+      resetActiveConversation();
       ConversationStore.emitChange();
       break;
 
@@ -210,6 +211,12 @@ function deleteConversation(conv_id) {
       return true;
     }
   });
+}
+
+
+// Used to display the first conversation after a delete
+function resetActiveConversation() {
+  _activeConversation = _conversations[0].conv_id;
 }
 
 

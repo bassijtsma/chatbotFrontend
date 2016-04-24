@@ -84,6 +84,11 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
+    case Constants.CONV_DELETE :
+      deleteAllMessagesForConv(action.conv_id);
+      MessageStore.emitChange();
+      break;
+
     case Constants.MESSAGE_DELETE_SUCCESS:
       deleteMessagesBackup(action.recoverykey);
       break;
@@ -203,5 +208,13 @@ function restoreMessagesBackup(recoverykey) {
   _messages = _messagesBackup.recoverykey;
 }
 
-
+function deleteAllMessagesForConv(conv_id) {
+  var newMessages = [];
+  _messages.forEach(function(message) {
+    if (message.conv_id !== conv_id) {
+      newMessages.push(message);
+    }
+  })
+  _messages = newMessages;
+}
 module.exports = MessageStore;

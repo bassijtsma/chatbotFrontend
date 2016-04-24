@@ -86,7 +86,7 @@ var ConversationItemActions = {
       .delete('/conversations/'+conv_id)
       .then(function(result) {
         console.log('success:', result);
-        if(result.results === 'Conversation de  leted successfully') {
+        if(result.results === 'Deleted the conv_id and its messages') {
           Dispatcher.dispatch({
             actionType: Constants.CONV_DELETE_SUCCESS,
             requestResult: result,
