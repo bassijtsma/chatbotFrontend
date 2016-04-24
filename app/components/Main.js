@@ -15,6 +15,7 @@ var MessagesHeader = require('./MessagesHeader');
 var NewMessage = require('./NewMessage');
 var StatusDialog = require('./StatusDialog');
 var StatusDialogStore = require('../stores/StatusDialogStore');
+var Footer = require('./Footer');
 
 var Main = React.createClass({
 
@@ -48,38 +49,44 @@ var Main = React.createClass({
 
   render: function() {
     return (
-      <div className='container-fluid'>
-        <div className="row">
-          <div className="col-sm-3 col-md-2 sidebar sidebartop">
-            <Header headerVisibility={this.state.headerVisibility} />
-            <StatusDialog
-            isVisible={this.state.statusDialogVisibility}
-            statusDialogMessage='test' />
+      <div>
+        <div className='container-fluid'>
+          <div className="row">
+            <div className="col-sm-3 col-md-2 sidebar sidebartop">
+              <Header headerVisibility={this.state.headerVisibility} />
+              <StatusDialog
+              isVisible={this.state.statusDialogVisibility}
+              statusDialogMessage='test' />
 
-            <ConversationsHeader />
-            <Conversations
-              conversations={this.state.conversations}
-              conversationsEditState={this.state.conversationsEditState}
-              conversationsDeleteState={this.state.conversationsDeleteState}
-              />
-          </div>
+              <ConversationsHeader />
+              <Conversations
+                conversations={this.state.conversations}
+                conversationsEditState={this.state.conversationsEditState}
+                conversationsDeleteState={this.state.conversationsDeleteState}
+                />
+            </div>
 
-          <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <MessagesHeader />
-            <Messages
-              activeConversation={this.state.activeConvId}
-              messages={this.state.messages}
-              questionsEditState={this.state.questionsEditState}
-              responsesEditState={this.state.responsesEditState}
-              messagesDeleteState={this.state.messagesDeleteState}
-              />
-            <NewMessage
-              activeConversation={this.state.activeConvId}
-              highestm_nr={this.state.highestM_NrForActiveConv}
-              />
+            <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              <MessagesHeader />
+              <Messages
+                activeConversation={this.state.activeConvId}
+                messages={this.state.messages}
+                questionsEditState={this.state.questionsEditState}
+                responsesEditState={this.state.responsesEditState}
+                messagesDeleteState={this.state.messagesDeleteState}
+                />
+              <NewMessage
+                activeConversation={this.state.activeConvId}
+                highestm_nr={this.state.highestM_NrForActiveConv}
+                />
+            </div>
           </div>
         </div>
+        <Footer />
       </div>
+
+
+
     )
   },
 
