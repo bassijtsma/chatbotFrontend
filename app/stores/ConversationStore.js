@@ -44,7 +44,18 @@ var ConversationStore = assign({}, EventEmitter.prototype, {
 
   getConversationsDeleteState: function() {
     return _conversationsDeleteState;
+  },
+
+  getHigestConvId: function() {
+    var highestconv_id = 0;
+    _conversations.forEach(function (conv) {
+      if (conv.conv_id > highestconv_id) {
+        highestconv_id = conv.conv_id
+      }
+    })
+    return highestconv_id;
   }
+
 
 });
 
@@ -53,7 +64,7 @@ Dispatcher.register(function(action) {
   switch (action.actionType) {
 
     case Constants.CONV_CREATE:
-      // do create
+      createConversation(action.conv);
       ConversationStore.emitChange();
       break;
 
@@ -142,10 +153,10 @@ function setActiveConversation(conv_id) {
 }
 
 
-// TODO
-function createConversation(conv_id) {
-  _conversationsEditState[conv_id] = false;
-  _conversationsDeleteState[conv_id] = false;
+function createConversation(conv) {
+  _conversations.push(conv);
+  _conversationsEditState[conv.conv_id] = false;
+  _conversationsDeleteState[conv.conv_id] = false;
 }
 
 
@@ -169,7 +180,7 @@ function updateConversation(conv_id, newConvName) {
 
 function setConversationsBackup(recoverykey) {
   // Because JS does weird pointer/value referencing we use json parse/stringify
-  // to make a copy. otherwise will simply just reference _conversations 
+  // to make a copy. otherwise will simply just reference _conversations
   var backupconv = JSON.parse(JSON.stringify(_conversations))
   _conversationsBackup.recoverykey = backupconv;
 }
@@ -194,6 +205,9 @@ function deleteConversation(conv_id) {
       _conversations.splice(index, 1);
       delete _conversationsEditState.conv_id;
       delete _conversationsDeleteState.conv_id;
+      return false;
+    } else {
+      return true;
     }
   });
 }

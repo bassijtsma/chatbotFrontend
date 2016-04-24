@@ -15,7 +15,7 @@ var ConversationsHeader = React.createClass({
     return (
       <div className='conversations-header'>
 
-        <div>
+        <div onClick={this.newConversation}>
           <ReactCSSTransitionGroup transitionName="newConvHover"
           transitionEnterTimeout={300} transitionLeaveTimeout={300}>
             {this.state.newConvHover
@@ -42,6 +42,13 @@ var ConversationsHeader = React.createClass({
     this.setState({
       newConvHover: false
     })
+  },
+
+  newConversation: function() {
+    var newConvId = ConversationStore.getHigestConvId() + 1;
+    var temporaryObjectId = (String(Math.floor(Date.now() / 1000)) + newConvId);
+    var newConv = {conv_name: ' ', conv_id: newConvId, _id: temporaryObjectId}
+    ConversationItemActions.createConversation(newConv);
   }
 })
 

@@ -156,9 +156,11 @@ function toggleMessageEditState(objectId, messageType) {
   }
 }
 
+
 function toggleMessageDeleteState(objectId) {
   _messagesDeleteState[objectId] = !_messagesDeleteState[objectId];
 }
+
 
 function setHighestM_NrForActiveConv(activeConvId) {
   highestM_NrForActiveConv = 0;

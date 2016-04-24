@@ -3,10 +3,34 @@ var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
 var ConversationItemActions = {
-  createConversation: function() {
+  createConversation: function(conversation) {
     Dispatcher.dispatch({
-      actionType: Constants.CONV_CREATE
+      actionType: Constants.CONV_CREATE,
+      conv: conversation
     });
+    Api
+    .post('/conversations/', conversation)
+    .then(function(result) {
+      if (result.results === 'Conversation inserted successfully') {
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_CREATE_SUCCESS,
+          conv: conversation
+        });
+      } else {
+        console.log(result.results)
+        Dispatcher.dispatch({
+          actionType: Constants.CONV_CREATE_FAIL,
+          conv: conversation
+        });
+      }
+    })
+    .catch(function(error){
+      console.log(error);
+      Dispatcher.dispatch({
+        actionType: Constants.CONV_CREATE_FAIL,
+        conv: conversation
+      });
+    })
   },
   updateConversation: function(requestBody) {
     var timestamp = Date.now();
