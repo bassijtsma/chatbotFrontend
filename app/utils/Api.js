@@ -31,7 +31,7 @@ var Api = {
         });
     });
   },
-  put: function(PUTEndPoint, payoad) {
+  put: function(PUTEndPoint, payload) {
     return new Promise(function (resolve, reject) {
       axios.put(url+PUTEndPoint, payload)
         .then(function (response) {

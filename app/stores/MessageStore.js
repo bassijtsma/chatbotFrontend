@@ -185,7 +185,10 @@ function createNewMessage(message) {
 
 
 function setMessagesBackup(recoverykey) {
-  _messagesBackup.recoverykey = _messages;
+  // Because JS does weird pointer/value referencing we use json parse/stringify
+  // to make a copy. otherwise will simply just reference _messages
+  var backupmsgs = JSON.parse(JSON.stringify(_messages))
+  _messagesBackup.recoverykey = backupmsgs;
 }
 
 

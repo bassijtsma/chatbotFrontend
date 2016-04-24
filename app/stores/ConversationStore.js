@@ -155,6 +155,7 @@ function toggleConversationDeleteState(conv_id) {
 
 
 function updateConversation(conv_id, newConvName) {
+  console.log('beginning iterate _conversations')
   _conversations.every(function(conv) {
     if (conv.conv_id === conv_id) {
       conv.conv_name = newConvName;
@@ -167,8 +168,10 @@ function updateConversation(conv_id, newConvName) {
 
 
 function setConversationsBackup(recoverykey) {
-  console.log('setting conv backup')
-  _conversationsBackup.recoverykey = _conversations;
+  // Because JS does weird pointer/value referencing we use json parse/stringify
+  // to make a copy. otherwise will simply just reference _conversations 
+  var backupconv = JSON.parse(JSON.stringify(_conversations))
+  _conversationsBackup.recoverykey = backupconv;
 }
 
 
@@ -181,6 +184,7 @@ function deleteConversationsBackup(recoverykey) {
 function restoreConversationsBackup(recoverykey) {
   console.log('restoring backup convs')
   _conversations = _conversationsBackup.recoverykey;
+  console.log('convs is now:', _conversations);
 }
 
 

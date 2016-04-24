@@ -17,15 +17,14 @@ var ConversationItemActions = {
       recoverykey: timestamp
     });
     Api
-    .put('/conversations/' + requestBody.conv_id)
+    .put('/conversations/' + requestBody.conv_id, requestBody)
     .then(function(result) {
-      if (result.results === 'TODO') {
+      if (result.results === 'Conversation updated successfully') {
         Dispatcher.dispatch({
           actionType: Constants.CONV_UPDATE_SUCCESS,
-          recoverykey: timestmap
+          recoverykey: timestamp
         });
       } else {
-        console.log("TODO CON ITEM ACTIONS CONV UPDTATE");
         Dispatcher.dispatch({
           actionType: Constants.CONV_UPDATE_FAIL,
           recoverykey: timestamp
