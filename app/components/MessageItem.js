@@ -13,7 +13,7 @@ var MessageItem = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div classname="message">
         <form className="MessageForm" onSubmit={this._onSubmitMessageForm}>
           {this.props.editState
           ?
@@ -46,8 +46,6 @@ var MessageItem = React.createClass({
   _onSubmitMessageForm: function(event) {
     event.preventDefault();
     event.stopPropagation();
-    console.log('submit form:', event)
-    console.log(event.target);
     this._updateMessageText();
   },
 
@@ -56,17 +54,17 @@ var MessageItem = React.createClass({
       objectId: this.props.objectId,
       m_nr: this.props.m_nr,
       is_alternative: false,
-      conv_id: this.props.activeConversation
-
+      conv_id: this.props.activeConversation,
+      messageType: this.props.messageType
     };
     if (this.props.messageType === 'question') {
       requestBody.qtext = this.state.tempMessageText;
       requestBody.rtext = this.props.rtext;
     } else {
       requestBody.rtext = this.state.tempMessageText
-      requestBody.qtext = this.props.rtext;requestBody.rtext = this.props.qtext;
+      requestBody.qtext = this.props.qtext;
     }
-    console.log('performed _updateMessageText: ', requestBody);
+    MessageActions.updateMessage(requestBody);
   }
 })
 

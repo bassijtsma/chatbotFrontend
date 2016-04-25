@@ -104,7 +104,17 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_UPDATE:
+      setMessagesBackup(action.recoverykey);
+      updateMessageText(action.message);
+      MessageStore.emitChange();
+      break;
 
+    case Constants.MESSAGE_UPDATE_SUCCESS:
+      deleteMessagesBackup(action.recoverykey);
+      break;
+
+    case Constants.MESSAGE_UPDATE_FAIL:
+      restoreMessagesBackup(action.recoverykey);
       MessageStore.emitChange();
       break;
 
@@ -217,4 +227,25 @@ function deleteAllMessagesForConv(conv_id) {
   })
   _messages = newMessages;
 }
+
+function updateMessageText(message) {
+  var newMessage = message;
+  _messages.every(function(msg, index) {
+    if (msg.m_nr === message.m_nr && msg.conv_id === message.conv_id) {
+      _messages[index].qtext = message.qtext;
+      _messages[index].rtext = message.rtext;
+      if (message.messageType === 'question') {
+        _questionsEditState[message.objectId] = false;
+      } else if (message.messageType === 'response') {
+        _responsesEditState[message.objectId] = false;
+      } else {
+        console.log('failed to specify msgtype in updateMessageText');
+      }
+      return false;
+    } else {
+      return true;
+    }
+  })
+}
+
 module.exports = MessageStore;

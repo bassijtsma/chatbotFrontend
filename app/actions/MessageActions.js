@@ -18,13 +18,6 @@ var MessageActions = {
         console.log(error);
       });
   },
-  editMessage: function(objectId, messageType) {
-    Dispatcher.dispatch({
-      actionType: Constants.MESSAGE_EDIT,
-      objectId: objectId,
-      messageType: messageType
-    });
-  },
   deleteMessage: function(objectId, requestBody) {
     console.log(requestBody);
     var timestamp = Date.now();
@@ -73,7 +66,6 @@ var MessageActions = {
     Api
       .post('/messages/', message)
       .then(function(result) {
-
         if (result.results === 'Message inserted successfully') {
           Dispatcher.dispatch({
             actionType: Constants.MESSAGE_CREATE_SUCCESS,
@@ -91,7 +83,50 @@ var MessageActions = {
       .catch(function(err) {
         console.log(err);
       });
+  },
+  editMessage: function(objectId, messageType) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_EDIT,
+      objectId: objectId,
+      messageType: messageType
+    });
+  },
+  updateMessage: function(message) {
+    var timestamp = Date.now();
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_UPDATE,
+      message: message,
+      recoverykey: timestamp
+    });
+    Api
+    .put('/messages/'+message.conv_id+'/'+message.m_nr, message)
+    .then(function(result) {
+      if (result.results === 'Message updated successfully') {
+        console.log('success:', result)
+        Dispatcher.dispatch({
+          actionType: Constants.MESSAGE_UPDATE_SUCCESS,
+          message: message,
+          recoverykey: timestamp
+        });
+      } else {
+        console.log('mesage not updated successfully')
+        Dispatcher.dispatch({
+          actionType: Constants.MESSAGE_UPDATE_FAIL,
+          message: message,
+          recoverykey: timestamp
+        });
+      }
+    })
+    .catch(function(err) {
+      console.log('error:', err)
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_UPDATE_FAIL,
+        message: message,
+        recoverykey: timestamp
+      });
+    })
   }
+
 };
 
 module.exports = MessageActions;
