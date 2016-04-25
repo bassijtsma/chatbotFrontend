@@ -10,8 +10,8 @@ var MessageItem = React.createClass({
       tempMessageText: ''
     }
   },
-
   render: function() {
+
     return (
       <div classname="message">
         <form className="MessageForm" onSubmit={this._onSubmitMessageForm}>
@@ -50,6 +50,7 @@ var MessageItem = React.createClass({
   },
 
   _updateMessageText: function() {
+
     var requestBody = {
       objectId: this.props.objectId,
       m_nr: this.props.m_nr,
@@ -64,6 +65,7 @@ var MessageItem = React.createClass({
       requestBody.rtext = this.state.tempMessageText
       requestBody.qtext = this.props.qtext;
     }
+    console.log('req', requestBody)
     MessageActions.updateMessage(requestBody);
   }
 })
