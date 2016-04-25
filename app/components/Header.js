@@ -14,8 +14,8 @@ var Header = React.createClass({
     return (
       <div className="row">
         <h1>Chatbot Manager</h1>
-        <p onClick={this._onHeaderToggle}>help</p>
-        {this.props.headerVisibility ? <p>help text?</p> : null}
+        <p onClick={this._onHeaderToggle} className='headertext'>help</p>
+        {this.props.headerVisibility ? <p className='headertext'>help text?</p> : null}
       </div>
     )
   },

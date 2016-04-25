@@ -7,12 +7,11 @@ var ConversationStore = require('../stores/ConversationStore');
 var ConversationItemOptions = React.createClass({
   render: function() {
     return (
-      <div>
         <p className = 'conversation-options' >
           <span onClick = {this._editConversation} >
           {this.props.isEditState
             ? <span onClick = {this.props.updateConversation}>Save </span>
-            : 'Edit conversation name'}
+          : 'Edit | '}
           </span>
           <span>
             {this.props.isDeleteState
@@ -23,7 +22,6 @@ var ConversationItemOptions = React.createClass({
             : <span onClick={this._toggleDeleteConversationAlert}>Delete</span>}
           </span>
         </p>
-      </div>
     )
   },
 

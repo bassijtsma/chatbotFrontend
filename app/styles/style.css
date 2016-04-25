@@ -1,7 +1,15 @@
 /* Built on top of getbootstrap.com dashboard example */
 
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   padding-top: 0px;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 }
 
 .sub-header {
@@ -12,7 +20,6 @@ body {
 /*
  * Sidebar
  */
-
 
 
 @media (min-width: 768px) {
@@ -40,17 +47,43 @@ body {
   margin-bottom: 20px;
   margin-left: -20px;
 }
-.nav-sidebar > li > a {
-  padding-right: 20px;
-  padding-left: 20px;
+.nav-sidebar > li {
+  padding-right: 10px;
+  padding-left: 10px;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+.nav-sidebar > .active,
+.nav-sidebar > .active:focus {
   color: #fff;
   background-color: #428bca;
 }
 
+.nav-sidebar > li:hover {
+  background-color: #66A8E0;
+}
+
+h1, h2 {
+  color: #fff;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+.conversation-item-header {
+  margin-top: 0px;
+}
+.conversation-options {
+  color: #fff;
+  font-size: 12px;
+}
+
+.headertext, .new-conversation, .glyphicon-plus {
+  color: #fff;
+}
+
+.conversationname-input {
+  color: #000;
+}
 
 /*
  * Main content
@@ -70,36 +103,14 @@ body {
 }
 
 
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
+.message-options {
+  font-size: 12px;
 }
 
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
+
 .footer {
   position: absolute;
   bottom: 0;

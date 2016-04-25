@@ -10,7 +10,7 @@ var Conversations = React.createClass({
   propTypes: {
     conversations: PropTypes.array.isRequired
   },
-  
+
   render: function() {
     var ConversationItems;
 
@@ -30,7 +30,7 @@ var Conversations = React.createClass({
     };
 
     return(
-      <ul className='conversations'>
+      <ul className='nav nav-sidebar'>
         {ConversationItems}
       </ul>
     )

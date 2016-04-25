@@ -12,10 +12,9 @@ var Messages = require('./Messages');
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
 var MessagesHeader = require('./MessagesHeader');
-var NewMessage = require('./NewMessage');
+var NewMessageFooter = require('./NewMessageFooter');
 var StatusDialog = require('./StatusDialog');
 var StatusDialogStore = require('../stores/StatusDialogStore');
-var Footer = require('./Footer');
 
 var Main = React.createClass({
 
@@ -52,7 +51,7 @@ var Main = React.createClass({
       <div>
         <div className='container-fluid'>
           <div className="row">
-            <div className="col-sm-3 col-md-2 sidebar sidebartop">
+            <div className="col-sm-3 col-md-3 sidebar sidebartop">
               <Header headerVisibility={this.state.headerVisibility} />
               <StatusDialog
               isVisible={this.state.statusDialogVisibility}
@@ -66,7 +65,7 @@ var Main = React.createClass({
                 />
             </div>
 
-            <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
               <MessagesHeader />
               <Messages
                 activeConversation={this.state.activeConvId}
@@ -75,14 +74,13 @@ var Main = React.createClass({
                 responsesEditState={this.state.responsesEditState}
                 messagesDeleteState={this.state.messagesDeleteState}
                 />
-              <NewMessage
-                activeConversation={this.state.activeConvId}
-                highestm_nr={this.state.highestM_NrForActiveConv}
-                />
             </div>
           </div>
         </div>
-        <Footer />
+        <NewMessageFooter
+          activeConversation={this.state.activeConvId}
+          highestm_nr={this.state.highestM_NrForActiveConv}
+          />
       </div>
 
 

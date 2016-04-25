@@ -5,24 +5,68 @@ var MessageActions = require('../actions/MessageActions');
 var MessageOptions = require('./MessageOptions');
 
 var MessageItem = React.createClass({
-
+  getInitialState: function() {
+    return {
+      tempMessageText: ''
+    }
+  },
 
   render: function() {
     return (
       <div>
-        {this.props.editState
-        ? <p>Edit the message text </p>
-        : <p>{this.props.text}</p> }
+        <form className="MessageForm" onSubmit={this._onSubmitMessageForm}>
+          {this.props.editState
+          ?
+              <input type='text' className='conversationname-input'
+              placeholder= {this.props.text}
+              value={this.state.tempMessageText}
+              onChange={this._updateTempMessageText}
+              />
+          : <p>{this.props.text}</p> }
 
-        <MessageOptions
-            objectId={this.props.objectId}
-            messageType={this.props.messageType}
-            editState={this.props.editState}
-            deleteState={this.props.deleteState}
-            m_nr={this.props.m_nr}
-            convId={this.props.activeConversation} />
+          <MessageOptions
+              objectId={this.props.objectId}
+              messageType={this.props.messageType}
+              editState={this.props.editState}
+              deleteState={this.props.deleteState}
+              m_nr={this.props.m_nr}
+              convId={this.props.activeConversation}
+              updateFn={this._updateMessageText} />
+        </form>
       </div>
     )
+  },
+
+  _updateTempMessageText: function(event) {
+    this.setState({
+      tempMessageText: event.target.value
+    })
+  },
+
+  _onSubmitMessageForm: function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('submit form:', event)
+    console.log(event.target);
+    this._updateMessageText();
+  },
+
+  _updateMessageText: function() {
+    var requestBody = {
+      objectId: this.props.objectId,
+      m_nr: this.props.m_nr,
+      is_alternative: false,
+      conv_id: this.props.activeConversation
+
+    };
+    if (this.props.messageType === 'question') {
+      requestBody.qtext = this.state.tempMessageText;
+      requestBody.rtext = this.props.rtext;
+    } else {
+      requestBody.rtext = this.state.tempMessageText
+      requestBody.qtext = this.props.rtext;requestBody.rtext = this.props.qtext;
+    }
+    console.log('performed _updateMessageText: ', requestBody);
   }
 })
 

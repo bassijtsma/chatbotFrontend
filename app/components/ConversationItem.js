@@ -19,18 +19,17 @@ var ConversationItem = React.createClass({
 
   render: function() {
     return (
-      <div>
       <li onClick= {this._setActiveConversation}
         className= {this.props.isActiveConversation
-          ? 'activeConv conversation-item'
-          : 'inactiveConv conversation-item'
+          ? 'active conversation-item'
+          : 'conversation-item'
         } >
 
         {!this.props.isEditState
           ? <h2 className='conversation-item-header'>
             {this.props.conversationName}
           </h2>
-          : <input type='text' className='conversationname-form'
+          : <input type='text' className='conversationname-input'
           placeholder= {this.props.conversationName}
           value={this.state.tempConversationName}
           onChange={this._updateTempConversationName}
@@ -43,8 +42,7 @@ var ConversationItem = React.createClass({
             updateConversation={this._updateConversationName}
             />
         </li>
-      </div>)
-      },
+      )},
 
       _onChange: function() {
 
@@ -63,7 +61,7 @@ var ConversationItem = React.createClass({
       },
 
       _updateConversationName: function() {
-        requestBody = {
+        var requestBody = {
           conv_name: this.state.tempConversationName,
           conv_id: this.props.conversationId
         };

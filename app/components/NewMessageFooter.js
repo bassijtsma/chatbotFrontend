@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
 
-var NewMessage = React.createClass({
+var NewMessageFooter = React.createClass({
   getInitialState: function(){
     return {
       questionInputField: '',
@@ -12,23 +12,30 @@ var NewMessage = React.createClass({
   },
   render: function() {
     return (
-      <div className='row new-message'>
-        <form className="saveForm" onSubmit={this.onSaveForm}>
-          <div className='col-xs-5'>
-            <input type="text" value={this.state.questionInputField} placeholder='yo' onChange={this.updateQuestionInputField}/>
+      <footer className="footer">
+        <div className="container">
+          <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+            <div className='row new-message'>
+              <form className="saveForm" onSubmit={this.onSaveForm}>
+
+                <div className='col-xs-5'>
+                  <input type="text" value={this.state.questionInputField} placeholder='yo' onChange={this.updateQuestionInputField}/>
+                </div>
+
+                <div className='col-xs-5'>
+                <input type="text" value={this.state.responseInputField} onChange={this.updateResponseInputField} />
+                </div>
+
+                <div className='col-xs-2'>
+                  <button type="submit">Save</button>
+                </div>
+              </form>
+            </div>
           </div>
+        </div>
+      </footer>
 
-          <div className='col-xs-5'>
-          <input type="text" value={this.state.responseInputField} onChange={this.updateResponseInputField} />
-          </div>
 
-          <div className='col-xs-2'>
-
-            <button type="submit">Save</button>
-
-          </div>
-        </form>
-      </div>
     )
   },
 
@@ -65,4 +72,4 @@ var NewMessage = React.createClass({
 
 })
 
-module.exports = NewMessage;
+module.exports = NewMessageFooter;
