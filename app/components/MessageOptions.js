@@ -6,8 +6,9 @@ var MessageActions = require('../actions/MessageActions');
 var MessageOptions = React.createClass({
 	propTypes: {
 		m_nr: React.PropTypes.number.isRequired,
-		objectId: React.PropTypes.string.isRequired
+		msgkey: React.PropTypes.number.isRequired
 	},
+
 	render: function() {
 		return (
       <div>
@@ -15,7 +16,7 @@ var MessageOptions = React.createClass({
 
 					{!this.props.deleteState
 						? <span onClick={this._editMessage.bind(this,
-		          this.props.objectId, this.props.messageType)}>
+		          this.props.msgkey, this.props.messageType)}>
 		          {this.props.editState
 								? <span onClick={this.props.updateFn} type='submit'>Save</span>
 								: 'Edit '}
@@ -27,14 +28,14 @@ var MessageOptions = React.createClass({
 						? <span>
 								Delete message?
 								<span onClick={this._confirmDeleteMessage.bind(this,
-									this.props.objectId)}> Confirm</span>
+									this.props.msgkey)}> Confirm</span>
 								<span> | </span>
 								<span onClick={this._toggleDeleteMessage.bind(this,
-										this.props.objectId)}>Cancel</span>
+										this.props.msgkey)}>Cancel</span>
 							</span>
 
 						: <span onClick={this._toggleDeleteMessage.bind(this,
-		          this.props.objectId)}> Delete </span>
+		          this.props.msgkey)}> Delete </span>
 					}
         </p>
       </div>
@@ -42,20 +43,22 @@ var MessageOptions = React.createClass({
 	},
 
   _editMessage: function(msgkey, messageType) {
+		console.log('editmsg:', msgkey);
     MessageActions.editMessage(msgkey, messageType);
   },
 
-  _toggleDeleteMessage: function(objectId) {
-    MessageActions.toggleDeleteMessageAlert(objectId);
+  _toggleDeleteMessage: function(key) {
+		console.log(key);
+    MessageActions.toggleDeleteMessageAlert(key);
   },
 
-	_confirmDeleteMessage: function(objectId) {
+	_confirmDeleteMessage: function(key) {
 		var requestBody = {
 			'conv_id' : this.props.convId,
 			'm_nr' : this.props.m_nr,
 			'key' : this.props.msgkey
 		}
-		MessageActions.deleteMessage(objectId, requestBody);
+		MessageActions.deleteMessage(key, requestBody);
 	}
 })
 

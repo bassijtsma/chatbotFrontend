@@ -5,13 +5,18 @@ var MessageActions = require('../actions/MessageActions');
 var MessageOptions = require('./MessageOptions');
 
 var MessageItem = React.createClass({
+  PropTypes: {
+    messagenr: PropTypes.number.isRequired,
+    msgkey: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    isAlternative: PropTypes.bool.isRequired,
+    messageType: PropTypes.string.isRequired,
+  },
+
   getInitialState: function() {
     return {
       tempMessageText: ''
     }
-  },
-  componentDidUpdate: function() {
-
   },
 
   render: function() {
@@ -30,7 +35,6 @@ var MessageItem = React.createClass({
             : <p>{this.props.text} {this.props.m_nr} {this.props.activeConversation}</p> }
 
           <MessageOptions
-              objectId={this.props.objectId}
               msgkey={this.props.msgkey}
               messageType={this.props.messageType}
               editState={this.props.editState}
@@ -58,7 +62,6 @@ var MessageItem = React.createClass({
   _updateMessageText: function() {
 
     var requestBody = {
-      objectId: this.props.objectId,
       m_nr: this.props.m_nr,
       is_alternative: false,
       conv_id: this.props.activeConversation,
@@ -85,14 +88,5 @@ var MessageItem = React.createClass({
     }
   }
 })
-
-MessageItem.PropTypes = {
-  messagenr: PropTypes.number.isRequired,
-  msgkey: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  isAlternative: PropTypes.bool.isRequired,
-  messageType: PropTypes.string.isRequired,
-  objectId: PropTypes.string.isRequired
-}
 
 module.exports = MessageItem;

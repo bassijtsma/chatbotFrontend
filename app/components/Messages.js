@@ -13,7 +13,7 @@ var Messages = React.createClass({
   },
 
   render: function() {
-
+    console.log('edistate', this.props.questionsEditState);
     var messageItems = this.props.messages.map(function (message) {
       if (message.conv_id === this.props.activeConversation) {
         return (
@@ -22,7 +22,6 @@ var Messages = React.createClass({
                 <div className='message question'>
 
                   <MessageItem
-                    objectId={message._id}
                     m_nr={message.m_nr}
                     text={message.qtext}
                     qtext={message.qtext}
@@ -30,8 +29,8 @@ var Messages = React.createClass({
                     msgkey={message.key}
                     is_alternative={message.is_alternative}
                     messageType='question'
-                    editState={this.props.questionsEditState[message._id]}
-                    deleteState={this.props.messagesDeleteState[message._id]}
+                    editState={this.props.questionsEditState[message.key]}
+                    deleteState={this.props.messagesDeleteState[message.key]}
                     activeConversation={this.props.activeConversation}
                      />
                </div>
@@ -40,7 +39,6 @@ var Messages = React.createClass({
               <div className='col-xs-6'>
                 <div className='message response'>
                   <MessageItem
-                    objectId={message._id}
                     m_nr={message.m_nr}
                     text={message.rtext}
                     qtext={message.qtext}
@@ -48,8 +46,8 @@ var Messages = React.createClass({
                     msgkey={message.key}
                     is_alternative={message.is_alternative}
                     messageType='response'
-                    editState={this.props.responsesEditState[message._id]}
-                    deleteState={this.props.messagesDeleteState[message._id]}
+                    editState={this.props.responsesEditState[message.key]}
+                    deleteState={this.props.messagesDeleteState[message.key]}
                     activeConversation={this.props.activeConversation}
                      />
                   </div>

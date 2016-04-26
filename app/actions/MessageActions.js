@@ -20,11 +20,11 @@ var MessageActions = {
         console.log(error);
       });
   },
-  deleteMessage: function(objectId, requestBody) {
+  deleteMessage: function(key, requestBody) {
     var recoverykey = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
-      objectId: objectId,
+      key: key,
       recoverykey: recoverykey
     });
     console.log('reqkey:' , requestBody.key)
@@ -54,10 +54,10 @@ var MessageActions = {
       });
     });
   },
-  toggleDeleteMessageAlert: function(objectId) {
+  toggleDeleteMessageAlert: function(key) {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_ALERTDELETETOGGLE,
-      objectId: objectId,
+      key: key
     });
   },
   createNewMessage: function(message) {
@@ -91,11 +91,9 @@ var MessageActions = {
         console.log(err);
       });
   },
-  editMessage: function(objectId, messageType) {
-    var key = Date.now() + Math.floor(Math.random() * seed);
+  editMessage: function(key, messageType) {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_EDIT,
-      objectId: objectId,
       key: key,
       messageType: messageType
     });

@@ -80,7 +80,7 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGE_DELETE:
       setMessagesBackup(action.recoverykey);
-      deleteMessage(action.objectId);
+      deleteMessage(action.key);
       MessageStore.emitChange();
       break;
 
@@ -99,7 +99,8 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_EDIT:
-      toggleMessageEditState(action.objectId, action.messageType);
+    console.log(action.key)
+      toggleMessageEditState(action.key, action.messageType);
       MessageStore.emitChange();
       break;
 
@@ -119,7 +120,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_ALERTDELETETOGGLE:
-      toggleMessageDeleteState(action.objectId);
+      toggleMessageDeleteState(action.key);
       MessageStore.emitChange();
       break;
 
@@ -141,19 +142,20 @@ function setMessages(messages) {
 
 function setInitialMessagesState(messages) {
   messages.map(function (message) {
-    _questionsEditState[message._id] = false;
-    _responsesEditState[message._id] = false;
-    _messagesDeleteState[message._id] = false;
+    _questionsEditState[message.key] = false;
+    _responsesEditState[message.key] = false;
+    _messagesDeleteState[message.key] = false;
   });
 }
 
-function deleteMessage(objectId) {
+function deleteMessage(key) {
+  console.log('the key:', key)
   _messages.every(function(msg, index) {
-    if (msg._id === objectId) {
+    if (msg.key === key) {
       _messages.splice(index, 1);
-      delete _questionsEditState.objectId;
-      delete _responsesEditState.objectId;
-      delete _messagesDeleteState.objectId;
+      delete _questionsEditState.key;
+      delete _responsesEditState.key;
+      delete _messagesDeleteState.key;
       console.log('msg deleted');
       return false;
     } else {
@@ -163,17 +165,18 @@ function deleteMessage(objectId) {
 }
 
 
-function toggleMessageEditState(objectId, messageType) {
+function toggleMessageEditState(key, messageType) {
   if (messageType === 'question') {
-    _questionsEditState[objectId] = !_questionsEditState[objectId];
+    console.log(key, _questionsEditState[key]);
+    _questionsEditState[key] = !_questionsEditState[key];
   } else if (messageType === 'response') {
-    _responsesEditState[objectId] = !_responsesEditState[objectId];
+    _responsesEditState[key] = !_responsesEditState[key];
   }
 }
 
 
-function toggleMessageDeleteState(objectId) {
-  _messagesDeleteState[objectId] = !_messagesDeleteState[objectId];
+function toggleMessageDeleteState(key) {
+  _messagesDeleteState[key] = !_messagesDeleteState[key];
 }
 
 
@@ -231,13 +234,13 @@ function deleteAllMessagesForConv(conv_id) {
 function updateMessageText(message) {
   var newMessage = message;
   _messages.every(function(msg, index) {
-    if (msg.m_nr === message.m_nr && msg.conv_id === message.conv_id) {
+    if (msg.key === message.key) {
       _messages[index].qtext = message.qtext;
       _messages[index].rtext = message.rtext;
       if (message.messageType === 'question') {
-        _questionsEditState[message.objectId] = false;
+        _questionsEditState[message.key] = false;
       } else if (message.messageType === 'response') {
-        _responsesEditState[message.objectId] = false;
+        _responsesEditState[message.key] = false;
       } else {
         console.log('failed to specify msgtype in updateMessageText');
       }
