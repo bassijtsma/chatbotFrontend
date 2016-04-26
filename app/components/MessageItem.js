@@ -10,8 +10,12 @@ var MessageItem = React.createClass({
       tempMessageText: ''
     }
   },
-  render: function() {
+  componentDidUpdate: function() {
 
+  },
+
+  render: function() {
+    var ref = this.props.messageType + this.props.messagenr;
     return (
       <div classname="message">
         <form className="MessageForm" onSubmit={this._onSubmitMessageForm}>
@@ -21,11 +25,13 @@ var MessageItem = React.createClass({
               placeholder= {this.props.text}
               value={this.state.tempMessageText}
               onChange={this._updateTempMessageText}
+              ref= {this.focusInputField}
               />
-          : <p>{this.props.text}</p> }
+            : <p>{this.props.text} {this.props.m_nr} {this.props.activeConversation}</p> }
 
           <MessageOptions
               objectId={this.props.objectId}
+              msgkey={this.props.msgkey}
               messageType={this.props.messageType}
               editState={this.props.editState}
               deleteState={this.props.deleteState}
@@ -56,7 +62,8 @@ var MessageItem = React.createClass({
       m_nr: this.props.m_nr,
       is_alternative: false,
       conv_id: this.props.activeConversation,
-      messageType: this.props.messageType
+      messageType: this.props.messageType,
+      key: this.props.msgkey
     };
     if (this.props.messageType === 'question') {
       requestBody.qtext = this.state.tempMessageText;
@@ -65,13 +72,23 @@ var MessageItem = React.createClass({
       requestBody.rtext = this.state.tempMessageText
       requestBody.qtext = this.props.qtext;
     }
-    console.log('req', requestBody)
+    console.log('update for:', requestBody);
     MessageActions.updateMessage(requestBody);
+  },
+
+  focusInputField: function(input) {
+    if (this.props.editState) {
+      console.log('input:', input)
+        if (input != null) {
+          input.focus();
+      }
+    }
   }
 })
 
 MessageItem.PropTypes = {
   messagenr: PropTypes.number.isRequired,
+  msgkey: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   isAlternative: PropTypes.bool.isRequired,
   messageType: PropTypes.string.isRequired,

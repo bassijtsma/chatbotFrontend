@@ -41,8 +41,8 @@ var MessageOptions = React.createClass({
     );
 	},
 
-  _editMessage: function(objectId, messageType) {
-    MessageActions.editMessage(objectId, messageType);
+  _editMessage: function(msgkey, messageType) {
+    MessageActions.editMessage(msgkey, messageType);
   },
 
   _toggleDeleteMessage: function(objectId) {
@@ -52,7 +52,8 @@ var MessageOptions = React.createClass({
 	_confirmDeleteMessage: function(objectId) {
 		var requestBody = {
 			'conv_id' : this.props.convId,
-			'm_nr' : this.props.m_nr
+			'm_nr' : this.props.m_nr,
+			'key' : this.props.msgkey
 		}
 		MessageActions.deleteMessage(objectId, requestBody);
 	}

@@ -17,7 +17,7 @@ var Messages = React.createClass({
     var messageItems = this.props.messages.map(function (message) {
       if (message.conv_id === this.props.activeConversation) {
         return (
-            <div className='row' key={message._id}>
+            <div className='row' key={message.key}>
               <div className='col-xs-6'>
                 <div className='message question'>
 
@@ -27,6 +27,7 @@ var Messages = React.createClass({
                     text={message.qtext}
                     qtext={message.qtext}
                     rtext={message.rtext}
+                    msgkey={message.key}
                     is_alternative={message.is_alternative}
                     messageType='question'
                     editState={this.props.questionsEditState[message._id]}
@@ -44,6 +45,7 @@ var Messages = React.createClass({
                     text={message.rtext}
                     qtext={message.qtext}
                     rtext={message.rtext}
+                    msgkey={message.key}
                     is_alternative={message.is_alternative}
                     messageType='response'
                     editState={this.props.responsesEditState[message._id]}

@@ -2,12 +2,14 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
+var seed = 99999999;
+
 var MessageActions = {
   getMessages: function() {
     Api
       .get('/messages/')
       .then(function (messages) {
-        console.log('getting messages complete!');
+        console.log('getting messages complete!', messages);
         Dispatcher.dispatch({
           actionType: Constants.MESSAGES_RECEIVED,
           messages: messages.results
@@ -19,28 +21,28 @@ var MessageActions = {
       });
   },
   deleteMessage: function(objectId, requestBody) {
-    console.log(requestBody);
-    var timestamp = Date.now();
+    var recoverykey = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
       objectId: objectId,
-      recoverykey: timestamp
+      recoverykey: recoverykey
     });
+    console.log('reqkey:' , requestBody.key)
     Api
-    .delete('/messages/'+requestBody.conv_id+'/'+requestBody.m_nr)
+    .delete('/messages/'+requestBody.conv_id+'/'+requestBody.key)
     .then(function(result) {
       if (result.results === 'Message deleted successfully') {
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_DELETE_SUCCESS,
           requestResult: result,
           conv_id: requestBody.conv_id,
-          recoverykey: timestamp
+          recoverykey: recoverykey
         });
       } else {
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_DELETE_FAIL,
           requestResult: result,
-          recoverykey: timestamp
+          recoverykey: recoverykey
         });
       }
     })
@@ -48,19 +50,22 @@ var MessageActions = {
       console.log(error);
       Dispatcher.dispatch({
         actionType: Constants.MESSAGE_DELETE_FAIL,
-        recoverykey: timestamp
+        recoverykey: key
       });
     });
   },
   toggleDeleteMessageAlert: function(objectId) {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_ALERTDELETETOGGLE,
-      objectId: objectId
+      objectId: objectId,
     });
   },
   createNewMessage: function(message) {
+    var key = Date.now() + Math.floor(Math.random() * seed);
+    message.key = key;
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_CREATE,
+      recoverkey: key,
       message: message
     });
     Api
@@ -70,13 +75,15 @@ var MessageActions = {
           Dispatcher.dispatch({
             actionType: Constants.MESSAGE_CREATE_SUCCESS,
             requestResult: result,
-            conv_id: message.conv_id
+            conv_id: message.conv_id,
+            recoverykey: key
           });
         } else {
           Dispatcher.dispatch({
             actionType: Constants.MESSAGE_CREATE_FAIL,
             requestResult: result,
-            conv_id: message.conv_id
+            conv_id: message.conv_id,
+            recoverykey: key
           });
         }
       })
@@ -85,35 +92,36 @@ var MessageActions = {
       });
   },
   editMessage: function(objectId, messageType) {
+    var key = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_EDIT,
       objectId: objectId,
+      key: key,
       messageType: messageType
     });
   },
   updateMessage: function(message) {
-    var timestamp = Date.now();
+    var recoverykey = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_UPDATE,
       message: message,
-      recoverykey: timestamp
     });
     Api
-    .put('/messages/'+message.conv_id+'/'+message.m_nr, message)
+    .put('/messages/'+message.conv_id +'/'+ message.key, message)
     .then(function(result) {
       if (result.results === 'Message updated successfully') {
         console.log('success:', result)
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_UPDATE_SUCCESS,
           message: message,
-          recoverykey: timestamp
+          recoverykey: recoverykey
         });
       } else {
         console.log('mesage not updated successfully')
         Dispatcher.dispatch({
           actionType: Constants.MESSAGE_UPDATE_FAIL,
           message: message,
-          recoverykey: timestamp
+          recoverykey: recoverykey
         });
       }
     })
@@ -122,7 +130,7 @@ var MessageActions = {
       Dispatcher.dispatch({
         actionType: Constants.MESSAGE_UPDATE_FAIL,
         message: message,
-        recoverykey: timestamp
+        recoverykey: recoverykey
       });
     })
   }
