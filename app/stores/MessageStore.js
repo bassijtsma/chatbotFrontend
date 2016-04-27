@@ -167,7 +167,6 @@ function deleteMessage(key) {
 
 function toggleMessageEditState(key, messageType) {
   if (messageType === 'question') {
-    console.log(key, _questionsEditState[key]);
     _questionsEditState[key] = !_questionsEditState[key];
   } else if (messageType === 'response') {
     _responsesEditState[key] = !_responsesEditState[key];
@@ -197,7 +196,6 @@ function setHighestM_NrForActiveConv(activeConvId) {
 // When successfull, we fetch the newly created message's objectId, and update
 // it in all necessary places. Feels dangerous but makes it look instanteneous
 function createNewMessage(message) {
-  console.log('the m_nr is now:', message.m_nr);
   _messages.push(message);
   _highestM_NrForActiveConv = message.m_nr;
 }

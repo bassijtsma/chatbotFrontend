@@ -8,7 +8,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
-var headerVisibility = false;
+var headerVisibility = true;
 
 var HeaderStore = assign({}, EventEmitter.prototype, {
 

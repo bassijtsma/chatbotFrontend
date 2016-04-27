@@ -38,6 +38,17 @@ body {
   }
 }
 
+.circular {
+  margin-left: 50%;
+  margin-right: 50px;
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
+	-webkit-border-radius: 60px;
+	-moz-border-radius: 60px;
+	background: url(http://static.comicvine.com/uploads/original/11124/111247756/5020957-bender.jpg) no-repeat;
+	}
+
 .sidebartop {
   background-color: #1f2d3e;
 }
