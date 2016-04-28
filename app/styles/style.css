@@ -10,6 +10,7 @@ body {
   padding-top: 0px;
   /* Margin bottom by footer height */
   margin-bottom: 115px;
+  background-color: #d9e0e7;
 }
 
 .sub-header {
@@ -30,7 +31,7 @@ body {
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #1f2d3e;
@@ -39,18 +40,20 @@ body {
 }
 
 .circular {
-  margin-left: 50%;
-  margin-right: 50px;
-	width: 120px;
-	height: 120px;
-	border-radius: 60px;
-	-webkit-border-radius: 60px;
-	-moz-border-radius: 60px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
 	background: url(http://static.comicvine.com/uploads/original/11124/111247756/5020957-bender.jpg) no-repeat;
 	}
 
 .sidebartop {
-  background-color: #1f2d3e;
+  background-color: #1a2229;
+}
+
+.sidebar {
+  background-color: #2d353c;
 }
 /* Sidebar navigation */
 .nav-sidebar {
@@ -62,18 +65,19 @@ body {
   padding-right: 10px;
   padding-left: 10px;
 }
+.nav-sidebar > li:hover {
+  background-color: #1a2229;
+}
 .nav-sidebar > .active,
-.nav-sidebar > .active:focus {
+.nav-sidebar > .active:focus, .nav-sidebar > .active:hover {
   color: #fff;
-  background-color: #428bca;
+  background-color: #348fe2;
 }
 
-.nav-sidebar > li:hover {
-  background-color: #66A8E0;
-}
 
 h1, h2 {
   color: #fff;
+  font-size: 22px;
 }
 
 h2 {
@@ -119,12 +123,78 @@ h2 {
 }
 
 .message {
-  padding: 5px;
-  background-color: #DEDEDE;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+.question {
+  /*background-color: #DEDEDE;*/
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #fff;
+  position: relative;
+  padding: 20px 30px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.response {
+  /*background-color: #DEDEDE;*/
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #fff;
+  position: relative;
+  padding: 20px 30px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.question:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  border: 10px solid transparent;
+  border-right-color: #fff;
+  left: -20px;
+  top: 20px;
+}
+
+.response:before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  border: 10px solid transparent;
+  border-right-color: #fff;
+  right: -20px;
+  top: 20px;
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+
+.message-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e7eb;
+  line-height: 30px;
+}
+
+.message-content{
+  margin-top: 20px;
+}
+
+.message-footer {
+  padding: 20px 30px;
+  background: #e8ecf1;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
 }
 
 .container-fluid {
+
+}
+
+.messagetext {
 
 }
 

@@ -13,7 +13,6 @@ var Messages = React.createClass({
   },
 
   render: function() {
-    console.log('edistate', this.props.questionsEditState);
     var messageItems = this.props.messages.map(function (message) {
       if (message.conv_id === this.props.activeConversation) {
         return (

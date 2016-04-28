@@ -51,7 +51,7 @@ var Main = React.createClass({
       <div>
         <div className='container-fluid'>
           <div className="row">
-            <div className="col-sm-3 col-md-3 sidebar sidebartop">
+            <div className="col-sm-3 col-md-3 sidebar">
               <Header headerVisibility={this.state.headerVisibility} />
               <StatusDialog
               isVisible={this.state.statusDialogVisibility}

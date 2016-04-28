@@ -22,28 +22,36 @@ var MessageItem = React.createClass({
   render: function() {
     var ref = this.props.messageType + this.props.messagenr;
     return (
-      <div classname="message">
-        <form className="MessageForm" onSubmit={this._onSubmitMessageForm}>
-          {this.props.editState
-          ?
-              <input type='text' className='conversationname-input'
-              placeholder= {this.props.text}
-              value={this.state.tempMessageText}
-              onChange={this._updateTempMessageText}
-              ref= {this.focusInputField}
-              />
-            : <p>{this.props.text} {this.props.m_nr} {this.props.activeConversation}</p> }
-
-          <MessageOptions
-              msgkey={this.props.msgkey}
-              messageType={this.props.messageType}
-              editState={this.props.editState}
-              deleteState={this.props.deleteState}
-              m_nr={this.props.m_nr}
-              convId={this.props.activeConversation}
-              updateFn={this._updateMessageText} />
+        <form className="message-form" onSubmit={this._onSubmitMessageForm}>
+        <div className="row">
+          <div className="message-header">Person or Chatbot says.. </div>
+        </div>
+        <div className="row">
+          <div className="message-content">
+            {this.props.editState
+            ?
+                <input type='text' className='conversationname-input'
+                placeholder= {this.props.text}
+                value={this.state.tempMessageText}
+                onChange={this._updateTempMessageText}
+                ref= {this.focusInputField}
+                />
+              : <p className="messagetext">{this.props.text} {this.props.m_nr} {this.props.activeConversation}</p> }
+            </div>
+          </div>
+          <div className="row">
+            <div className="message-footer">
+              <MessageOptions
+                  msgkey={this.props.msgkey}
+                  messageType={this.props.messageType}
+                  editState={this.props.editState}
+                  deleteState={this.props.deleteState}
+                  m_nr={this.props.m_nr}
+                  convId={this.props.activeConversation}
+                  updateFn={this._updateMessageText} />
+              </div>
+            </div>
         </form>
-      </div>
     )
   },
 

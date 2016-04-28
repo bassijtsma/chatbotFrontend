@@ -13,16 +13,18 @@ var Header = React.createClass({
   render : function() {
     return (
       <div className="row">
-        <h1>Chatbot Manager</h1>
-        <p onClick={this._onHeaderToggle} className='headertext'>What is this?</p>
-        {this.props.headerVisibility
-          ? <div>
-                <div className="circular"></div>
-              <p className='headertext'>
-                This is a chatbot editor. Create conversations ...
-              </p>
-            </div>
-          : null}
+        <div className="col-sm-12 sidebartop">
+          <h1>Chatbot Manager</h1>
+          <p onClick={this._onHeaderToggle} className='headertext'>What is this?</p>
+          {this.props.headerVisibility
+            ? <div>
+                  <div className="circular"></div>
+                <p className='headertext'>
+                  This is a chatbot editor. Create conversations ...
+                </p>
+              </div>
+            : null}
+        </div>
       </div>
     )
   },
