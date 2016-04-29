@@ -10,7 +10,7 @@ var ConversationsHeader = React.createClass({
     return (
       <div className='row conversations-header' onClick={this.newConversation}>
             <p className="new-conversation">
-              New conversation
+              NEW CONVERSATION &nbsp;
               <span className="glyphicon glyphicon-plus" aria-hidden="true" />
             </p>
       </div>
@@ -21,7 +21,7 @@ var ConversationsHeader = React.createClass({
   newConversation: function() {
     var newConvId = ConversationStore.getHigestConvId() + 1;
     var temporaryObjectId = (String(Math.floor(Date.now() / 1000)) + newConvId);
-    var newConv = {conv_name: ' ', conv_id: newConvId, _id: temporaryObjectId}
+    var newConv = {conv_name: 'Placeholder...', conv_id: newConvId, _id: temporaryObjectId}
     ConversationItemActions.createConversation(newConv);
   }
 })

@@ -31,7 +31,7 @@ body {
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 0 20px 20px 20px;
+    /*padding: 0 20px 20px 20px;*/
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #1f2d3e;
@@ -52,6 +52,10 @@ body {
   background-color: #1a2229;
 }
 
+.sidebartop > h1, .sidebartop > p {
+  margin: 0px;
+}
+
 .sidebar {
   background-color: #2d353c;
 }
@@ -63,7 +67,9 @@ body {
 }
 .nav-sidebar > li {
   padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #424C54;
+  cursor: pointer;
 }
 .nav-sidebar > li:hover {
   background-color: #1a2229;
@@ -72,6 +78,8 @@ body {
 .nav-sidebar > .active:focus, .nav-sidebar > .active:hover {
   color: #fff;
   background-color: #348fe2;
+  border-top: 1px solid #1a2229;
+  border-bottom: 1px solid #1a2229;
 }
 
 
@@ -87,13 +95,31 @@ h2 {
 .conversation-item-header {
   margin-top: 0px;
 }
+
+.conversation-item {
+  padding: 5px 5px 5px 0px;
+}
+
 .conversation-options {
   color: #fff;
   font-size: 12px;
+  margin-bottom: 0px;
 }
 
-.headertext, .new-conversation, .glyphicon-plus {
+.headertext {
   color: #fff;
+  margin-bottom: 0px;
+}
+
+.new-conversation, .glyphicon-plus {
+   color: #fff;
+   cursor: pointer;
+}
+
+.conversations-header {
+  padding: 15px 5px 5px 15px;
+  border-top: 1px solid #424C54;
+  border-bottom: 1px solid #424C54;
 }
 
 .conversationname-input {
@@ -121,30 +147,30 @@ h2 {
 .message-options {
   text-align: right;
   font-size: 12px;
-  padding: 5px;
+  padding: 5px 15px 5px 5px;
 }
 
 .message {
   margin-bottom: 10px;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 15px 5px 15px;
 }
 
 .question {
   margin-left: 10%;
   background: #fff;
   position: relative;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .response {
   margin-right: 10%;
   background: #fff;
   position: relative;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
 .question:before {
@@ -188,7 +214,7 @@ h2 {
   -webkit-border-radius: 0 0 4px 4px;
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
-  margin: 0px -5px -15px -15px;
+  margin: 0px -15px -15px -15px;
   display: block;
 }
 
@@ -196,10 +222,49 @@ h2 {
 
 }
 
-.messagetext {
-  padding-top: 5px;
+.message-text {
+  margin: 7px 0px 7px 0px;
 }
 
+.message-input {
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+
+.nomsgwarning {
+  margin-top: 0px;
+  text-align: center;
+  position: relative;
+  padding: 25px 50px 50px 50px;
+  background: #fff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .nomsgwarning {
+    margin-top: 50px;
+    text-align: center;
+    position: relative;
+    padding: 25px 50px 50px 50px;
+    background: #fff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+  }
+}
+
+.nomsgwarning > h1 {
+  color: #333;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 

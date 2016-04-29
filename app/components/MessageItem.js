@@ -31,17 +31,19 @@ var MessageItem = React.createClass({
           </div>
 
 
-          <div className="message-content" onClick={this._editMessage.bind(
-              this, this.props.msgkey, this.props.messageType)}>
+          <div className="message-content">
             {this.props.editState
             ?
-                <input type='text' className='conversationname-input'
+                <input type='text'
                 value={this.state.tempMessageText}
                 onChange={this._updateTempMessageText}
                 ref= {this.focusInputField}
-                className="messagetext"
+                className="message-input"
                 />
-              : <p className="messagetext">{this.props.text}</p> }
+              : <p className="message-text"
+                  onClick={this._editMessage.bind(
+                  this, this.props.msgkey, this.props.messageType)}>
+                  {this.props.text} </p> }
             </div>
 
             <div className="message-footer">
@@ -73,13 +75,10 @@ var MessageItem = React.createClass({
   },
 
   _editMessage: function(msgkey, messageType) {
-    console.log('editmsg:', msgkey);
     MessageActions.editMessage(msgkey, messageType);
   },
 
-
   _updateMessageText: function() {
-
     var requestBody = {
       m_nr: this.props.m_nr,
       is_alternative: false,
@@ -100,7 +99,6 @@ var MessageItem = React.createClass({
 
   focusInputField: function(input) {
     if (this.props.editState) {
-      console.log('input:', input)
         if (input != null) {
           input.focus();
       }
