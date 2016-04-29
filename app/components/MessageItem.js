@@ -15,7 +15,7 @@ var MessageItem = React.createClass({
 
   getInitialState: function() {
     return {
-      tempMessageText: ''
+      tempMessageText: this.props.text
     }
   },
 
@@ -23,23 +23,27 @@ var MessageItem = React.createClass({
     var ref = this.props.messageType + this.props.messagenr;
     return (
         <form className="message-form" onSubmit={this._onSubmitMessageForm}>
-        <div className="row">
-          <div className="message-header">Person or Chatbot says.. </div>
-        </div>
-        <div className="row">
-          <div className="message-content">
+
+          <div className="message-header">
+            {this.props.messageType === 'question'
+              ? 'Person says...'
+              : 'Chatbot replies...'}
+          </div>
+
+
+          <div className="message-content" onClick={this._editMessage.bind(
+              this, this.props.msgkey, this.props.messageType)}>
             {this.props.editState
             ?
                 <input type='text' className='conversationname-input'
-                placeholder= {this.props.text}
                 value={this.state.tempMessageText}
                 onChange={this._updateTempMessageText}
                 ref= {this.focusInputField}
+                className="messagetext"
                 />
-              : <p className="messagetext">{this.props.text} {this.props.m_nr} {this.props.activeConversation}</p> }
+              : <p className="messagetext">{this.props.text}</p> }
             </div>
-          </div>
-          <div className="row">
+
             <div className="message-footer">
               <MessageOptions
                   msgkey={this.props.msgkey}
@@ -48,9 +52,10 @@ var MessageItem = React.createClass({
                   deleteState={this.props.deleteState}
                   m_nr={this.props.m_nr}
                   convId={this.props.activeConversation}
-                  updateFn={this._updateMessageText} />
+                  updateFn={this._onSubmitMessageForm}
+                  editFn={this._editMessage} />
               </div>
-            </div>
+
         </form>
     )
   },
@@ -66,6 +71,12 @@ var MessageItem = React.createClass({
     event.stopPropagation();
     this._updateMessageText();
   },
+
+  _editMessage: function(msgkey, messageType) {
+    console.log('editmsg:', msgkey);
+    MessageActions.editMessage(msgkey, messageType);
+  },
+
 
   _updateMessageText: function() {
 

@@ -119,31 +119,29 @@ h2 {
 
 
 .message-options {
+  text-align: right;
   font-size: 12px;
+  padding: 5px;
 }
 
 .message {
   margin-bottom: 10px;
+  padding: 5px 5px 5px 15px;
 }
+
 .question {
-  /*background-color: #DEDEDE;*/
   margin-left: 10%;
-  margin-right: 10%;
   background: #fff;
   position: relative;
-  padding: 20px 30px;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
 }
 
 .response {
-  /*background-color: #DEDEDE;*/
-  margin-left: 10%;
   margin-right: 10%;
   background: #fff;
   position: relative;
-  padding: 20px 30px;
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -173,21 +171,25 @@ h2 {
 }
 
 .message-header {
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #e2e7eb;
-  line-height: 30px;
+  line-height: 25px;
+  display: block;
+
 }
 
 .message-content{
-  margin-top: 20px;
+  display: block;
+  cursor: pointer;
 }
 
 .message-footer {
-  padding: 20px 30px;
   background: #e8ecf1;
   -webkit-border-radius: 0 0 4px 4px;
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
+  margin: 0px -5px -15px -15px;
+  display: block;
 }
 
 .container-fluid {
@@ -195,7 +197,7 @@ h2 {
 }
 
 .messagetext {
-
+  padding-top: 5px;
 }
 
 /* Sticky footer styles

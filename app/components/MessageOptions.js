@@ -11,11 +11,10 @@ var MessageOptions = React.createClass({
 
 	render: function() {
 		return (
-      <div>
         <p className="message-options">
 
 					{!this.props.deleteState
-						? <span onClick={this._editMessage.bind(this,
+						? <span onClick={this.props.editFn.bind(null,
 		          this.props.msgkey, this.props.messageType)}>
 		          {this.props.editState
 								? <span onClick={this.props.updateFn} type='submit'>Save</span>
@@ -38,14 +37,9 @@ var MessageOptions = React.createClass({
 		          this.props.msgkey)}> Delete </span>
 					}
         </p>
-      </div>
     );
 	},
 
-  _editMessage: function(msgkey, messageType) {
-		console.log('editmsg:', msgkey);
-    MessageActions.editMessage(msgkey, messageType);
-  },
 
   _toggleDeleteMessage: function(key) {
 		console.log(key);
