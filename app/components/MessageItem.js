@@ -26,10 +26,9 @@ var MessageItem = React.createClass({
 
           <div className="message-header">
             {this.props.messageType === 'question'
-              ? 'Person says...'
-              : 'Chatbot replies...'}
+              ? <p className="message-header-text">Person says:</p>
+              : <p className="message-header-text">Chatbot replies:</p> }
           </div>
-
 
           <div className="message-content">
             {this.props.editState

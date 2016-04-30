@@ -13,13 +13,11 @@ var Messages = React.createClass({
   },
 
   render: function() {
-    var messageItemsCount = 0;
     var messageItems = this.props.messages.map(function (message) {
       if (message.conv_id === this.props.activeConversation) {
-        messageItemsCount += 1;
         return (
             <div className='row' key={message.key}>
-              <div className='col-xs-6'>
+              <div className='col-xs-5'>
                 <div className='message question'>
 
                   <MessageItem
@@ -37,7 +35,7 @@ var Messages = React.createClass({
                </div>
               </div>
 
-              <div className='col-xs-6'>
+              <div className='col-xs-5'>
                 <div className='message response'>
                   <MessageItem
                     m_nr={message.m_nr}
@@ -57,21 +55,9 @@ var Messages = React.createClass({
          )}
     }.bind(this));
 
-    var noMessageWarning =  <div className="col-sm-offset-2 col-sm-8">
-                              <div className="nomsgwarning">
-                                <h1>Oops!</h1>
-                                  <p>
-                                    It looks like there are no messages to
-                                    display yet. Create your messages below!
-                                  </p>
-                              </div>
-                            </div>
-                          ;
     return (
         <div className="row">
-            {messageItemsCount > 0 && this.props.messages.length > 0
-              ? messageItems
-              : noMessageWarning}
+            {messageItems}
         </div>
     )
   }

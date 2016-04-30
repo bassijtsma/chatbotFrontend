@@ -11,7 +11,7 @@ var ConversationsHeader = require('./ConversationsHeader')
 var Messages = require('./Messages');
 var MessageStore = require('../stores/MessageStore');
 var MessageActions = require('../actions/MessageActions');
-var MessagesHeader = require('./MessagesHeader');
+var NoMessagesWarning = require('./NoMessagesWarning');
 var NewMessageFooter = require('./NewMessageFooter');
 var StatusDialog = require('./StatusDialog');
 var StatusDialogStore = require('../stores/StatusDialogStore');
@@ -31,7 +31,8 @@ var Main = React.createClass({
       conversationsEditState: {},
       conversationsDeleteState: {},
       statusDialogVisibility: false,
-      statusDialogMessage: ''
+      statusDialogMessage: '',
+      noMessagesWarningVisibility: false
     }
   },
 
@@ -39,10 +40,8 @@ var Main = React.createClass({
     HeaderStore.addChangeListener(this._onChange);
     ConversationStore.addChangeListener(this._onChange);
     ConversationItemActions.getConversations();
-
     MessageStore.addChangeListener(this._onChange);
     MessageActions.getMessages();
-
     StatusDialogStore.addChangeListener(this._onChange);
   },
 
@@ -66,6 +65,7 @@ var Main = React.createClass({
             </div>
 
             <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+              <NoMessagesWarning isVisible={this.state.noMessagesWarningVisibility} />
               <Messages
                 activeConversation={this.state.activeConvId}
                 messages={this.state.messages}
@@ -81,9 +81,6 @@ var Main = React.createClass({
           highestm_nr={this.state.highestM_NrForActiveConv}
           />
       </div>
-
-
-
     )
   },
 
@@ -100,7 +97,8 @@ var Main = React.createClass({
       headerVisibility: HeaderStore.getHeaderVisibility(),
       highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv(),
       statusDialogVisibility: StatusDialogStore.getStatusDialogVisibility(),
-      statusDialogMessage: StatusDialogStore.getStatusDialogMessage()
+      statusDialogMessage: StatusDialogStore.getStatusDialogMessage(),
+      noMessagesWarningVisibility: MessageStore.geNoMessagesWarningVisibility()
     })
   },
 

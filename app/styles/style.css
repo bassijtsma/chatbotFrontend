@@ -135,8 +135,8 @@ h2 {
 }
 @media (min-width: 768px) {
   .main {
-    padding-right: 40px;
-    padding-left: 40px;
+    padding-right: 30px;
+    padding-left: 30px;
   }
 }
 .main .page-header {
@@ -201,7 +201,12 @@ h2 {
   border-bottom: 1px solid #e2e7eb;
   line-height: 25px;
   display: block;
+}
 
+.message-header-text {
+  color: #348fe2;
+  font-size: 14px;
+  margin-bottom: 0px;
 }
 
 .message-content{

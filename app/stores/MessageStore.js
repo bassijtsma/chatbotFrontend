@@ -10,6 +10,7 @@ var _questionsEditState = {};
 var _responsesEditState = {};
 var _messagesDeleteState = {};
 var _highestM_NrForActiveConv = 0;
+var _noMessagesWarningVisibility = false;
 // object to store backup of msgs for rollbacks in case of API failure
 var _messagesBackup = {};
 
@@ -44,6 +45,10 @@ var MessageStore = assign({}, EventEmitter.prototype, {
   },
   getHighestM_NrForActiveConv: function() {
     return _highestM_NrForActiveConv;
+  },
+
+  geNoMessagesWarningVisibility: function() {
+    return _noMessagesWarningVisibility;
   }
 
 });
@@ -126,6 +131,7 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_CLICKED:
       setHighestM_NrForActiveConv(action.conv_id);
+      setNoMsgWarningVisibility(action.conv_id);
       MessageStore.emitChange();
       break;
 
@@ -247,6 +253,26 @@ function updateMessageText(message) {
       return true;
     }
   })
+}
+
+// If more than 1 message is visible, the "no msg" warning should not be shown
+function shouldShowNoMessageWarning(conv_id) {
+  var shouldShowWarning = true;
+  _messages.every(function(msg) {
+    if (msg.conv_id === conv_id) {
+      shouldShowWarning = false;
+      return false;
+    } return true;
+  })
+  return shouldShowWarning;
+}
+
+function setNoMsgWarningVisibility(conv_id){
+  if (shouldShowNoMessageWarning(conv_id)) {
+    _noMessagesWarningVisibility = true;
+  } else {
+    _noMessagesWarningVisibility = false;
+  }
 }
 
 module.exports = MessageStore;
