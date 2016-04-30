@@ -52,9 +52,6 @@ var Main = React.createClass({
           <div className="row">
             <div className="col-sm-3 col-md-3 sidebar">
               <Header headerVisibility={this.state.headerVisibility} />
-              <StatusDialog
-              isVisible={this.state.statusDialogVisibility}
-              statusDialogMessage='test' />
 
               <ConversationsHeader />
               <Conversations
@@ -65,6 +62,10 @@ var Main = React.createClass({
             </div>
 
             <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+              <StatusDialog
+              isVisible={this.state.statusDialogVisibility}
+              statusDialogMessage='test' />
+
               <NoMessagesWarning isVisible={this.state.noMessagesWarningVisibility} />
               <Messages
                 activeConversation={this.state.activeConvId}

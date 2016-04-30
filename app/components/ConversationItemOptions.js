@@ -26,7 +26,6 @@ var ConversationItemOptions = React.createClass({
   },
 
   _editConversation: function() {
-    console.log(' edit conv state', this.props.conversationId)
     ConversationItemActions.toggleEditConversation(this.props.conversationId);
   },
 

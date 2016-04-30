@@ -14,7 +14,7 @@ var Header = React.createClass({
     return (
       <div className="row">
         <div className="col-sm-12 sidebartop">
-          <h1>Chatbot Manager</h1>
+          <h1 className="sidebar-title">Chatbot Manager</h1>
           <p onClick={this._onHeaderToggle} className='headertext'>What is this?</p>
           {this.props.headerVisibility
             ? <div>

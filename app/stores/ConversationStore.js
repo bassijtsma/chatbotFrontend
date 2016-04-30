@@ -65,6 +65,7 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_CREATE:
       createConversation(action.conv);
+      setActiveConversation(action.conv.conv_id)
       ConversationStore.emitChange();
       break;
 
@@ -123,6 +124,7 @@ Dispatcher.register(function(action) {
       setActiveConversation(action.conv_id);
       ConversationStore.emitChange();
       break;
+
 
 
     default:

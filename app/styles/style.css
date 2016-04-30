@@ -83,21 +83,31 @@ body {
 }
 
 
-h1, h2 {
+h1 {
   color: #fff;
   font-size: 22px;
 }
 
+.sidebar-title {
+  padding-top: 10px;
+}
+
 h2 {
+  color: #fff;
   font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .conversation-item-header {
   margin-top: 0px;
 }
 
+.conversation-item-header:first-letter {
+    text-transform:capitalize;
+}
+
 .conversation-item {
-  padding: 5px 5px 5px 0px;
+  padding: 10px 5px 5px 0px;
 }
 
 .conversation-options {
@@ -109,6 +119,7 @@ h2 {
 .headertext {
   color: #fff;
   margin-bottom: 0px;
+  padding: 5px 5px 15px 0px;
 }
 
 .new-conversation, .glyphicon-plus {
@@ -151,6 +162,7 @@ h2 {
 }
 
 .message {
+  max-width: 320px;
   margin-bottom: 10px;
   padding: 5px 15px 5px 15px;
 }

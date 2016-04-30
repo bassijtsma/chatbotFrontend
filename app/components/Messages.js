@@ -17,7 +17,7 @@ var Messages = React.createClass({
       if (message.conv_id === this.props.activeConversation) {
         return (
             <div className='row' key={message.key}>
-              <div className='col-xs-5'>
+              <div className='col-xs-6'>
                 <div className='message question'>
 
                   <MessageItem
@@ -35,7 +35,7 @@ var Messages = React.createClass({
                </div>
               </div>
 
-              <div className='col-xs-5'>
+              <div className='col-xs-6'>
                 <div className='message response'>
                   <MessageItem
                     m_nr={message.m_nr}

@@ -4,11 +4,11 @@ var PropTypes = React.PropTypes;
 var StatusDialog = React.createClass({
   render: function() {
     return (
-      <span>
+      <div className="row">
         {this.props.isVisible
-        ? <span>{this.props.statusDialogMessage}</span>
+        ? <p>{this.props.statusDialogMessage}</p>
         : null}
-      </span>
+      </div>
     )
   }
 });

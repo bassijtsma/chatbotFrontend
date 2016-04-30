@@ -3,7 +3,6 @@ var PropTypes = React.PropTypes;
 
 var NoMessagesWarning = React.createClass({
   render : function() {
-
     if (this.props.isVisible) {
       var warning = <div className='row'>
         <div className="col-sm-offset-2 col-sm-8">

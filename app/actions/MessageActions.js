@@ -25,7 +25,8 @@ var MessageActions = {
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
       key: key,
-      recoverykey: recoverykey
+      recoverykey: recoverykey,
+      conv_id: requestBody.conv_id
     });
     console.log('reqkey:' , requestBody.key)
     Api

@@ -2,7 +2,7 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../utils/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
-
+var ConversationStore = require('./ConversationStore');
 
 var CHANGE_EVENT = 'change';
 var _messages = [];
@@ -66,6 +66,7 @@ Dispatcher.register(function(action) {
     case Constants.MESSAGE_CREATE:
       setMessagesBackup(action.recoverykey);
       createNewMessage(action.message);
+      setNoMsgWarningVisibility(action.message.conv_id);
       MessageStore.emitChange();
       break;
 
@@ -86,11 +87,14 @@ Dispatcher.register(function(action) {
     case Constants.MESSAGE_DELETE:
       setMessagesBackup(action.recoverykey);
       deleteMessage(action.key);
+      setNoMsgWarningVisibility(action.conv_id)
       MessageStore.emitChange();
       break;
 
     case Constants.CONV_DELETE :
       deleteAllMessagesForConv(action.conv_id);
+      var defaultconvid = ConversationStore.getAllConversations()[0].conv_id;
+      setNoMsgWarningVisibility(defaultconvid);
       MessageStore.emitChange();
       break;
 
@@ -135,6 +139,10 @@ Dispatcher.register(function(action) {
       MessageStore.emitChange();
       break;
 
+    case Constants.CONV_CREATE:
+      setNoMsgWarningVisibility(action.conv.conv_id);
+      MessageStore.emitChange();
+      break;
 
     default:
 
@@ -268,6 +276,7 @@ function shouldShowNoMessageWarning(conv_id) {
 }
 
 function setNoMsgWarningVisibility(conv_id){
+  console.log('set no msg warnign visib', conv_id)
   if (shouldShowNoMessageWarning(conv_id)) {
     _noMessagesWarningVisibility = true;
   } else {
