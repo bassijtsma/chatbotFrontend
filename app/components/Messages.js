@@ -56,7 +56,7 @@ var Messages = React.createClass({
     }.bind(this));
 
     return (
-        <div className="row">
+        <div>
             {messageItems}
         </div>
     )

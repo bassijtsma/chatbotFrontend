@@ -13,7 +13,8 @@ var StatusDialog = React.createClass({
     return (
       <div className="row">
         <div className="col-md-12">
-          <div className="message">
+          <div className="instructions-container">
+
             <p className="instructions-title"
               onClick={this._onInstructionsToggle}>See instructions</p>
             {this.props.isVisible

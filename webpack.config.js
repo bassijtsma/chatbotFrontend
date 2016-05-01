@@ -19,11 +19,15 @@ module.exports = {
   module : {
     loaders: [
       {test: /\.js$/, include: __dirname + '/app', loader: "babel-loader"},
-      { test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,  loader: 'url-loader?limit=100000' },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") }
+      { test: /\.(woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,  loader: 'url-loader?limit=100' },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
     ]
   },
   plugins: [HtmlWebpackPluginConfig, new ExtractTextPlugin("style.css", {
       allChunks: true
   })]
 }
+
+
+// publicPath: 'http://bastronaut.com/',

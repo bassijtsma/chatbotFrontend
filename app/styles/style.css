@@ -45,7 +45,9 @@ body {
 	border-radius: 50px;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
-	background: url(http://static.comicvine.com/uploads/original/11124/111247756/5020957-bender.jpg) no-repeat;
+	background: url(../img/bender.png) no-repeat;
+  background-size: 100px 100px;
+  background-repeat: no-repeat;
 	}
 
 .sidebartop {
@@ -172,14 +174,14 @@ ol {
 }
 
 .message {
-  max-width: 320px;
+
   margin-bottom: 10px;
   padding: 5px 15px 5px 15px;
 }
 
-.instructions {
+.instructions-container {
     padding: 5px 15px 5px 15px;
-    margin-left: 10%;
+    margin: 0px 4.1666% 20px  4.1666%;
     background: #fff;
     position: relative;
     border-radius: 5px;

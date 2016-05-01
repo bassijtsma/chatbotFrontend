@@ -22,7 +22,7 @@ var MessageItem = React.createClass({
   render: function() {
     var ref = this.props.messageType + this.props.messagenr;
     return (
-        <form className="message-form" onSubmit={this._onSubmitMessageForm}>
+        <form onSubmit={this._onSubmitMessageForm}>
 
           <div className="message-header">
             {this.props.messageType === 'question'
