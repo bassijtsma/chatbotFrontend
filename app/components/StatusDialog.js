@@ -14,12 +14,23 @@ var StatusDialog = React.createClass({
       <div className="row">
         <div className="col-md-12">
           <div className="instructions-container">
+            <div className={this.props.instructionsVisibility ? "instructions-header" : null }>
 
-            <p className="instructions-title"
-              onClick={this._onInstructionsToggle}>See instructions</p>
-            {this.props.isVisible
-            ? <p>{this.props.statusDialogMessage}</p>
-            : null}
+              {this.props.instructionsVisibility
+                ? <p className="instructions-text-header" onClick={this._onInstructionsToggle}>Hide Instructions
+                    <span className="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+                  </p>
+              :  <p className="instructions-text-header"
+              onClick={this._onInstructionsToggle}>Show Instructions
+                  <span className="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+                </p>}
+
+              {this.props.isVisible
+              ? <p className="instructions-text-header statusdialog-message">
+              {this.props.statusDialogMessage}</p>
+              : null}
+            </div>
+
             <Instructions isVisible={this.props.instructionsVisibility} />
           </div>
         </div>

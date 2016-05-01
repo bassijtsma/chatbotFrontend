@@ -39,9 +39,14 @@ body {
   }
 }
 
+.circular-container {
+  text-align: center;
+}
+
 .circular {
 	width: 100px;
 	height: 100px;
+  margin: 20px 20px 0px 20px;
 	border-radius: 50px;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
@@ -52,10 +57,11 @@ body {
 
 .sidebartop {
   background-color: #1a2229;
+  padding-bottom: 20px;
 }
 
 .sidebartop > h1, .sidebartop > p {
-  margin: 0px;
+  margin: 10px 0 0 0;
 }
 
 .sidebar {
@@ -134,6 +140,10 @@ h2 {
   cursor: pointer;
 }
 
+.glyphicon-menu-down {
+  color: #333;
+}
+
 .conversations-header {
   padding: 15px 5px 5px 15px;
   border-top: 1px solid #424C54;
@@ -148,6 +158,8 @@ ol {
   padding: 0px 0px 0px 15px;
   color: #fff;
 }
+
+
 
 /*
  * Main content
@@ -180,8 +192,8 @@ ol {
 }
 
 .instructions-container {
-    padding: 5px 15px 5px 15px;
-    margin: 0px 4.1666% 20px  4.1666%;
+    padding: 15px 15px 15px 15px;
+    margin: 0px 2.0833% 20px  2.0833%;
     background: #fff;
     position: relative;
     border-radius: 5px;
@@ -189,8 +201,29 @@ ol {
     -webkit-border-radius: 5px;
 }
 
+.instructions-text-header {
+  color: #348fe2;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.instructions-text {
+  color: #333;
+}
+
+.instructions-header {
+  border-bottom: 1px solid #e2e7eb;
+  margin-bottom: 5px;
+}
+
+.statusdialog-message {
+  float: right!important
+}
+
 .question {
-  margin-left: 10%;
+  margin-left: 5%;
   background: #fff;
   position: relative;
   border-radius: 5px;
@@ -199,7 +232,7 @@ ol {
 }
 
 .response {
-  margin-right: 10%;
+  margin-right: 5%;
   background: #fff;
   position: relative;
   border-radius: 5px;
@@ -315,4 +348,8 @@ ol {
   /* Set the fixed height of the footer here */
   height: 80px;
   background-color: #f5f5f5;
+}
+
+.glyphicon {
+  margin-left: 5px;
 }

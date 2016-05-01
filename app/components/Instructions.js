@@ -10,10 +10,10 @@ var Instructions = React.createClass({
            This app allows you to create and manage automated
            conversations with a Whatsapp Chatbot. See the example
            chat to the right: Whenever a message contains
-           "hi there", it will reply with "Hi! :) How are you?"
+           "hi there", it will reply with "Hi! :) How are you?". Test it now!
           </p>
-          <p>Test it now!</p>
-          <ol>
+
+          <ol className="instructions-text">
            <li>Add chatbot to your contacts</li>
            <li>Send a message to the chatbot</li>
            <li>Receive automated reply!</li>

@@ -66,7 +66,7 @@ var Main = React.createClass({
 
               <StatusDialog
               isVisible={this.state.statusDialogVisibility}
-              statusDialogMessage='test'
+              statusDialogMessage={this.state.statusDialogMessage}
               instructionsVisibility={this.state.instructionsVisibility} />
 
               <NoMessagesWarning isVisible={this.state.noMessagesWarningVisibility} />
