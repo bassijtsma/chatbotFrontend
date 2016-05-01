@@ -116,6 +116,11 @@ h2 {
   margin-bottom: 0px;
 }
 
+.headertext-title {
+  color: #fff;
+  cursor: pointer;
+}
+
 .headertext {
   color: #fff;
   margin-bottom: 0px;
@@ -123,8 +128,8 @@ h2 {
 }
 
 .new-conversation, .glyphicon-plus {
-   color: #fff;
-   cursor: pointer;
+  color: #fff;
+  cursor: pointer;
 }
 
 .conversations-header {
@@ -135,6 +140,11 @@ h2 {
 
 .conversationname-input {
   color: #000;
+}
+
+ol {
+  padding: 0px 0px 0px 15px;
+  color: #fff;
 }
 
 /*
@@ -165,6 +175,16 @@ h2 {
   max-width: 320px;
   margin-bottom: 10px;
   padding: 5px 15px 5px 15px;
+}
+
+.instructions {
+    padding: 5px 15px 5px 15px;
+    margin-left: 10%;
+    background: #fff;
+    position: relative;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 .question {

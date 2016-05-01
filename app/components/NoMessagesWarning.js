@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var NoMessagesWarning = React.createClass({
+var Instructions = React.createClass({
   render : function() {
     if (this.props.isVisible) {
       var warning = <div className='row'>
@@ -22,4 +22,4 @@ var NoMessagesWarning = React.createClass({
   }
 })
 
-module.exports = NoMessagesWarning;
+module.exports = Instructions;

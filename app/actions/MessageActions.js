@@ -132,8 +132,12 @@ var MessageActions = {
         recoverykey: recoverykey
       });
     })
+  },
+  toggleInstructions: function() {
+    Dispatcher.dispatch({
+      actionType: Constants.TOGGLEINSTRUCTIONS
+    })
   }
-
 };
 
 module.exports = MessageActions;

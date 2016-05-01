@@ -3,7 +3,6 @@ require("../styles/style.css");
 
 var React = require('react');
 var Header = require('./Header');
-var HeaderStore = require('../stores/HeaderStore');
 var ConversationStore = require('../stores/ConversationStore');
 var Conversations = require('./Conversations');
 var ConversationItemActions = require('../actions/ConversationItemActions');
@@ -16,6 +15,7 @@ var NewMessageFooter = require('./NewMessageFooter');
 var StatusDialog = require('./StatusDialog');
 var StatusDialogStore = require('../stores/StatusDialogStore');
 
+
 var Main = React.createClass({
 
   getInitialState: function() {
@@ -26,7 +26,7 @@ var Main = React.createClass({
       messages: [],
       questionsEditState: {},
       responsesEditState: {},
-      headerVisibility: false,
+      instructionsVisibility: true,
       alertsVisibilities: {},
       conversationsEditState: {},
       conversationsDeleteState: {},
@@ -37,7 +37,6 @@ var Main = React.createClass({
   },
 
   componentDidMount: function() {
-    HeaderStore.addChangeListener(this._onChange);
     ConversationStore.addChangeListener(this._onChange);
     ConversationItemActions.getConversations();
     MessageStore.addChangeListener(this._onChange);
@@ -51,7 +50,7 @@ var Main = React.createClass({
         <div className='container-fluid'>
           <div className="row">
             <div className="col-sm-3 col-md-3 sidebar">
-              <Header headerVisibility={this.state.headerVisibility} />
+              <Header />
 
               <ConversationsHeader />
               <Conversations
@@ -62,9 +61,11 @@ var Main = React.createClass({
             </div>
 
             <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
               <StatusDialog
               isVisible={this.state.statusDialogVisibility}
-              statusDialogMessage='test' />
+              statusDialogMessage='test'
+              instructionsVisibility={this.state.instructionsVisibility} />
 
               <NoMessagesWarning isVisible={this.state.noMessagesWarningVisibility} />
               <Messages
@@ -95,7 +96,7 @@ var Main = React.createClass({
       questionsEditState: MessageStore.getQuestionsEditState(),
       responsesEditState: MessageStore.getResponsesEditState(),
       messagesDeleteState: MessageStore.getMessagesDeleteState(),
-      headerVisibility: HeaderStore.getHeaderVisibility(),
+      instructionsVisibility: MessageStore.getInstructionsVisibility(),
       highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv(),
       statusDialogVisibility: StatusDialogStore.getStatusDialogVisibility(),
       statusDialogMessage: StatusDialogStore.getStatusDialogMessage(),

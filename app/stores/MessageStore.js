@@ -11,6 +11,7 @@ var _responsesEditState = {};
 var _messagesDeleteState = {};
 var _highestM_NrForActiveConv = 0;
 var _noMessagesWarningVisibility = false;
+var instructionsVisibility = true;
 // object to store backup of msgs for rollbacks in case of API failure
 var _messagesBackup = {};
 
@@ -26,6 +27,10 @@ var MessageStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener(CHANGE_EVENT, callback);
+  },
+
+  getInstructionsVisibility: function() {
+    return instructionsVisibility;
   },
 
   getAllMessages: function() {
@@ -141,6 +146,11 @@ Dispatcher.register(function(action) {
 
     case Constants.CONV_CREATE:
       setNoMsgWarningVisibility(action.conv.conv_id);
+      MessageStore.emitChange();
+      break;
+
+    case Constants.TOGGLEINSTRUCTIONS:
+      instructionsVisibility = !instructionsVisibility;
       MessageStore.emitChange();
       break;
 

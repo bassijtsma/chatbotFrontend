@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 var ConversationStore = require('../stores/ConversationStore');
 var ConversationItem = require('./ConversationItem');
 var ConversationItemActions = require('../actions/ConversationItemActions');
-var HeaderStore = require('../stores/HeaderStore');
+
 
 
 var Conversations = React.createClass({

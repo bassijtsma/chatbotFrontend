@@ -1,8 +1,5 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var HeaderActions = require('../actions/HeaderActions');
-var HeaderStore = require('../stores/HeaderStore');
-
 
 var Header = React.createClass({
 
@@ -15,23 +12,15 @@ var Header = React.createClass({
       <div className="row">
         <div className="col-sm-12 sidebartop">
           <h1 className="sidebar-title">Chatbot Manager</h1>
-          <p onClick={this._onHeaderToggle} className='headertext'>What is this?</p>
-          {this.props.headerVisibility
-            ? <div>
-                  <div className="circular"></div>
-                <p className='headertext'>
-                  This is a chatbot editor. Create conversations ...
-                </p>
-              </div>
-            : null}
+          <p className='headertext-title'>What is this?</p>
+          <div className="circular"></div>
+
         </div>
       </div>
     )
   },
 
-  _onHeaderToggle: function() {
-    HeaderActions.toggleInformation();
-  }
+
 
 })
 
