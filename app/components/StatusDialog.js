@@ -18,6 +18,13 @@ var StatusDialog = React.createClass({
           <div className="instructions-container">
             <div className={this.props.instructionsVisibility ? "instructions-header" : null }>
 
+              {this.props.isVisible
+              ? <p className={this.props.statusLevel === 'warning'
+                ? "statusdialog statusdialog-warning"
+                : "statusdialog statusdialog-message" }>
+              {this.props.statusDialogMessage}</p>
+              : null}
+
               {this.props.instructionsVisibility
                 ? <p className="instructions-text-header" onClick={this._onInstructionsToggle}>Hide Instructions
                     <span className="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
@@ -27,14 +34,7 @@ var StatusDialog = React.createClass({
                   <span className="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
                 </p>}
 
-              {this.props.isVisible
-              ? <p className={this.props.statusLevel === 'warning'
-                ? "statusdialog-warning"
-                : "statusdialog-message" }>
-              {this.props.statusDialogMessage}</p>
-              : null}
             </div>
-
             <Instructions isVisible={this.props.instructionsVisibility} />
           </div>
         </div>
