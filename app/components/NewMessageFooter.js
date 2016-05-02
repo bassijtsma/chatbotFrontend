@@ -13,24 +13,33 @@ var NewMessageFooter = React.createClass({
   render: function() {
     return (
       <footer className="footer">
-        <div className="container">
-          <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
-            <div className='row new-message'>
-              <form className="saveForm" onSubmit={this.onSaveForm}>
+        <div className="container-fluid">
+          <div className="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main-footer">
 
-                <div className='col-xs-5'>
-                  <input type="text" value={this.state.questionInputField} placeholder='yo' onChange={this.updateQuestionInputField}/>
+            <form onSubmit={this.onSaveForm}>
+              <div className='row'>
+                <div className='col-xs-6 col-md-5'>
+                  <input type="text"
+                    className="newmessage-input"
+                    value={this.state.questionInputField}
+                    placeholder='New message...'
+                    onChange={this.updateQuestionInputField}/>
                 </div>
 
-                <div className='col-xs-5'>
-                <input type="text" value={this.state.responseInputField} onChange={this.updateResponseInputField} />
+                <div className='col-xs-6 col-md-5 col-md-offset-2'>
+                <input type="text"
+                  className="newmessage-input"
+                  value={this.state.responseInputField}
+                  placeholder='New response...'
+                  onChange={this.updateResponseInputField} />
+                </div>
                 </div>
 
-                <div className='col-xs-2'>
-                  <button type="submit">Save</button>
+                <div className='row'>
+                  <button type="submit" className="save-newmsg">Save</button>
                 </div>
-              </form>
-            </div>
+
+            </form>
           </div>
         </div>
       </footer>
