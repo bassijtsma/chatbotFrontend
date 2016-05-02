@@ -78,7 +78,7 @@ Dispatcher.register(function(action) {
 
     case Constants.MESSAGES_RECEIVED:
       _statusDialogMessage = 'Messages received succesfully!';
-      _statusDialogVisibility = true;
+      _statusDialogVisibility = false;
       _statusLevel = _statusOK;
       StatusDialogStore.emitChange();
       break;

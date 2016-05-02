@@ -3,7 +3,7 @@ var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
 var seed = 99999999;
-var defaultconvid = 1;
+var defaultconvid = 9999999; // set to 1 to disable editing the default convid
 
 var MessageActions = {
   getMessages: function() {
