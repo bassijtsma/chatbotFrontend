@@ -2,6 +2,8 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
+var defaultconvid = 1;
+
 var ConversationItemActions = {
   createConversation: function(conversation) {
     Dispatcher.dispatch({
@@ -33,6 +35,12 @@ var ConversationItemActions = {
     })
   },
   updateConversation: function(requestBody) {
+    if (requestBody.conv_id === defaultconvid) {
+      Dispatcher.dispatch({
+        actionType: Constants.CONV_CANNOTUPDATEEXAMPLE,
+      });
+      return;
+    }
     var timestamp = Date.now();
     Dispatcher.dispatch({
       actionType: Constants.CONV_UPDATE,
@@ -77,6 +85,12 @@ var ConversationItemActions = {
   },
   deleteConversation: function(conv_id) {
     var timestamp = Date.now();
+    if (conv_id === defaultconvid) {
+      Dispatcher.dispatch({
+        actionType: Constants.CONV_CANNOTDELETEEXAMPLE,
+      });
+      return;
+    }
     Dispatcher.dispatch({
       actionType: Constants.CONV_DELETE,
       conv_id: conv_id,

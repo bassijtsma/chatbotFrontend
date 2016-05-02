@@ -46,7 +46,7 @@ body {
 .circular {
 	width: 100px;
 	height: 100px;
-  margin: 20px 20px 0px 20px;
+  margin: 15px 20px 0px 20px;
 	border-radius: 50px;
 	-webkit-border-radius: 50px;
 	-moz-border-radius: 50px;
@@ -58,10 +58,11 @@ body {
 .sidebartop {
   background-color: #1a2229;
   padding-bottom: 20px;
+  padding-top: 15px;
 }
 
 .sidebartop > h1, .sidebartop > p {
-  margin: 10px 0 0 0;
+  margin: 0;
 }
 
 .sidebar {
@@ -70,7 +71,7 @@ body {
 /* Sidebar navigation */
 .nav-sidebar {
   margin-right: -21px; /* 20px padding + 1px border */
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: -20px;
 }
 .nav-sidebar > li {
@@ -93,12 +94,9 @@ body {
 
 h1 {
   color: #fff;
-  font-size: 22px;
+  font-size: 24px;
 }
 
-.sidebar-title {
-  padding-top: 10px;
-}
 
 h2 {
   color: #fff;
@@ -166,7 +164,7 @@ ol {
  */
 
 .main {
-  padding: 20px;
+  padding: 10px 20px 10px 20px;
 }
 @media (min-width: 768px) {
   .main {
@@ -199,12 +197,18 @@ ol {
 .instructions-container {
     padding: 15px 15px 15px 15px;
     /*margin: 0px 2.0833% 20px  2.0833%;*/
-    margin: 0px 5px 20px 5px;
+    margin: 0px 0px 10px 0px;
     background: #fff;
     position: relative;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .instructions-container {
+    margin: 0px 5px 20px 5px;
+  }
 }
 
 .instructions-text-header {
@@ -224,8 +228,21 @@ ol {
   margin-bottom: 5px;
 }
 
+.statusdialog {
+  float: right!important;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
 .statusdialog-message {
-  float: right!important
+  color: #348fe2;
+}
+
+.statusdialog-warning {
+  color: #E23434;
+  font-weight: bold;
 }
 
 .question {
@@ -352,9 +369,9 @@ ol {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 80px;
+  /*height: 80px;*/
   background-color: #f5f5f5;
-  border-top: 1px solid #1a2229;
+  /*border-top: 1px solid #333;*/
 }
 
 .main-footer {

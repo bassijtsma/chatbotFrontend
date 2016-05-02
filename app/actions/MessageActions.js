@@ -3,6 +3,7 @@ var Constants = require('../utils/Constants');
 var Api = require('../utils/Api');
 
 var seed = 99999999;
+var defaultconvid = 1;
 
 var MessageActions = {
   getMessages: function() {
@@ -21,6 +22,12 @@ var MessageActions = {
       });
   },
   deleteMessage: function(key, requestBody) {
+    if (requestBody.conv_id === defaultconvid) {
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_CANNOTDELETEEXAMPLE
+      });
+      return;
+    };
     var recoverykey = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_DELETE,
@@ -62,6 +69,12 @@ var MessageActions = {
     });
   },
   createNewMessage: function(message) {
+    if (message.conv_id === defaultconvid) {
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_CANNOTCREATEEXAMPLE
+      });
+      return;
+    };
     var key = Date.now() + Math.floor(Math.random() * seed);
     message.key = key;
     Dispatcher.dispatch({
@@ -100,6 +113,13 @@ var MessageActions = {
     });
   },
   updateMessage: function(message) {
+    if (message.conv_id === defaultconvid) {
+      Dispatcher.dispatch({
+        actionType: Constants.MESSAGE_CANNOTUPDATEEXAMPLE
+      });
+      return;
+    };
+
     var recoverykey = Date.now() + Math.floor(Math.random() * seed);
     Dispatcher.dispatch({
       actionType: Constants.MESSAGE_UPDATE,

@@ -34,7 +34,8 @@ var Main = React.createClass({
       conversationsDeleteState: {},
       statusDialogVisibility: false,
       statusDialogMessage: '',
-      noMessagesWarningVisibility: false
+      noMessagesWarningVisibility: false,
+      statusLevel: ''
     }
   },
 
@@ -67,6 +68,7 @@ var Main = React.createClass({
               <StatusDialog
               isVisible={this.state.statusDialogVisibility}
               statusDialogMessage={this.state.statusDialogMessage}
+              statusLevel={this.state.statusLevel}
               instructionsVisibility={this.state.instructionsVisibility} />
 
               <NoMessagesWarning isVisible={this.state.noMessagesWarningVisibility} />
@@ -102,6 +104,7 @@ var Main = React.createClass({
       highestM_NrForActiveConv: MessageStore.getHighestM_NrForActiveConv(),
       statusDialogVisibility: StatusDialogStore.getStatusDialogVisibility(),
       statusDialogMessage: StatusDialogStore.getStatusDialogMessage(),
+      statusLevel: StatusDialogStore.getStatusLevel(),
       noMessagesWarningVisibility: MessageStore.geNoMessagesWarningVisibility()
     })
   },

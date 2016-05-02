@@ -6,10 +6,12 @@ var MessageActions = require('../actions/MessageActions');
 var StatusDialog = React.createClass({
   propTypes: {
       isVisible: PropTypes.bool.isRequired,
-      instructionsVisibility: PropTypes.bool.isRequired
+      instructionsVisibility: PropTypes.bool.isRequired,
+      statusLevel: PropTypes.string.isRequired
   },
 
   render: function() {
+    console.log('the statuslevel:', this.props.statusLevel)
     return (
       <div className="row">
         <div className="col-md-12">
@@ -26,7 +28,9 @@ var StatusDialog = React.createClass({
                 </p>}
 
               {this.props.isVisible
-              ? <p className="instructions-text-header statusdialog-message">
+              ? <p className={this.props.statusLevel === 'warning'
+                ? "statusdialog-warning"
+                : "statusdialog-message" }>
               {this.props.statusDialogMessage}</p>
               : null}
             </div>
