@@ -20,7 +20,7 @@ var NewMessageFooter = React.createClass({
             </div>
             <form onSubmit={this.onSaveForm}>
               <div className='row'>
-                <div className='col-xs-6 col-md-5'>
+                <div className='col-xs-6 col-md-5 newmsgquestion'>
                   <input type="text"
                     className="newmessage-input"
                     value={this.state.questionInputField}
@@ -28,20 +28,22 @@ var NewMessageFooter = React.createClass({
                     onChange={this.updateQuestionInputField}/>
                 </div>
 
-                <div className='col-xs-6 col-md-5 col-md-offset-2 newmsg-container'>
+                <div className='col-xs-6 col-md-5 col-md-offset-2 newmsgresponse'>
 
-                  <div className="newmsg-input-container">
-                    <input type="text"
-                    className="newmessage-input newmsg-response"
-                    value={this.state.responseInputField}
-                    placeholder='New response...'
-                    onChange={this.updateResponseInputField} />
+                  <div className='newmsg-container'>
+                    <div className="newmsg-input-container">
+                      <input type="text"
+                      className="newmessage-input"
+                      value={this.state.responseInputField}
+                      placeholder='New response...'
+                      onChange={this.updateResponseInputField} />
+                    </div>
+
+                    <div className="newmsg-submit">
+                      <button type="submit" className="save-newmsg">Save</button>
+                    </div>
+
                   </div>
-
-                  <div className="newmsg-submit">
-                    <button type="submit" className="save-newmsg">Save</button>
-                  </div>
-
                 </div>
               </div>
             </form>
