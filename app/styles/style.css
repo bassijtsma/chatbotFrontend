@@ -76,7 +76,7 @@ p, ol {
 }
 /* Sidebar navigation */
 .nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
+  margin-right: -15px;
   margin-bottom: 10px;
   margin-left: -20px;
 }

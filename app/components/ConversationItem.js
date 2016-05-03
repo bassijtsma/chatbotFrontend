@@ -13,7 +13,7 @@ var ConversationItem = React.createClass({
 
   getInitialState: function() {
     return {
-      tempConversationName: ''
+      tempConversationName: this.props.conversationName
     }
   },
 
@@ -61,6 +61,11 @@ var ConversationItem = React.createClass({
       },
 
       _updateConversationName: function() {
+        if (typeof this.state.tempConversationName == 'undefined') {
+          this.setState({
+            tempConversationName : 'Placeholder...'
+          });
+        }
         var requestBody = {
           conv_name: this.state.tempConversationName,
           conv_id: this.props.conversationId

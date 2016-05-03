@@ -14,7 +14,7 @@ var Instructions = React.createClass({
           </p>
 
           <ol className="instructions-text">
-           <li>Add chatbot to your contacts: 06noginvullen</li>
+           <li>Add chatbot to your contacts: 06 123 456 78</li>
            <li>Send it a message thats shown below</li>
            <li>???</li>
            <li>Receive automated reply! (Profit!)</li>

@@ -21,7 +21,7 @@ var ConversationsHeader = React.createClass({
   newConversation: function() {
     var newConvId = ConversationStore.getHigestConvId() + 1;
     var temporaryObjectId = (String(Math.floor(Date.now() / 1000)) + newConvId);
-    var newConv = {conv_name: 'Placeholder...', conv_id: newConvId, _id: temporaryObjectId}
+    var newConv = {conv_name: 'Placeholder... Edit me!', conv_id: newConvId, _id: temporaryObjectId}
     ConversationItemActions.createConversation(newConv);
   }
 })

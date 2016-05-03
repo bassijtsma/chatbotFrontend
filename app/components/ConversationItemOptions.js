@@ -5,6 +5,7 @@ var ConversationStore = require('../stores/ConversationStore');
 
 
 var ConversationItemOptions = React.createClass({
+  
   render: function() {
     return (
         <p className = 'conversation-options' >
