@@ -1,7 +1,7 @@
 var axios = require('axios');
-var url = 'http://bastronaut.com:3000';
+// var url = 'http://bastronaut.com:3000';
 // var url =  'http://198.211.120.226:3000';
-// var url =  'http://localhost:3000';
+var url =  'http://localhost:3000';
 var Promise = require('es6-promise').Promise;
 
 var Api = {

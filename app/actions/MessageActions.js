@@ -157,6 +157,13 @@ var MessageActions = {
     Dispatcher.dispatch({
       actionType: Constants.TOGGLEINSTRUCTIONS
     })
+  },
+  toggleMessageIsAlternative: function(message) {
+    Dispatcher.dispatch({
+      actionType: Constants.MESSAGE_TOGGLEALTERNATIVE,
+      key: message.key
+    })
+    MessageActions.updateMessage(message);
   }
 };
 

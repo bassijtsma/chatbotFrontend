@@ -22,9 +22,9 @@ var MessageItem = React.createClass({
   render: function() {
     var ref = this.props.messageType + this.props.messagenr;
     return (
-        <form onSubmit={this._onSubmitMessageForm}>
+        <form onSubmit={this.onSubmitMessageForm}>
 
-          <div className="message-header">
+          <div className={this.props.is_alternative ? "message-header-alternative" : "message-header"}>
             {this.props.messageType === 'question'
               ? <p className="message-header-text">Person says:</p>
               : <p className="message-header-text">Chatbot replies:</p> }
@@ -40,7 +40,7 @@ var MessageItem = React.createClass({
                 className="message-input"
                 />
               : <p className="message-text"
-                  onClick={this._editMessage.bind(
+                  onClick={this.editMessage.bind(
                   this, this.props.msgkey, this.props.messageType)}>
                   {this.props.text} </p> }
             </div>
@@ -51,10 +51,12 @@ var MessageItem = React.createClass({
                   messageType={this.props.messageType}
                   editState={this.props.editState}
                   deleteState={this.props.deleteState}
+                  is_alternative={this.props.is_alternative}
                   m_nr={this.props.m_nr}
                   convId={this.props.activeConversation}
-                  updateFn={this._onSubmitMessageForm}
-                  editFn={this._editMessage} />
+                  updateFn={this.onSubmitMessageForm}
+                  toggleAltFn={this.toggleIsAlternative}
+                  editFn={this.editMessage} />
               </div>
 
         </form>
@@ -67,13 +69,13 @@ var MessageItem = React.createClass({
     })
   },
 
-  _onSubmitMessageForm: function(event) {
+  onSubmitMessageForm: function(event) {
     event.preventDefault();
     event.stopPropagation();
     this._updateMessageText();
   },
 
-  _editMessage: function(msgkey, messageType) {
+  editMessage: function(msgkey, messageType) {
     MessageActions.editMessage(msgkey, messageType);
   },
 
@@ -94,6 +96,20 @@ var MessageItem = React.createClass({
     }
     console.log('update for:', requestBody);
     MessageActions.updateMessage(requestBody);
+  },
+
+  toggleIsAlternative: function() {
+    var message = {
+      m_nr: this.props.m_nr,
+      is_alternative: !this.props.is_alternative,
+      conv_id: this.props.activeConversation,
+      messageType: this.props.messageType,
+      key: this.props.msgkey,
+      qtext : this.props.qtext,
+      rtext : this.props.rtext
+    };
+
+    MessageActions.toggleMessageIsAlternative(message);
   },
 
   focusInputField: function(input) {

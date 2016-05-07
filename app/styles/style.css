@@ -310,6 +310,14 @@ ol {
   display: block;
 }
 
+/*TODO: new styling in header for is-alternative*/
+.message-header-alternative {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e2e7eb;
+  line-height: 25px;
+  display: block;
+}
+
 .message-header-text {
   color: #348fe2;
   font-size: 14px;
@@ -329,6 +337,8 @@ ol {
   margin: 0px -15px -15px -15px;
   display: block;
 }
+
+
 
 .container-fluid {
 
@@ -376,6 +386,14 @@ ol {
 
 .nomsgwarning > h1 {
   color: #333;
+}
+
+.is-alternative-question {
+  padding-left: 10px;
+}
+
+.is-alternative-response {
+  padding-right: 10px;
 }
 /* Sticky footer styles
 -------------------------------------------------- */

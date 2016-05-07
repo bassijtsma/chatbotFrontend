@@ -13,12 +13,17 @@ var MessageOptions = React.createClass({
 		return (
         <p className="message-options">
 
+					<input type='checkbox'
+						checked={this.props.is_alternative}
+						onChange={this.props.toggleAltFn}/>
+					 Alternative |
+
 					{!this.props.deleteState
 						? <span onClick={this.props.editFn.bind(null,
 		          this.props.msgkey, this.props.messageType)}>
 		          {this.props.editState
-								? <span onClick={this.props.updateFn} type='submit'>Save</span>
-								: 'Edit '}
+								? <span onClick={this.props.updateFn} type='submit'> Save </span>
+								: ' Edit '}
 		        </span>
 						: null
 					}
@@ -34,7 +39,7 @@ var MessageOptions = React.createClass({
 							</span>
 
 						: <span onClick={this._toggleDeleteMessage.bind(this,
-		          this.props.msgkey)}> Delete </span>
+		          this.props.msgkey)}>| Delete </span>
 					}
         </p>
     );
@@ -42,7 +47,6 @@ var MessageOptions = React.createClass({
 
 
   _toggleDeleteMessage: function(key) {
-		console.log(key);
     MessageActions.toggleDeleteMessageAlert(key);
   },
 

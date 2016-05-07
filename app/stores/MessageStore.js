@@ -11,7 +11,7 @@ var _responsesEditState = {};
 var _messagesDeleteState = {};
 var _highestM_NrForActiveConv = 0;
 var _noMessagesWarningVisibility = false;
-var instructionsVisibility = true;
+var instructionsVisibility = false;
 // object to store backup of msgs for rollbacks in case of API failure
 var _messagesBackup = {};
 
@@ -85,7 +85,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_TOGGLEALTERNATIVE:
-      toggleMessageIsAlternative(action.message);
+      toggleMessageIsAlternative(action.key);
       MessageStore.emitChange();
       break;
 
@@ -294,4 +294,13 @@ function setNoMsgWarningVisibility(conv_id){
   }
 }
 
+function toggleMessageIsAlternative(key) {
+  _messages.every(function(msg) {
+    if (msg.key === key) {
+      console.log('message toggled for:', msg)
+      msg.is_alternative = !msg.is_alternative;
+      return false;
+    } return true;
+  })
+}
 module.exports = MessageStore;
