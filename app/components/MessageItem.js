@@ -41,8 +41,9 @@ var MessageItem = React.createClass({
                 />
               : <p className="message-text"
                   onClick={this.editMessage.bind(
-                  this, this.props.msgkey, this.props.messageType)}>
-                  {this.props.text} </p> }
+                  this, this.props.msgkey, this.props.messageType)} >
+                  <span dangerouslySetInnerHTML={{__html: this.props.text}}></span>
+                </p>}
             </div>
 
             <div className="message-footer">

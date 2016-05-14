@@ -69,6 +69,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.MESSAGE_CREATE:
+    console.log('newly created msg:', action.message)
       setMessagesBackup(action.recoverykey);
       createNewMessage(action.message);
       setNoMsgWarningVisibility(action.message.conv_id);
@@ -145,6 +146,7 @@ Dispatcher.register(function(action) {
       break;
 
     case Constants.CONV_CREATE:
+      setHighestM_NrForActiveConv(action.conv.conv_id);
       setNoMsgWarningVisibility(action.conv.conv_id);
       MessageStore.emitChange();
       break;
@@ -286,7 +288,6 @@ function shouldShowNoMessageWarning(conv_id) {
 }
 
 function setNoMsgWarningVisibility(conv_id){
-  console.log('set no msg warnign visib', conv_id)
   if (shouldShowNoMessageWarning(conv_id)) {
     _noMessagesWarningVisibility = true;
   } else {
@@ -297,7 +298,6 @@ function setNoMsgWarningVisibility(conv_id){
 function toggleMessageIsAlternative(key) {
   _messages.every(function(msg) {
     if (msg.key === key) {
-      console.log('message toggled for:', msg)
       msg.is_alternative = !msg.is_alternative;
       return false;
     } return true;

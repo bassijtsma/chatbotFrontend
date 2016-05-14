@@ -29,6 +29,10 @@ p, ol {
  */
 
 
+input[type=checkbox], input[type=radio] {
+  margin: 0 5px 0 0;
+}
+
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
