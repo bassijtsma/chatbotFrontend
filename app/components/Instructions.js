@@ -14,7 +14,7 @@ var Instructions = React.createClass({
           </p>
 
           <ol className="instructions-text">
-           <li>Add your facebook account to the chatbot page as a developer</li>
+           <li>Add your facebook account to the chatbot page as a testuser</li>
            <li>Visit the chatbot facebook page</li>
            <li>Send it a message thats shown below</li>
            <li>Receive automated reply!</li>

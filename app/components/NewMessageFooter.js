@@ -71,6 +71,10 @@ var NewMessageFooter = React.createClass({
     event.preventDefault();
     event.stopPropagation();
     this.createNewMessage();
+    this.setState({
+      questionInputField: '',
+      responseInputField: ''
+    })
   },
 
   createNewMessage: function() {
