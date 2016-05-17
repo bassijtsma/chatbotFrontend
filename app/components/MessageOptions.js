@@ -17,7 +17,7 @@ var MessageOptions = React.createClass({
 						checked={this.props.is_alternative}
 						onChange={this.props.toggleAltFn}
 						className="alternative-checkbox" />
-					<span onClick={this.props.toggleAltFn}>Alternate </span>|
+					<span onClick={this.props.toggleAltFn}>Or... </span>|
 
 					{!this.props.deleteState
 						? <span onClick={this.props.editFn.bind(null,
