@@ -207,7 +207,7 @@ ol {
 }
 
 .instructions-container {
-    padding: 15px 15px 15px 15px;
+    padding: 15px 15px 10px 15px;
     /*margin: 0px 2.0833% 20px  2.0833%;*/
     margin: 0px 0px 10px 0px;
     background: #fff;
@@ -412,12 +412,13 @@ ol {
 }
 
 .main-footer {
-  padding: 0px 20px 5px 5px;
+  padding: 5px 20px 10px 5px;
 }
 @media (min-width: 768px) {
   .main-footer {
     padding-right: 30px;
     padding-left: 30px;
+
   }
 }
 

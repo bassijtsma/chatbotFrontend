@@ -2,6 +2,7 @@ var Dispatcher = require('../dispatcher/Dispatcher');
 var Constants = require('../utils/Constants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var ConversationStore = require('./ConversationStore');
 
 var CHANGE_EVENT = 'change';
 var _statusDialogVisibility = true;
@@ -138,11 +139,27 @@ Dispatcher.register(function(action) {
       _statusLevel = _statusWarning;
       StatusDialogStore.emitChange();
       break;
+
+
+    // OPTIONAL: If the user should not be allowed to remove the example
+    // conversation, uncomment this code to show the warning dialog.
+    // Turned off for demo purposes
+    //
+    // case Constants.CONV_CLICKED:
+    // var conversations = ConversationStore.getAllConversations();
+    // if (action.conv_id == conversations[0]['conv_id']) {
+    //   _statusDialogMessage = 'Note: you cannot modify this example';
+    //   _statusDialogVisibility = true;
+    //   _statusLevel = _statusOK;
+    // } else {
+    //   _statusDialogVisibility = false;
+    // }
+    // StatusDialogStore.emitChange();
+    // break;
+
     default:
       // none
   }
-
-  //TODO: maybe after switch statement add timer to hide? hideStatusDialog()
 
 });
 
